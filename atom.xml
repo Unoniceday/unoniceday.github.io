@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Uno</title>
+  <title>Uno 開發日常</title>
   
-  <subtitle>開發日常</subtitle>
+  
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://unoniceday.github.io/"/>
