@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-TW">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.2.0',
+    sidebar: {"position":"right","display":"post","offset":15,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="前言在使用Timeline自訂腳本的時候，有需要繼承幾個類別，一開始接觸的時候還蠻混亂的，之後稍微清楚了所以紀錄一下。最常用到的幾個類別分別為：  Playable  TrackAsset  PlayableAsset  PlayableBehaviour  因為他們名字太相像，使用有些API也蠻像的，所以很容易搞不清楚它們分別是拿來幹嘛的。 以一個Timeline編輯器來說，最主要就分為  編輯">
+<meta name="keywords" content="Tineline、Unity">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Timeline 擴展功能類別之間的關係">
+<meta property="og:url" content="http://unoniceday.github.io/2019/08/04/Timeline擴展功能的類別之間的關係/index.html">
+<meta property="og:site_name" content="Uno 開發日常">
+<meta property="og:description" content="前言在使用Timeline自訂腳本的時候，有需要繼承幾個類別，一開始接觸的時候還蠻混亂的，之後稍微清楚了所以紀錄一下。最常用到的幾個類別分別為：  Playable  TrackAsset  PlayableAsset  PlayableBehaviour  因為他們名字太相像，使用有些API也蠻像的，所以很容易搞不清楚它們分別是拿來幹嘛的。 以一個Timeline編輯器來說，最主要就分為  編輯">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="http://unoniceday.github.io/Timeline/20190804065103222.png">
+<meta property="og:image" content="http://unoniceday.github.io/Timeline/20190804084733309.png">
+<meta property="og:updated_time" content="2019-08-04T14:12:43.700Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Timeline 擴展功能類別之間的關係">
+<meta name="twitter:description" content="前言在使用Timeline自訂腳本的時候，有需要繼承幾個類別，一開始接觸的時候還蠻混亂的，之後稍微清楚了所以紀錄一下。最常用到的幾個類別分別為：  Playable  TrackAsset  PlayableAsset  PlayableBehaviour  因為他們名字太相像，使用有些API也蠻像的，所以很容易搞不清楚它們分別是拿來幹嘛的。 以一個Timeline編輯器來說，最主要就分為  編輯">
+<meta name="twitter:image" content="http://unoniceday.github.io/Timeline/20190804065103222.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Uno 開發日常" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://unoniceday.github.io/2019/08/04/Timeline擴展功能的類別之間的關係/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Timeline 擴展功能類別之間的關係 | Uno 開發日常</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-TW">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Uno 開發日常</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切換導航欄">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首頁</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>標籤</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分類</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>時間軸</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://unoniceday.github.io/2019/08/04/Timeline擴展功能的類別之間的關係/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Uno">
+      <meta itemprop="description" content="紀錄開發的各種問題">
+      <meta itemprop="image" content="/images/WebAvator.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Uno 開發日常">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Timeline 擴展功能類別之間的關係
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+
+              
+                
+              
+
+              <time title="創建時間：2019-08-04 15:09:58 / 修改時間：22:12:43" itemprop="dateCreated datePublished" datetime="2019-08-04T15:09:58+08:00">2019-08-04</time>
+            </span>
+          
+
+          
+            
+
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Unity/" itemprop="url" rel="index"><span itemprop="name">Unity</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">評論數：</span>
+                <a href="/2019/08/04/Timeline擴展功能的類別之間的關係/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/08/04/Timeline擴展功能的類別之間的關係/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在使用Timeline自訂腳本的時候，有需要繼承幾個類別，一開始接觸的時候還蠻混亂的，之後稍微清楚了所以紀錄一下。<br>最常用到的幾個類別分別為：</p>
+<ul>
+<li>Playable </li>
+<li>TrackAsset </li>
+<li>PlayableAsset </li>
+<li>PlayableBehaviour</li>
+</ul>
+<p>因為他們名字太相像，使用有些API也蠻像的，所以很容易搞不清楚它們分別是拿來幹嘛的。</p>
+<p>以一個Timeline編輯器來說，最主要就分為</p>
+<ol>
+<li>編輯器本身</li>
+<li>軌道</li>
+<li>軌道上的片段</li>
+</ol>
+<p>對照圖就會是<br><img src="/Timeline/20190804065103222.png" alt></p>
+<h1 id="Playable"><a href="#Playable" class="headerlink" title="Playable"></a>Playable</h1><p>Timeline是基於Playable API去實現的，創建Timeline的時候<br>也可以看到副檔名是.playable，也就是說除了Timeline外，還可以使用這組API去完成各種事情。<br>有興趣的話可以參考 UnityTaiwan的範例。</p>
+<p><a href="https://unitytaiwan.blogspot.com/2017/12/simple-animation.html?fbclid=IwAR1kCohLj5Sgr1AdseZ2_LQDspVoM4PJj1z19d78D-D7IuvoXDJxDDCB4dM" target="_blank" rel="noopener">Simple Animation組件介紹</a></p>
+<p><a href="https://vrast.cn/posts/5df16bd2/" target="_blank" rel="noopener">UNITY3D Playables API 实践(上)</a></p>
+<h1 id="TrackAsset"><a href="#TrackAsset" class="headerlink" title="TrackAsset"></a>TrackAsset</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[TrackColor(<span class="number">241f</span>/<span class="number">255f</span>,<span class="number">249f</span>/<span class="number">255f</span>,<span class="number">99f</span>/<span class="number">255f</span>)]</span><br><span class="line">[TrackBindingType(typeof(Sprite))]</span><br><span class="line">[TrackClipType(typeof(ImageControlAsset))]</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ImageControlTrack</span> :</span> TrackAsset &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> override Playable <span class="title">CreatePlayable</span><span class="params">(PlayableGraph graph, GameObject go, TimelineClip clip)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> base.CreatePlayable(graph, go, clip);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在這邊我想完成的是在Track綁定一個Sprite，用Clip控制這個圖片在那些時間點移動，因為程式碼有點量，只節錄一些一般會用到的片段。</p>
+<p>第1行 是宣告這個Track的顏色</p>
+<p>第2行TrackClipType宣告了這個Track綁的Clip，通常會是擴充功能中繼承了PlayableAsset的類別，放進編輯器的話畫面是下方紅圈那樣</p>
+<p>第3行則是這一個Track綁的物件，這邊綁的是隨便一個遊戲物體，在編輯器上位於最前方，見下方藍圈。</p>
+<p><img src="/Timeline/20190804084733309.png" alt><br><br></p>
+<h1 id="PlayableAsset與PlayableBehaviour"><a href="#PlayableAsset與PlayableBehaviour" class="headerlink" title="PlayableAsset與PlayableBehaviour"></a>PlayableAsset與PlayableBehaviour</h1><br>
+這兩個會放在一起的原因是，Playable API的核心原則是分離數據與邏輯，這兩個分別代表了一個Clip中的數據與邏輯。
+
+<p><b>PlayableAsset是數據部分而PlayableBehaviour則是處理邏輯</b></p>
+<ul>
+<li>PlayableAsset<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ImageControlAsset</span> :</span> PlayableAsset, ITimelineClipAsset</span><br><span class="line">&#123;</span><br><span class="line">    [SerializeField]</span><br><span class="line">    <span class="keyword">private</span> ImageControlBehaviour <span class="keyword">template</span> = <span class="keyword">new</span> ImageControlBehaviour();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> ClipCaps clipCaps &#123; get&#123; <span class="keyword">return</span> ClipCaps.None; &#125;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> override Playable <span class="title">CreatePlayable</span><span class="params">(PlayableGraph graph, GameObject owner)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> ScriptPlayable&lt;ImageControlBehaviour&gt;.Create(graph, <span class="keyword">template</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>可以看到在這個處理數據的類別包含了邏輯的部分，在CreatePlayable的API那創建。<br>值得一提的是，這邊可以使用UnityEngine的東西，像是DestroyImmediate(obj) 在邏輯那個類則不行。</p>
+<ul>
+<li>PlayableBehaviour<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ImageControlBehaviour</span> :</span> PlayableBehaviour &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> override <span class="keyword">void</span> <span class="title">ProcessFrame</span><span class="params">(Playable playable, FrameData info, object playerData)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        Sprite data = (Sprite)playerData;</span><br><span class="line">        base.ProcessFrame(playable, info, playerData);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>繼承PlayableBehaviour的類別可以使用很多類似於MonoBehaviour的API<br>但僅僅只是類似而已，還是有許多差別的，這些稍微介紹一下</p>
+<p>ProcessFrame這個東西跟Update很相像，是在Timeline這個片段的時候會進行更新<br>而一開始在ImageControlTrack宣告的綁定物件類別 - Sprite</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[TrackBindingType(typeof(Sprite))]</span><br></pre></td></tr></table></figure>
+
+<p>則可以從這個API內的第三個參數，傳入類行為object內找到，將他轉型就可以拿到你放入的物件，再對它進行處理。<br>另外還可以用很多API，像是有OnBehaviourPlay、OnBehaviourPause、OnGraphStart、OnGraphStop這邊就不多介紹了。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ImageControlBehaviour</span> :</span> PlayableBehaviour &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> override <span class="keyword">void</span> <span class="title">ProcessFrame</span><span class="params">(Playable playable, FrameData info, object playerData)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        Sprite data = (Sprite)playerData;</span><br><span class="line">        base.ProcessFrame(playable, info, playerData);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> override <span class="keyword">void</span> <span class="title">OnBehaviourPlay</span><span class="params">(Playable playable, FrameData info)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        base.OnBehaviourPlay(playable, info);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> override <span class="keyword">void</span> <span class="title">OnBehaviourPause</span><span class="params">(Playable playable, FrameData info)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        base.OnBehaviourPause(playable, info);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> override <span class="keyword">void</span> <span class="title">OnPlayableCreate</span><span class="params">(Playable playable)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        base.OnPlayableCreate(playable);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> override <span class="keyword">void</span> <span class="title">OnGraphStart</span><span class="params">(Playable playable)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        base.OnGraphStart(playable);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> override <span class="keyword">void</span> <span class="title">OnGraphStop</span><span class="params">(Playable playable)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        base.OnGraphStop(playable);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Tineline、Unity/" rel="tag"><i class="fa fa-tag"></i> Tineline、Unity</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/03/Unity-Timeline-快速認識/" rel="next" title="Timeline 快速認識">
+                <i class="fa fa-chevron-left"></i> Timeline 快速認識
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            本站概要
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/WebAvator.png" alt="Uno">
+            
+              <p class="site-author-name" itemprop="name">Uno</p>
+              <div class="site-description motion-element" itemprop="description">紀錄開發的各種問題</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">文章</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">分類</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">標籤</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/unoniceday" title="GitHub &rarr; https://github.com/unoniceday" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:uno.niceday@gmail.com" title="E-Mail &rarr; mailto:uno.niceday@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Playable"><span class="nav-number">2.</span> <span class="nav-text">Playable</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TrackAsset"><span class="nav-number">3.</span> <span class="nav-text">TrackAsset</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PlayableAsset與PlayableBehaviour"><span class="nav-number">4.</span> <span class="nav-text">PlayableAsset與PlayableBehaviour</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Uno</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主題 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://r-uno.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://unoniceday.github.io/2019/08/04/Timeline擴展功能的類別之間的關係/";
+    this.page.identifier = "2019/08/04/Timeline擴展功能的類別之間的關係/";
+    this.page.title = 'Timeline 擴展功能類別之間的關係';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://r-uno.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    window.addEventListener('load', loadComments, false);
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
