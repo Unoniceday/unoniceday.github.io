@@ -98,17 +98,17 @@
 <meta name="keywords" content="Tineline、Unity">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Timeline 擴展功能類別之間的關係">
-<meta property="og:url" content="http://unoniceday.github.io/2019/08/04/Timeline擴展功能的類別之間的關係/index.html">
+<meta property="og:url" content="http://unoniceday.github.io/2019/08/04/Timeline/index.html">
 <meta property="og:site_name" content="Uno 開發日常">
 <meta property="og:description" content="前言在使用Timeline自訂腳本的時候，有需要繼承幾個類別，一開始接觸的時候還蠻混亂的，之後稍微清楚了所以紀錄一下。最常用到的幾個類別分別為：  Playable  TrackAsset  PlayableAsset  PlayableBehaviour  因為他們名字太相像，使用有些API也蠻像的，所以很容易搞不清楚它們分別是拿來幹嘛的。 以一個Timeline編輯器來說，最主要就分為  編輯">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:image" content="http://unoniceday.github.io/2019/08/04/Timeline擴展功能的類別之間的關係/20190804065103222.png">
-<meta property="og:image" content="http://unoniceday.github.io/2019/08/04/Timeline擴展功能的類別之間的關係/20190804084733309.png">
-<meta property="og:updated_time" content="2019-08-04T14:12:43.700Z">
+<meta property="og:image" content="http://unoniceday.github.io/2019/08/04/Timeline/20190804065103222.png">
+<meta property="og:image" content="http://unoniceday.github.io/2019/08/04/Timeline/20190804084733309.png">
+<meta property="og:updated_time" content="2019-08-04T15:27:48.009Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Timeline 擴展功能類別之間的關係">
 <meta name="twitter:description" content="前言在使用Timeline自訂腳本的時候，有需要繼承幾個類別，一開始接觸的時候還蠻混亂的，之後稍微清楚了所以紀錄一下。最常用到的幾個類別分別為：  Playable  TrackAsset  PlayableAsset  PlayableBehaviour  因為他們名字太相像，使用有些API也蠻像的，所以很容易搞不清楚它們分別是拿來幹嘛的。 以一個Timeline編輯器來說，最主要就分為  編輯">
-<meta name="twitter:image" content="http://unoniceday.github.io/2019/08/04/Timeline擴展功能的類別之間的關係/20190804065103222.png">
+<meta name="twitter:image" content="http://unoniceday.github.io/2019/08/04/Timeline/20190804065103222.png">
 
 
 
@@ -118,7 +118,7 @@
 
   
   
-  <link rel="canonical" href="http://unoniceday.github.io/2019/08/04/Timeline擴展功能的類別之間的關係/">
+  <link rel="canonical" href="http://unoniceday.github.io/2019/08/04/Timeline/">
 
 
 
@@ -323,7 +323,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://unoniceday.github.io/2019/08/04/Timeline擴展功能的類別之間的關係/">
+    <link itemprop="mainEntityOfPage" href="http://unoniceday.github.io/2019/08/04/Timeline/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Uno">
@@ -366,7 +366,7 @@
                 
               
 
-              <time title="創建時間：2019-08-04 15:09:58 / 修改時間：22:12:43" itemprop="dateCreated datePublished" datetime="2019-08-04T15:09:58+08:00">2019-08-04</time>
+              <time title="創建時間：2019-08-04 15:09:58 / 修改時間：23:27:48" itemprop="dateCreated datePublished" datetime="2019-08-04T15:09:58+08:00">2019-08-04</time>
             </span>
           
 
@@ -403,8 +403,8 @@
                 </span>
             
                 <span class="post-meta-item-text">評論數：</span>
-                <a href="/2019/08/04/Timeline擴展功能的類別之間的關係/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/08/04/Timeline擴展功能的類別之間的關係/" itemprop="commentCount"></span>
+                <a href="/2019/08/04/Timeline/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/08/04/Timeline/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -449,7 +449,7 @@
 <li>軌道</li>
 <li>軌道上的片段</li>
 </ol>
-<p>對照圖就會是<br><img src="/2019/08/04/Timeline擴展功能的類別之間的關係/20190804065103222.png" alt></p>
+<p>對照圖就會是<br><img src="/2019/08/04/Timeline/20190804065103222.png" alt></p>
 <h1 id="Playable"><a href="#Playable" class="headerlink" title="Playable"></a>Playable</h1><p>Timeline是基於Playable API去實現的，創建Timeline的時候<br>也可以看到副檔名是.playable，也就是說除了Timeline外，還可以使用這組API去完成各種事情。<br>有興趣的話可以參考 UnityTaiwan的範例。</p>
 <p><a href="https://unitytaiwan.blogspot.com/2017/12/simple-animation.html?fbclid=IwAR1kCohLj5Sgr1AdseZ2_LQDspVoM4PJj1z19d78D-D7IuvoXDJxDDCB4dM" target="_blank" rel="noopener">Simple Animation組件介紹</a></p>
 <p><a href="https://vrast.cn/posts/5df16bd2/" target="_blank" rel="noopener">UNITY3D Playables API 实践(上)</a></p>
@@ -459,7 +459,7 @@
 <p>第1行 是宣告這個Track的顏色</p>
 <p>第2行TrackClipType宣告了這個Track綁的Clip，通常會是擴充功能中繼承了PlayableAsset的類別，放進編輯器的話畫面是下方紅圈那樣</p>
 <p>第3行則是這一個Track綁的物件，這邊綁的是隨便一個遊戲物體，在編輯器上位於最前方，見下方藍圈。</p>
-<p><img src="/2019/08/04/Timeline擴展功能的類別之間的關係/20190804084733309.png" alt><br><br></p>
+<p><img src="/2019/08/04/Timeline/20190804084733309.png" alt><br><br></p>
 <h1 id="PlayableAsset與PlayableBehaviour"><a href="#PlayableAsset與PlayableBehaviour" class="headerlink" title="PlayableAsset與PlayableBehaviour"></a>PlayableAsset與PlayableBehaviour</h1><br>
 這兩個會放在一起的原因是，Playable API的核心原則是分離數據與邏輯，這兩個分別代表了一個Clip中的數據與邏輯。
 
@@ -888,8 +888,8 @@
 
 <script>
   var disqus_config = function() {
-    this.page.url = "http://unoniceday.github.io/2019/08/04/Timeline擴展功能的類別之間的關係/";
-    this.page.identifier = "2019/08/04/Timeline擴展功能的類別之間的關係/";
+    this.page.url = "http://unoniceday.github.io/2019/08/04/Timeline/";
+    this.page.identifier = "2019/08/04/Timeline/";
     this.page.title = 'Timeline 擴展功能類別之間的關係';
     };
   function loadComments() {
