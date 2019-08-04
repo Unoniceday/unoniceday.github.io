@@ -102,15 +102,15 @@
 <meta property="og:site_name" content="Uno 開發日常">
 <meta property="og:description" content="用途Timeline是Unity 在2017.1版本中推出的敘事工具，可以在時間軸內編排遊戲內各種東西，像是遊戲物件、聲音、光照、鏡頭，做成遊戲動畫、電影。像是在遊戲途中，我們常會遇到在某一個時間點，需要插入一段劇情動畫，而timeline就可以用來解決這類的事情。 Intro to Unity Timeline 簡單範例1.創建一個Timeline 首先打開Timeline視窗 [ Window">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:image" content="http://unoniceday.github.io/Unity-Timeline-%E5%9F%BA%E7%A4%8E%E8%AA%8D%E8%AD%98/20190803020026895.png">
-<meta property="og:image" content="http://unoniceday.github.io/Unity-Timeline-%E5%9F%BA%E7%A4%8E%E8%AA%8D%E8%AD%98/20190803021734682.png">
-<meta property="og:image" content="http://unoniceday.github.io/Unity-Timeline-%E5%9F%BA%E7%A4%8E%E8%AA%8D%E8%AD%98/20190803022255226.png">
-<meta property="og:image" content="http://unoniceday.github.io/Unity-Timeline-%E5%9F%BA%E7%A4%8E%E8%AA%8D%E8%AD%98/20190803023110789.png">
-<meta property="og:updated_time" content="2019-08-04T14:13:08.483Z">
+<meta property="og:image" content="http://unoniceday.github.io/2019/08/03/Unity-Timeline-快速認識/20190803020026895.png">
+<meta property="og:image" content="http://unoniceday.github.io/2019/08/03/Unity-Timeline-快速認識/20190803021734682.png">
+<meta property="og:image" content="http://unoniceday.github.io/2019/08/03/Unity-Timeline-快速認識/20190803022255226.png">
+<meta property="og:image" content="http://unoniceday.github.io/2019/08/03/Unity-Timeline-快速認識/20190803023110789.png">
+<meta property="og:updated_time" content="2019-08-04T15:22:40.697Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Timeline 快速認識">
 <meta name="twitter:description" content="用途Timeline是Unity 在2017.1版本中推出的敘事工具，可以在時間軸內編排遊戲內各種東西，像是遊戲物件、聲音、光照、鏡頭，做成遊戲動畫、電影。像是在遊戲途中，我們常會遇到在某一個時間點，需要插入一段劇情動畫，而timeline就可以用來解決這類的事情。 Intro to Unity Timeline 簡單範例1.創建一個Timeline 首先打開Timeline視窗 [ Window">
-<meta name="twitter:image" content="http://unoniceday.github.io/Unity-Timeline-%E5%9F%BA%E7%A4%8E%E8%AA%8D%E8%AD%98/20190803020026895.png">
+<meta name="twitter:image" content="http://unoniceday.github.io/2019/08/03/Unity-Timeline-快速認識/20190803020026895.png">
 
 
 
@@ -383,7 +383,7 @@
                 
                   <span class="post-meta-item-text">更新於</span>
                 
-                <time title="修改時間：2019-08-04 22:13:08" itemprop="dateModified" datetime="2019-08-04T22:13:08+08:00">2019-08-04</time>
+                <time title="修改時間：2019-08-04 23:22:40" itemprop="dateModified" datetime="2019-08-04T23:22:40+08:00">2019-08-04</time>
               </span>
             
           
@@ -454,15 +454,15 @@
 <li>創建一個空物件</li>
 <li>點擊空物件，在Timeline視窗上按Create</li>
 </ul>
-<p><img src="/Unity-Timeline-%E5%9F%BA%E7%A4%8E%E8%AA%8D%E8%AD%98/20190803020026895.png" alt></p>
+<p><img src="/2019/08/03/Unity-Timeline-快速認識/20190803020026895.png" alt></p>
 <h5 id="2-移除不必要的組件"><a href="#2-移除不必要的組件" class="headerlink" title="2.移除不必要的組件"></a>2.移除不必要的組件</h5><p>由於指定了GameObject來創建這個Timeline，本身會自動添加Animator組件，但這個範例不必操作這個物體，所以把Gameobject上多餘的Animator移除掉，Timeline上的也是</p>
-<h5 id="3-加入要操控的物體"><a href="#3-加入要操控的物體" class="headerlink" title="3. 加入要操控的物體"></a>3. 加入要操控的物體</h5><p>創建兩個Cube，將它拖進Timeline視窗後會出現選項<br><img src="/Unity-Timeline-%E5%9F%BA%E7%A4%8E%E8%AA%8D%E8%AD%98/20190803021734682.png" alt></p>
+<h5 id="3-加入要操控的物體"><a href="#3-加入要操控的物體" class="headerlink" title="3. 加入要操控的物體"></a>3. 加入要操控的物體</h5><p>創建兩個Cube，將它拖進Timeline視窗後會出現選項<br><img src="/2019/08/03/Unity-Timeline-快速認識/20190803021734682.png" alt></p>
 <ul>
 <li>ActivationTrack ：操作物體的Active</li>
 <li>AnimationTrack ：物體的動畫軌道，可以錄製動畫</li>
 <li>AudioTrack ：音頻的軌道</li>
 </ul>
-<p>這邊就選Animation Track來做一段動畫。<br><br><br><br><br><img src="/Unity-Timeline-%E5%9F%BA%E7%A4%8E%E8%AA%8D%E8%AD%98/20190803022255226.png" alt><br>將物體擺上去後，會發現有個紅點可以點，它就是拿來錄製這個物體的動畫的按鈕，點下去後會發現右邊軌道上有個Recording，就代表開始錄製了，這邊就跟在Animation視窗上製作動畫一樣，可以操控它的位置、旋轉、…之類的東西。<br><br><br><br><br><b>如果不想用這個地方編輯它的動畫，也可以直接在 Recording模式中直接點擊兩下，它就會跳出Animation的視窗了</b><br><img src="/Unity-Timeline-%E5%9F%BA%E7%A4%8E%E8%AA%8D%E8%AD%98/20190803023110789.png" alt><br><br><br><br><br>然後另外一個物件同樣編輯一下動畫，就可以看見兩個物體一起動作的樣子了</p>
+<p>這邊就選Animation Track來做一段動畫。<br><br><br><br><br><img src="/2019/08/03/Unity-Timeline-快速認識/20190803022255226.png" alt><br>將物體擺上去後，會發現有個紅點可以點，它就是拿來錄製這個物體的動畫的按鈕，點下去後會發現右邊軌道上有個Recording，就代表開始錄製了，這邊就跟在Animation視窗上製作動畫一樣，可以操控它的位置、旋轉、…之類的東西。<br><br><br><br><br><b>如果不想用這個地方編輯它的動畫，也可以直接在 Recording模式中直接點擊兩下，它就會跳出Animation的視窗了</b><br><img src="/2019/08/03/Unity-Timeline-快速認識/20190803023110789.png" alt><br><br><br><br><br>然後另外一個物件同樣編輯一下動畫，就可以看見兩個物體一起動作的樣子了</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/kmRKZ4xzOgQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
