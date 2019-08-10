@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-TW">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.2.0',
+    sidebar: {"position":"right","display":"post","offset":15,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="簡單工廠前言 &amp;gt; 如何輕鬆方便的構造對象實例，而不必關心對象實例的細節和複雜的過程呢?  上面這句是工廠模式所關注的問題，這樣說有點抽象，用個情境來說： 現在飲料店來了一個顧客，他想要點紅茶跟綠茶，用UML圖表示，長的像這樣  123456789101112131415public class Customer : MonoBehaviour &amp;#123;    private void Star">
+<meta name="keywords" content="設計模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="設計模式 - 簡單工廠、工廠模式">
+<meta property="og:url" content="http://unoniceday.github.io/2019/08/10/【設計模式】簡單工廠、工廠模式/index.html">
+<meta property="og:site_name" content="Uno 開發日常">
+<meta property="og:description" content="簡單工廠前言 &amp;gt; 如何輕鬆方便的構造對象實例，而不必關心對象實例的細節和複雜的過程呢?  上面這句是工廠模式所關注的問題，這樣說有點抽象，用個情境來說： 現在飲料店來了一個顧客，他想要點紅茶跟綠茶，用UML圖表示，長的像這樣  123456789101112131415public class Customer : MonoBehaviour &amp;#123;    private void Star">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="http://unoniceday.github.io/2019/08/10/【設計模式】簡單工廠、工廠模式/20190810031005379.png">
+<meta property="og:image" content="http://unoniceday.github.io/2019/08/10/【設計模式】簡單工廠、工廠模式/20190810032704169.png">
+<meta property="og:updated_time" content="2019-08-10T08:26:05.575Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="設計模式 - 簡單工廠、工廠模式">
+<meta name="twitter:description" content="簡單工廠前言 &amp;gt; 如何輕鬆方便的構造對象實例，而不必關心對象實例的細節和複雜的過程呢?  上面這句是工廠模式所關注的問題，這樣說有點抽象，用個情境來說： 現在飲料店來了一個顧客，他想要點紅茶跟綠茶，用UML圖表示，長的像這樣  123456789101112131415public class Customer : MonoBehaviour &amp;#123;    private void Star">
+<meta name="twitter:image" content="http://unoniceday.github.io/2019/08/10/【設計模式】簡單工廠、工廠模式/20190810031005379.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Uno 開發日常" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://unoniceday.github.io/2019/08/10/【設計模式】簡單工廠、工廠模式/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>設計模式 - 簡單工廠、工廠模式 | Uno 開發日常</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-TW">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Uno 開發日常</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切換導航欄">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首頁</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>標籤</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分類</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>時間軸</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://unoniceday.github.io/2019/08/10/【設計模式】簡單工廠、工廠模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Uno">
+      <meta itemprop="description" content="紀錄開發的各種問題">
+      <meta itemprop="image" content="/images/WebAvator.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Uno 開發日常">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">設計模式 - 簡單工廠、工廠模式
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+
+              
+                
+              
+
+              <time title="創建時間：2019-08-10 14:59:11 / 修改時間：16:26:05" itemprop="dateCreated datePublished" datetime="2019-08-10T14:59:11+08:00">2019-08-10</time>
+            </span>
+          
+
+          
+            
+
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/設計模式/" itemprop="url" rel="index"><span itemprop="name">設計模式</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">評論數：</span>
+                <a href="/2019/08/10/【設計模式】簡單工廠、工廠模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/08/10/【設計模式】簡單工廠、工廠模式/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="簡單工廠"><a href="#簡單工廠" class="headerlink" title="簡單工廠"></a>簡單工廠</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><br>
+> 如何輕鬆方便的構造對象實例，而不必關心對象實例的細節和複雜的過程呢?
+
+<p>上面這句是工廠模式所關注的問題，這樣說有點抽象，用個情境來說：</p>
+<p>現在飲料店來了一個顧客，他想要點紅茶跟綠茶，用UML圖表示，長的像這樣</p>
+<p><img src="/2019/08/10/【設計模式】簡單工廠、工廠模式/20190810031005379.png" alt></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Customer</span> :</span> MonoBehaviour &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Start</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        GreenTea greenTea = <span class="keyword">new</span> GreenTea();</span><br><span class="line">        AddMaterial(); <span class="comment">//加料</span></span><br><span class="line">        Blend(); <span class="comment">//混合</span></span><br><span class="line">        Cup(); <span class="comment">//裝杯</span></span><br><span class="line">        </span><br><span class="line">        BlackTea blackTea = <span class="keyword">new</span> BlackTea();</span><br><span class="line">        AddMaterial(); <span class="comment">//加料</span></span><br><span class="line">        Blend(); <span class="comment">//混合</span></span><br><span class="line">        Cup(); <span class="comment">//裝杯</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但這樣顧客就需要知道綠茶的製造流程 ( 加料、混合、裝杯) 這不是很奇怪嗎，為什麼顧客需要知道你加什麼料啦！用程式的角度來說，就是顧客就跟製造的飲料緊密的耦合在一起。<br>        以後越來越多品項的話，在顧客那就需要知道更多製作方法，這樣顧客都可以開店了呢！ 於是為了解決這個問題，就會使用到這次的主題 — 簡單工廠。</p>
+<h2 id="具體實現"><a href="#具體實現" class="headerlink" title="具體實現"></a>具體實現</h2><p><b>具體的創建過程由內部進行，顧客只要把想喝什麼丟進去這個工廠就可以了。</b></p>
+<p>現在將茶抽象出來，因為綠茶跟紅茶都是茶，而且它們都經過三步驟 - 加料、混合、裝杯，所以將他們繼承至茶類</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> abstract <span class="class"><span class="keyword">class</span> <span class="title">Tea</span> &#123;</span> &#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BlackTea</span> :</span> Tea &#123; &#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GreenTea</span> :</span> Tea &#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>再來實作一個工廠，裡面有可以讓外部點茶的方法 - OrderTea，傳入想要點的茶的名字。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TeaFactory</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Tea <span class="title">OrderTea</span><span class="params">(<span class="built_in">string</span> name)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (name == <span class="string">"GreenTea"</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> GreenTea();</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (name == <span class="string">"BlackTea"</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> BlackTea();</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這樣在顧客那，就可以使用茶工廠的OrderTea傳入想要點的茶來拿到茶了，與之前不一樣的是<br>這樣顧客不需要知道這杯茶是怎麼做的，只需要知道茶的名字就可以得到想要的茶，實作都會在茶工廠內部實作。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Customer</span> :</span> MonoBehaviour &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Start</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        TeaFactory teaFactory = <span class="keyword">new</span> TeaFactory();</span><br><span class="line">        Tea greenTea = teaFactory.OrderTea(<span class="string">"GreenTea"</span>);</span><br><span class="line">        Tea blackTea = teaFactory.OrderTea(<span class="string">"BlackTea"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/08/10/【設計模式】簡單工廠、工廠模式/20190810032704169.png" alt></p>
+<p>但是!! 簡單工廠並不符合設計模式的開閉原則，每次修改的時候就得在原始代碼上新增對應，這樣一旦東西多了，不止每次修改都有風險出Bug，而且程式碼擠在一起也很難閱讀，因此這時候就需要使用到工廠模式啦</p>
+<h1 id="工廠模式"><a href="#工廠模式" class="headerlink" title="工廠模式"></a>工廠模式</h1><br>
+
+<blockquote>
+<p>工廠方法模式的實質是「定義一個建立物件的介面，但讓實現這個介面的類來決定實體化哪個類。工廠方法讓類別的實體化推遲到子類別中進行。」</p>
+</blockquote>
+<p>既然要符合開閉原則，那麼就把會修改原代碼的地方抽出來<br>上面看到TeaFactory的OrderTea方法是因為傳入的參數不同，導致每次新增品項都要修改原代碼一次<br>因此，把他抽出來做成介面</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">interface TeaFactory</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function">Tea <span class="title">OrderTea</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>原本的BlackTea跟GreenTea不變，額外再做一個GreenTeaFactory、BlackTeaFactory專門賣這兩種茶<br>這樣以後如果多了MikeTea，就再將MikeTea繼承於Tea，然後實作一個MikeTeaFactory繼承TeaFactory就好了，不需要改變到原始的代碼，就符合開閉原則了<br>但這缺點就是，如果新增一個MilkTea就要做一個MilkTeaFactory來對應，這樣每次新增就會跑出兩個類別要實作。</p>
+<p>現在實作上面說的東西：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BlackTeaFactory</span> :</span> TeaFactory</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Tea <span class="title">OrderTea</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> BlackTea();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GreenTeaFactory</span> :</span> TeaFactory</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Tea <span class="title">OrderTea</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> GreenTea();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>顧客：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Customer</span> :</span> MonoBehaviour &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Start</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">       </span><br><span class="line">        <span class="comment">//工廠方法</span></span><br><span class="line">        BlackTeaFactory blackTeaFactory = <span class="keyword">new</span> BlackTeaFactory();</span><br><span class="line">        blackTeaFactory.OrderTea();</span><br><span class="line">        GreenTeaFactory greenTeaFactory = <span class="keyword">new</span> GreenTeaFactory();</span><br><span class="line">        greenTeaFactory.OrderTea();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+![](/【設計模式】簡單工廠、工廠模式/20190810033730771.png)
+<br>
+
+<p>而且這樣的方法又有一個問題了，那就是一個具體工廠只能創建一個產品<br>像是上面的綠茶工廠，就只會生產綠茶，紅茶工廠只會生產紅茶<br>實際過程中一個工廠往往需要生產多類產品，這時候為了解決這個問題，就需要用到抽象工廠了，見下一篇~</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/設計模式/" rel="tag"><i class="fa fa-tag"></i> 設計模式</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/04/Timeline/" rel="next" title="Timeline 擴展功能類別之間的關係">
+                <i class="fa fa-chevron-left"></i> Timeline 擴展功能類別之間的關係
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/10/抽象工廠/" rel="prev" title="設計模式 - 抽象工廠">
+                設計模式 - 抽象工廠 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            本站概要
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/WebAvator.png" alt="Uno">
+            
+              <p class="site-author-name" itemprop="name">Uno</p>
+              <div class="site-description motion-element" itemprop="description">紀錄開發的各種問題</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">文章</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">分類</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">標籤</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/unoniceday" title="GitHub &rarr; https://github.com/unoniceday" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:uno.niceday@gmail.com" title="E-Mail &rarr; mailto:uno.niceday@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#簡單工廠"><span class="nav-number">1.</span> <span class="nav-text">簡單工廠</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具體實現"><span class="nav-number">1.2.</span> <span class="nav-text">具體實現</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#工廠模式"><span class="nav-number">2.</span> <span class="nav-text">工廠模式</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Uno</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主題 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://r-uno.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://unoniceday.github.io/2019/08/10/【設計模式】簡單工廠、工廠模式/";
+    this.page.identifier = "2019/08/10/【設計模式】簡單工廠、工廠模式/";
+    this.page.title = '設計模式 - 簡單工廠、工廠模式';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://r-uno.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    window.addEventListener('load', loadComments, false);
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

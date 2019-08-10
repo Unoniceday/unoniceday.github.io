@@ -94,23 +94,21 @@
 
 
 
-  <meta name="description" content="用途Timeline是Unity 在2017.1版本中推出的敘事工具，可以在時間軸內編排遊戲內各種東西，像是遊戲物件、聲音、光照、鏡頭，做成遊戲動畫、電影。像是在遊戲途中，我們常會遇到在某一個時間點，需要插入一段劇情動畫，而timeline就可以用來解決這類的事情。 Intro to Unity Timeline 簡單範例 創建一個Timeline 首先打開Timeline視窗 [ Window">
-<meta name="keywords" content="Timeline">
+  <meta name="description" content="抽象工廠前言現在這間工廠不僅僅是生產茶了，他還會賣果汁!這樣原本的茶工廠這名字就不足以容納新的品項了，所以重新命名將它改為飲料工廠從她衍生跑出兩間工廠，一個是coco，一個是tata 現在跟原本一樣，新增了一個果汁的品項，從果汁衍生出了檸檬汁與橘子汁，這裡跟原本的茶的品項衍生出綠茶跟紅茶的步驟是一樣的。 先創建一個果汁介面 123456public abstract class Juice &amp;#1">
+<meta name="keywords" content="設計模式、抽象工廠">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Timeline 快速認識">
-<meta property="og:url" content="http://unoniceday.github.io/2019/08/03/Unity-Timeline-快速認識/index.html">
+<meta property="og:title" content="設計模式 - 抽象工廠">
+<meta property="og:url" content="http://unoniceday.github.io/2019/08/10/抽象工廠/index.html">
 <meta property="og:site_name" content="Uno 開發日常">
-<meta property="og:description" content="用途Timeline是Unity 在2017.1版本中推出的敘事工具，可以在時間軸內編排遊戲內各種東西，像是遊戲物件、聲音、光照、鏡頭，做成遊戲動畫、電影。像是在遊戲途中，我們常會遇到在某一個時間點，需要插入一段劇情動畫，而timeline就可以用來解決這類的事情。 Intro to Unity Timeline 簡單範例 創建一個Timeline 首先打開Timeline視窗 [ Window">
+<meta property="og:description" content="抽象工廠前言現在這間工廠不僅僅是生產茶了，他還會賣果汁!這樣原本的茶工廠這名字就不足以容納新的品項了，所以重新命名將它改為飲料工廠從她衍生跑出兩間工廠，一個是coco，一個是tata 現在跟原本一樣，新增了一個果汁的品項，從果汁衍生出了檸檬汁與橘子汁，這裡跟原本的茶的品項衍生出綠茶跟紅茶的步驟是一樣的。 先創建一個果汁介面 123456public abstract class Juice &amp;#1">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:image" content="http://unoniceday.github.io/2019/08/03/Unity-Timeline-快速認識/20190803020026895.png">
-<meta property="og:image" content="http://unoniceday.github.io/2019/08/03/Unity-Timeline-快速認識/20190803021734682.png">
-<meta property="og:image" content="http://unoniceday.github.io/2019/08/03/Unity-Timeline-快速認識/20190803022255226.png">
-<meta property="og:image" content="http://unoniceday.github.io/2019/08/03/Unity-Timeline-快速認識/20190803023110789.png">
-<meta property="og:updated_time" content="2019-08-04T15:33:32.432Z">
+<meta property="og:image" content="http://unoniceday.github.io/2019/08/10/抽象工廠/20190810044926274.png">
+<meta property="og:image" content="http://unoniceday.github.io/2019/08/10/抽象工廠/20190810044944551.png">
+<meta property="og:updated_time" content="2019-08-10T08:49:53.336Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Timeline 快速認識">
-<meta name="twitter:description" content="用途Timeline是Unity 在2017.1版本中推出的敘事工具，可以在時間軸內編排遊戲內各種東西，像是遊戲物件、聲音、光照、鏡頭，做成遊戲動畫、電影。像是在遊戲途中，我們常會遇到在某一個時間點，需要插入一段劇情動畫，而timeline就可以用來解決這類的事情。 Intro to Unity Timeline 簡單範例 創建一個Timeline 首先打開Timeline視窗 [ Window">
-<meta name="twitter:image" content="http://unoniceday.github.io/2019/08/03/Unity-Timeline-快速認識/20190803020026895.png">
+<meta name="twitter:title" content="設計模式 - 抽象工廠">
+<meta name="twitter:description" content="抽象工廠前言現在這間工廠不僅僅是生產茶了，他還會賣果汁!這樣原本的茶工廠這名字就不足以容納新的品項了，所以重新命名將它改為飲料工廠從她衍生跑出兩間工廠，一個是coco，一個是tata 現在跟原本一樣，新增了一個果汁的品項，從果汁衍生出了檸檬汁與橘子汁，這裡跟原本的茶的品項衍生出綠茶跟紅茶的步驟是一樣的。 先創建一個果汁介面 123456public abstract class Juice &amp;#1">
+<meta name="twitter:image" content="http://unoniceday.github.io/2019/08/10/抽象工廠/20190810044926274.png">
 
 
 
@@ -120,7 +118,7 @@
 
   
   
-  <link rel="canonical" href="http://unoniceday.github.io/2019/08/03/Unity-Timeline-快速認識/">
+  <link rel="canonical" href="http://unoniceday.github.io/2019/08/10/抽象工廠/">
 
 
 
@@ -130,7 +128,7 @@
   };
 </script>
 
-  <title>Timeline 快速認識 | Uno 開發日常</title>
+  <title>設計模式 - 抽象工廠 | Uno 開發日常</title>
   
 
 
@@ -325,7 +323,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://unoniceday.github.io/2019/08/03/Unity-Timeline-快速認識/">
+    <link itemprop="mainEntityOfPage" href="http://unoniceday.github.io/2019/08/10/抽象工廠/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Uno">
@@ -342,7 +340,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Timeline 快速認識
+          <h1 class="post-title" itemprop="name headline">設計模式 - 抽象工廠
 
               
             
@@ -368,23 +366,13 @@
                 
               
 
-              <time title="創建時間：2019-08-03 11:25:08" itemprop="dateCreated datePublished" datetime="2019-08-03T11:25:08+08:00">2019-08-03</time>
+              <time title="創建時間：2019-08-10 15:39:56 / 修改時間：16:49:53" itemprop="dateCreated datePublished" datetime="2019-08-10T15:39:56+08:00">2019-08-10</time>
             </span>
           
 
           
             
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新於</span>
-                
-                <time title="修改時間：2019-08-04 23:33:32" itemprop="dateModified" datetime="2019-08-04T23:33:32+08:00">2019-08-04</time>
-              </span>
             
           
 
@@ -397,7 +385,7 @@
                 <span class="post-meta-item-text">分類於</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Unity/" itemprop="url" rel="index"><span itemprop="name">Unity</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/設計模式/" itemprop="url" rel="index"><span itemprop="name">設計模式</span></a></span>
 
                 
                 
@@ -415,8 +403,8 @@
                 </span>
             
                 <span class="post-meta-item-text">評論數：</span>
-                <a href="/2019/08/03/Unity-Timeline-快速認識/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/08/03/Unity-Timeline-快速認識/" itemprop="commentCount"></span>
+                <a href="/2019/08/10/抽象工廠/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/08/10/抽象工廠/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -447,31 +435,23 @@
       
 
       
-        <h1 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h1><p>Timeline是Unity 在2017.1版本中推出的<b>敘事工具</b>，可以在時間軸內編排遊戲內各種東西，像是遊戲物件、聲音、光照、鏡頭，做成遊戲動畫、電影。像是在遊戲途中，我們常會遇到在某一個時間點，需要插入一段劇情動畫，而timeline就可以用來解決這類的事情。</p>
-<p><a href="https://www.youtube.com/watch?v=G_uBFM3YUF4" target="_blank" rel="noopener">Intro to Unity Timeline</a></p>
-<h1 id="簡單範例"><a href="#簡單範例" class="headerlink" title="簡單範例"></a>簡單範例</h1><ol>
-<li>創建一個Timeline<ul>
-<li>首先打開Timeline視窗 [ Window -&gt; Timeline ] </li>
-<li>創建一個空物件</li>
-<li>點擊空物件，在Timeline視窗上按Create</li>
-</ul>
-</li>
-</ol>
-<p><img src="/2019/08/03/Unity-Timeline-快速認識/20190803020026895.png" alt></p>
-<ol start="2">
-<li><p>移除不必要的組件<br>由於指定了GameObject來創建這個Timeline，本身會自動添加Animator組件，但這個範例不必操作這個物體，所以把Gameobject上多餘的Animator移除掉，Timeline上的也是</p>
-</li>
-<li><p>加入要操控的物體<br>創建兩個Cube，將它拖進Timeline視窗後會出現選項<br><img src="/2019/08/03/Unity-Timeline-快速認識/20190803021734682.png" alt></p>
-</li>
-</ol>
-<ul>
-<li>ActivationTrack ：操作物體的Active</li>
-<li>AnimationTrack ：物體的動畫軌道，可以錄製動畫</li>
-<li>AudioTrack ：音頻的軌道</li>
-</ul>
-<p>這邊就選Animation Track來做一段動畫。<br><br><br><br><br><img src="/2019/08/03/Unity-Timeline-快速認識/20190803022255226.png" alt><br>將物體擺上去後，會發現有個紅點可以點，它就是拿來錄製這個物體的動畫的按鈕，點下去後會發現右邊軌道上有個Recording，就代表開始錄製了，這邊就跟在Animation視窗上製作動畫一樣，可以操控它的位置、旋轉、…之類的東西。<br><br><br><br><br><b>如果不想用這個地方編輯它的動畫，也可以直接在 Recording模式中直接點擊兩下，它就會跳出Animation的視窗了</b><br><img src="/2019/08/03/Unity-Timeline-快速認識/20190803023110789.png" alt><br><br><br><br><br>然後另外一個物件同樣編輯一下動畫，就可以看見兩個物體一起動作的樣子了</p>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/kmRKZ4xzOgQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <h1 id="抽象工廠"><a href="#抽象工廠" class="headerlink" title="抽象工廠"></a>抽象工廠</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>現在這間工廠不僅僅是生產茶了，他還會賣果汁!<br>這樣原本的茶工廠這名字就不足以容納新的品項了，所以重新命名將它改為飲料工廠<br>從她衍生跑出兩間工廠，一個是coco，一個是tata</p>
+<p>現在跟原本一樣，新增了一個果汁的品項，從果汁衍生出了檸檬汁與橘子汁，這裡跟原本的茶的品項衍生出綠茶跟紅茶的步驟是一樣的。</p>
+<p>先創建一個果汁介面</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> abstract <span class="class"><span class="keyword">class</span> <span class="title">Juice</span> &#123;</span> &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">衍生出檸檬汁、橘子汁</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LemonJuice</span> :</span> Juice &#123; &#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrangeJuice</span> :</span> Juice &#123; &#125;</span><br></pre></td></tr></table></figure>
 
+<p>這樣在飲料工廠介面就可以新增點果汁的選項(他原本是TeaFactory)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">interface DrinkFactory</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function">Tea <span class="title">OrderTea</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function">Juice <span class="title">OrderJuice</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>而從飲料工廠介面衍生出來的兩家飲料店，就可以實作它們的方法<br>這樣兩家飲料店都可以點果汁跟茶了!! </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CoCoFactory</span> :</span> DrinkFactory</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Juice <span class="title">OrderJuice</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> LemonJuice();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Tea <span class="title">OrderTea</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> BlackTea();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TaTaFactory</span> :</span> DrinkFactory</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Juice <span class="title">OrderJuice</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> OrangeJuice();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Tea <span class="title">OrderTea</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> GreenTea();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">顧客端：</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Customer</span> :</span> MonoBehaviour &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Start</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">     </span><br><span class="line">        CoCoFactory cocoFactory = <span class="keyword">new</span> CoCoFactory();</span><br><span class="line">        Juice juice1 = cocoFactory.OrderJuice();</span><br><span class="line">        Tea tea1 = cocoFactory.OrderTea();</span><br><span class="line"></span><br><span class="line">        TaTaFactory tataFactory = <span class="keyword">new</span> TaTaFactory();</span><br><span class="line">        Juice juice2 = drinkFactor.OrderJuice();</span><br><span class="line">        Tea tea2 = drinkFactor.OrderTea();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+![](/抽象工廠/20190810044744292.png)
+
+<h2 id="增加工廠"><a href="#增加工廠" class="headerlink" title="增加工廠"></a>增加工廠</h2><p>假設我們需要增加一家飲料店<br>那今天如果又多了一家飲料店叫WaWa的來搶生意，就只需要繼承於DrinkFactory然後實作就可以了</p>
+<p><img src="/2019/08/10/抽象工廠/20190810044926274.png" alt></p>
+<h2 id="增加品項"><a href="#增加品項" class="headerlink" title="增加品項"></a>增加品項</h2><p><img src="/2019/08/10/抽象工廠/20190810044944551.png" alt></p>
 
       
     </div>
@@ -498,7 +478,7 @@
         
         <div class="post-tags">
           
-            <a href="/tags/Timeline/" rel="tag"><i class="fa fa-tag"></i> Timeline</a>
+            <a href="/tags/設計模式、抽象工廠/" rel="tag"><i class="fa fa-tag"></i> 設計模式、抽象工廠</a>
           
         </div>
       
@@ -511,8 +491,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/31/MarkDown語法測試/" rel="next" title="MarkDown語法測試">
-                <i class="fa fa-chevron-left"></i> MarkDown語法測試
+              <a href="/2019/08/10/【設計模式】簡單工廠、工廠模式/" rel="next" title="設計模式 - 簡單工廠、工廠模式">
+                <i class="fa fa-chevron-left"></i> 設計模式 - 簡單工廠、工廠模式
               </a>
             
           </div>
@@ -520,10 +500,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/04/Timeline/" rel="prev" title="Timeline 擴展功能類別之間的關係">
-                Timeline 擴展功能類別之間的關係 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -721,7 +697,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#用途"><span class="nav-number">1.</span> <span class="nav-text">用途</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#簡單範例"><span class="nav-number">2.</span> <span class="nav-text">簡單範例</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#抽象工廠"><span class="nav-number">1.</span> <span class="nav-text">抽象工廠</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#增加工廠"><span class="nav-number">1.2.</span> <span class="nav-text">增加工廠</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#增加品項"><span class="nav-number">1.3.</span> <span class="nav-text">增加品項</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -890,9 +866,9 @@
 
 <script>
   var disqus_config = function() {
-    this.page.url = "http://unoniceday.github.io/2019/08/03/Unity-Timeline-快速認識/";
-    this.page.identifier = "2019/08/03/Unity-Timeline-快速認識/";
-    this.page.title = 'Timeline 快速認識';
+    this.page.url = "http://unoniceday.github.io/2019/08/10/抽象工廠/";
+    this.page.identifier = "2019/08/10/抽象工廠/";
+    this.page.title = '設計模式 - 抽象工廠';
     };
   function loadComments() {
     var d = document, s = d.createElement('script');
