@@ -319,6 +319,392 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://unoniceday.github.io/2019/08/11/Jenkins!自動建置Unity專案-本地建置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Uno">
+      <meta itemprop="description" content="紀錄開發的各種問題">
+      <meta itemprop="image" content="/images/WebAvator.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Uno 開發日常">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/11/Jenkins!自動建置Unity專案-本地建置/" class="post-title-link" itemprop="url">Jenkins!自動建置Unity專案-本地建置</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+
+              
+                
+              
+
+              <time title="創建時間：2019-08-11 14:30:00 / 修改時間：21:03:23" itemprop="dateCreated datePublished" datetime="2019-08-11T14:30:00+08:00">2019-08-11</time>
+            </span>
+          
+
+          
+            
+
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Jenkins/" itemprop="url" rel="index"><span itemprop="name">Jenkins</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">評論數：</span>
+                <a href="/2019/08/11/Jenkins!自動建置Unity專案-本地建置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/08/11/Jenkins!自動建置Unity專案-本地建置/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>
+              Unity本身有建置APK的API可以使用，而Jenkins扮演的角色就是從外部(不使用Unity編輯器)去呼叫Unity的API來建置專案
+用Jenkins建置專案大致可以分為
+
+連接git建置
+連接svn建置
+本地建置
+
+第一跟第二種都算是屬於遠端建置，多人協作的時候可以使用，第三種的話就是單純使用本機去建置，用到Jenkin的功能很少。
+這邊先從本地建置開始弄
+本地建置Unity 編譯apk的Script由於Jenkins只是呼叫unity的api來建置apk的，因此在unity內還是必須寫一個script來定義這個apk怎麼建置
+建立一個Builder
+using System.Collections;using System.Collections.Generic;using UnityEngine;using UnityEditor;public class Builder :
+              ...
+            </p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/08/11/Jenkins!自動建置Unity專案-本地建置/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://unoniceday.github.io/2019/08/10/Jenkins!自動建置Unity專案-環境準備/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Uno">
+      <meta itemprop="description" content="紀錄開發的各種問題">
+      <meta itemprop="image" content="/images/WebAvator.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Uno 開發日常">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/10/Jenkins!自動建置Unity專案-環境準備/" class="post-title-link" itemprop="url">Jenkins!自動建置Unity專案-環境準備</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+
+              
+                
+              
+
+              <time title="創建時間：2019-08-10 19:46:02 / 修改時間：23:42:34" itemprop="dateCreated datePublished" datetime="2019-08-10T19:46:02+08:00">2019-08-10</time>
+            </span>
+          
+
+          
+            
+
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Unity/" itemprop="url" rel="index"><span itemprop="name">Unity</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">評論數：</span>
+                <a href="/2019/08/10/Jenkins!自動建置Unity專案-環境準備/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/08/10/Jenkins!自動建置Unity專案-環境準備/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>
+              前言
+最近用的專案需要在一個Unity專案內選擇製作的場景build出6個apk，在客戶不斷要求更改下每次都要重新選擇場景去輸出超級麻煩的啦!!! 
+
+然後手動去選場景一個不注意就會選錯，然後又要重新輸出，根本無限輪迴地獄!!!加上長期合作所以這個地獄如果手動的話根本會崩潰，所以就去尋找可不可以自動build出apk的東西，於是就發現了Jenkins。
+簡單來說用在unity上的話，他可以在你不開啟untiy的情況下幫你輸出apk，如果你的unity專案有上git 還可以偵測git如果有commit就幫你build出apk，讓團隊協作的時候不用由某個人輸出，直接改完後去取檔案就好，好處當然不止這些，詳細就看後續介紹囉
+環境建置
+首先先到官網去下載
+https://jenkins.io/zh/download/
+選擇你的作業系統，由於我是windows，所以以下都是用windows環境建置
+
+              ...
+            </p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/08/10/Jenkins!自動建置Unity專案-環境準備/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://unoniceday.github.io/2019/08/10/設計模式---策略模式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1543,7 +1929,7 @@ _   底線
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">文章</span>
                   </a>
                 </div>
@@ -1566,7 +1952,9 @@ _   底線
                     
                       
                     
-                    <span class="site-state-item-count">3</span>
+                      
+                    
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">分類</span>
                   </a>
                 </div>
@@ -1595,7 +1983,11 @@ _   底線
                     
                       
                     
-                    <span class="site-state-item-count">6</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">標籤</span>
                   </a>
                 </div>
