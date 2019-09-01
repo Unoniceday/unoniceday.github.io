@@ -319,6 +319,387 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://unoniceday.github.io/2019/09/01/JobSystem初次見面/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Uno">
+      <meta itemprop="description" content="紀錄開發的各種問題">
+      <meta itemprop="image" content="/images/WebAvator.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Uno 開發日常">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/09/01/JobSystem初次見面/" class="post-title-link" itemprop="url">JobSystem初次見面</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+
+              
+                
+              
+
+              <time title="創建時間：2019-09-01 16:48:50 / 修改時間：22:56:44" itemprop="dateCreated datePublished" datetime="2019-09-01T16:48:50+08:00">2019-09-01</time>
+            </span>
+          
+
+          
+            
+
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Unity/" itemprop="url" rel="index"><span itemprop="name">Unity</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">評論數：</span>
+                <a href="/2019/09/01/JobSystem初次見面/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/09/01/JobSystem初次見面/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>
+              什麼是JobSystem一般用unity製作遊戲，如果沒有特別去開線程的話，都是交由一個主線程去控制整個遊戲運行，但現在遊戲越做越大，不只需要性能強的設備，如果在製作遊戲上只使用主線程去做各項事情的話，負載過高也會導致FPS降低，而JobSystem目的就是可以讓設計師去使用更多的cpu的資源，來降低主線程的工作量進而讓整體遊戲效能優化。使用多線程可以讓原本擠在一起的任務分散到各個執行續上去執行，可以更有效的利用cpu的多核。
+不過有一點需要注意的是，UnityAPI必須在主線程中使用。https://blogs.unity3d.com/2018/10/22/what-is-a-job-system/
+Race conditions &amp; safety system競爭(Race conditions)在編寫多線程的code時，總會存在(Race condition)競爭的風險，假設
+              ...
+            </p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/09/01/JobSystem初次見面/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://unoniceday.github.io/2019/08/31/Native-Arrays/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Uno">
+      <meta itemprop="description" content="紀錄開發的各種問題">
+      <meta itemprop="image" content="/images/WebAvator.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Uno 開發日常">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/31/Native-Arrays/" class="post-title-link" itemprop="url">【測試】使用 Native Arrays 引起cpu處理過大?</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+
+              
+                
+              
+
+              <time title="創建時間：2019-08-31 17:39:54" itemprop="dateCreated datePublished" datetime="2019-08-31T17:39:54+08:00">2019-08-31</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新於</span>
+                
+                <time title="修改時間：2019-09-01 00:45:49" itemprop="dateModified" datetime="2019-09-01T00:45:49+08:00">2019-09-01</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JobSystem/" itemprop="url" rel="index"><span itemprop="name">JobSystem</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">評論數：</span>
+                <a href="/2019/08/31/Native-Arrays/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/08/31/Native-Arrays/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>
+              前言創建一個Job，使用NativeArray儲存一個整數，然後呼叫了1億次加法，發現對比於使用int來呼叫1億次，相差了10倍左右，呼叫1億次加法大概花了600毫秒，但是使用NativeArray來算1億次加法會花大概6000毫秒，於是就有個疑問了 – NativeArray呼叫太多次是不是會造成cpu處理過大?
+結論Editor模式中，NativeContainer會有Safety check，但在建置完後的程式是沒有Safety check的，所以!!! 在Editor模式如果呼叫了過多次NativeContainer造成遊戲之中有延遲，很有可能是因為Safety check造成的，實際上性能消耗還是build出來測試會比較準確！
+測試幾種可能1. 在Job中int計算1億次先創建一個Job，用它來計算一般用int的性能消耗
+public struct OnlyCalculateJo
+              ...
+            </p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/08/31/Native-Arrays/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://unoniceday.github.io/2019/08/11/Jenkins!自動建置Unity專案-本地建置/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1324,13 +1705,23 @@ public class Customer : MonoBehaviour &#123;    private void Start()    &#123;  
                 
               
 
-              <time title="創建時間：2019-08-04 15:09:58 / 修改時間：23:27:48" itemprop="dateCreated datePublished" datetime="2019-08-04T15:09:58+08:00">2019-08-04</time>
+              <time title="創建時間：2019-08-04 15:09:58" itemprop="dateCreated datePublished" datetime="2019-08-04T15:09:58+08:00">2019-08-04</time>
             </span>
           
 
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新於</span>
+                
+                <time title="修改時間：2019-08-31 17:53:37" itemprop="dateModified" datetime="2019-08-31T17:53:37+08:00">2019-08-31</time>
+              </span>
             
           
 
@@ -1939,7 +2330,7 @@ _   底線
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">文章</span>
                   </a>
                 </div>
@@ -1964,7 +2355,9 @@ _   底線
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
+                      
+                    
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">分類</span>
                   </a>
                 </div>
@@ -1997,7 +2390,9 @@ _   底線
                     
                       
                     
-                    <span class="site-state-item-count">8</span>
+                      
+                    
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">標籤</span>
                   </a>
                 </div>

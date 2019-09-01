@@ -94,23 +94,18 @@
 
 
 
-  <meta name="description" content="用途Timeline是Unity 在2017.1版本中推出的敘事工具，可以在時間軸內編排遊戲內各種東西，像是遊戲物件、聲音、光照、鏡頭，做成遊戲動畫、電影。像是在遊戲途中，我們常會遇到在某一個時間點，需要插入一段劇情動畫，而timeline就可以用來解決這類的事情。 Intro to Unity Timeline 簡單範例 創建一個Timeline 首先打開Timeline視窗 [ Window">
-<meta name="keywords" content="Timeline">
+  <meta name="description" content="什麼是JobSystem一般用unity製作遊戲，如果沒有特別去開線程的話，都是交由一個主線程去控制整個遊戲運行，但現在遊戲越做越大，不只需要性能強的設備，如果在製作遊戲上只使用主線程去做各項事情的話，負載過高也會導致FPS降低，而JobSystem目的就是可以讓設計師去使用更多的cpu的資源，來降低主線程的工作量進而讓整體遊戲效能優化。使用多線程可以讓原本擠在一起的任務分散到各個執行續上去執行，">
+<meta name="keywords" content="Unity,JobSystem">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Timeline 快速認識">
-<meta property="og:url" content="http://unoniceday.github.io/2019/08/03/Unity-Timeline-快速認識/index.html">
+<meta property="og:title" content="JobSystem初次見面">
+<meta property="og:url" content="http://unoniceday.github.io/2019/09/01/JobSystem初次見面/index.html">
 <meta property="og:site_name" content="Uno 開發日常">
-<meta property="og:description" content="用途Timeline是Unity 在2017.1版本中推出的敘事工具，可以在時間軸內編排遊戲內各種東西，像是遊戲物件、聲音、光照、鏡頭，做成遊戲動畫、電影。像是在遊戲途中，我們常會遇到在某一個時間點，需要插入一段劇情動畫，而timeline就可以用來解決這類的事情。 Intro to Unity Timeline 簡單範例 創建一個Timeline 首先打開Timeline視窗 [ Window">
+<meta property="og:description" content="什麼是JobSystem一般用unity製作遊戲，如果沒有特別去開線程的話，都是交由一個主線程去控制整個遊戲運行，但現在遊戲越做越大，不只需要性能強的設備，如果在製作遊戲上只使用主線程去做各項事情的話，負載過高也會導致FPS降低，而JobSystem目的就是可以讓設計師去使用更多的cpu的資源，來降低主線程的工作量進而讓整體遊戲效能優化。使用多線程可以讓原本擠在一起的任務分散到各個執行續上去執行，">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:image" content="http://unoniceday.github.io/2019/08/03/Unity-Timeline-快速認識/20190803020026895.png">
-<meta property="og:image" content="http://unoniceday.github.io/2019/08/03/Unity-Timeline-快速認識/20190803021734682.png">
-<meta property="og:image" content="http://unoniceday.github.io/2019/08/03/Unity-Timeline-快速認識/20190803022255226.png">
-<meta property="og:image" content="http://unoniceday.github.io/2019/08/03/Unity-Timeline-快速認識/20190803023110789.png">
-<meta property="og:updated_time" content="2019-08-04T15:33:32.432Z">
+<meta property="og:updated_time" content="2019-09-01T14:56:44.630Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Timeline 快速認識">
-<meta name="twitter:description" content="用途Timeline是Unity 在2017.1版本中推出的敘事工具，可以在時間軸內編排遊戲內各種東西，像是遊戲物件、聲音、光照、鏡頭，做成遊戲動畫、電影。像是在遊戲途中，我們常會遇到在某一個時間點，需要插入一段劇情動畫，而timeline就可以用來解決這類的事情。 Intro to Unity Timeline 簡單範例 創建一個Timeline 首先打開Timeline視窗 [ Window">
-<meta name="twitter:image" content="http://unoniceday.github.io/2019/08/03/Unity-Timeline-快速認識/20190803020026895.png">
+<meta name="twitter:title" content="JobSystem初次見面">
+<meta name="twitter:description" content="什麼是JobSystem一般用unity製作遊戲，如果沒有特別去開線程的話，都是交由一個主線程去控制整個遊戲運行，但現在遊戲越做越大，不只需要性能強的設備，如果在製作遊戲上只使用主線程去做各項事情的話，負載過高也會導致FPS降低，而JobSystem目的就是可以讓設計師去使用更多的cpu的資源，來降低主線程的工作量進而讓整體遊戲效能優化。使用多線程可以讓原本擠在一起的任務分散到各個執行續上去執行，">
 
 
 
@@ -120,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="http://unoniceday.github.io/2019/08/03/Unity-Timeline-快速認識/">
+  <link rel="canonical" href="http://unoniceday.github.io/2019/09/01/JobSystem初次見面/">
 
 
 
@@ -130,7 +125,7 @@
   };
 </script>
 
-  <title>Timeline 快速認識 | Uno 開發日常</title>
+  <title>JobSystem初次見面 | Uno 開發日常</title>
   
 
 
@@ -325,7 +320,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://unoniceday.github.io/2019/08/03/Unity-Timeline-快速認識/">
+    <link itemprop="mainEntityOfPage" href="http://unoniceday.github.io/2019/09/01/JobSystem初次見面/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Uno">
@@ -342,7 +337,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Timeline 快速認識
+          <h1 class="post-title" itemprop="name headline">JobSystem初次見面
 
               
             
@@ -368,23 +363,13 @@
                 
               
 
-              <time title="創建時間：2019-08-03 11:25:08" itemprop="dateCreated datePublished" datetime="2019-08-03T11:25:08+08:00">2019-08-03</time>
+              <time title="創建時間：2019-09-01 16:48:50 / 修改時間：22:56:44" itemprop="dateCreated datePublished" datetime="2019-09-01T16:48:50+08:00">2019-09-01</time>
             </span>
           
 
           
             
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新於</span>
-                
-                <time title="修改時間：2019-08-04 23:33:32" itemprop="dateModified" datetime="2019-08-04T23:33:32+08:00">2019-08-04</time>
-              </span>
             
           
 
@@ -415,8 +400,8 @@
                 </span>
             
                 <span class="post-meta-item-text">評論數：</span>
-                <a href="/2019/08/03/Unity-Timeline-快速認識/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/08/03/Unity-Timeline-快速認識/" itemprop="commentCount"></span>
+                <a href="/2019/09/01/JobSystem初次見面/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/09/01/JobSystem初次見面/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -447,31 +432,22 @@
       
 
       
-        <h1 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h1><p>Timeline是Unity 在2017.1版本中推出的<b>敘事工具</b>，可以在時間軸內編排遊戲內各種東西，像是遊戲物件、聲音、光照、鏡頭，做成遊戲動畫、電影。像是在遊戲途中，我們常會遇到在某一個時間點，需要插入一段劇情動畫，而timeline就可以用來解決這類的事情。</p>
-<p><a href="https://www.youtube.com/watch?v=G_uBFM3YUF4" target="_blank" rel="noopener">Intro to Unity Timeline</a></p>
-<h1 id="簡單範例"><a href="#簡單範例" class="headerlink" title="簡單範例"></a>簡單範例</h1><ol>
-<li>創建一個Timeline<ul>
-<li>首先打開Timeline視窗 [ Window -&gt; Timeline ] </li>
-<li>創建一個空物件</li>
-<li>點擊空物件，在Timeline視窗上按Create</li>
-</ul>
-</li>
-</ol>
-<p><img src="/2019/08/03/Unity-Timeline-快速認識/20190803020026895.png" alt></p>
-<ol start="2">
-<li><p>移除不必要的組件<br>由於指定了GameObject來創建這個Timeline，本身會自動添加Animator組件，但這個範例不必操作這個物體，所以把Gameobject上多餘的Animator移除掉，Timeline上的也是</p>
-</li>
-<li><p>加入要操控的物體<br>創建兩個Cube，將它拖進Timeline視窗後會出現選項<br><img src="/2019/08/03/Unity-Timeline-快速認識/20190803021734682.png" alt></p>
-</li>
-</ol>
+        <h1 id="什麼是JobSystem"><a href="#什麼是JobSystem" class="headerlink" title="什麼是JobSystem"></a>什麼是JobSystem</h1><p>一般用unity製作遊戲，如果沒有特別去開線程的話，都是交由一個<b>主線程</b>去控制整個遊戲運行，但現在遊戲越做越大，不只需要性能強的設備，如果在製作遊戲上只使用主線程去做各項事情的話，負載過高也會導致FPS降低，而JobSystem目的就是可以讓設計師去使用更多的cpu的資源，來降低主線程的工作量進而讓整體遊戲效能優化。使用多線程可以讓原本擠在一起的任務分散到各個執行續上去執行，可以更有效的利用cpu的多核。</p>
+<p>不過有一點需要注意的是，<b>UnityAPI必須在主線程中使用。</b><br><a href="https://blogs.unity3d.com/2018/10/22/what-is-a-job-system/" target="_blank" rel="noopener">https://blogs.unity3d.com/2018/10/22/what-is-a-job-system/</a></p>
+<h1 id="Race-conditions-amp-safety-system"><a href="#Race-conditions-amp-safety-system" class="headerlink" title="Race conditions &amp; safety system"></a>Race conditions &amp; safety system</h1><h2 id="競爭-Race-conditions"><a href="#競爭-Race-conditions" class="headerlink" title="競爭(Race conditions)"></a>競爭(Race conditions)</h2><p>在編寫多線程的code時，總會存在<a href="https://en.wikipedia.org/wiki/Race_condition" target="_blank" rel="noopener">(Race condition)競爭</a>的風險，假設現在有兩條線程：A線程和B線程，在A設定了數據，在B也設定了，而兩個線程之間對這個數據進行搶奪，就是資源競爭，這一點會讓編寫多線程的代碼變得困難。</p>
+<h2 id="安全系統-safety-system"><a href="#安全系統-safety-system" class="headerlink" title="安全系統(safety system)"></a>安全系統(safety system)</h2><p>而這一點Unity會幫你解決!  Job System它會檢測所有潛在的競爭條件並保護你免受它們可能導致的bug。<br>Job System解決這個問題的方式是：如果你在主線程要丟數據給job，那就<b>傳遞一個複製的數據</b>過去，而不是<b>傳遞數據的引用</b>給Job。這個數據複製的，不管怎麼操控都不會影響到主線程的數據，所以可以避免資源競爭的問題。以這種方式複製數據意味著Job只能訪問blittable數據，而不是管理（託管）類型。這會導致很大限制，因為你不能從任務中返回任何結果，而為了解決不能返回任何結果的問題，就得需要使用到NativeContainer了！</p>
+<h1 id="NativeContainer"><a href="#NativeContainer" class="headerlink" title="NativeContainer"></a>NativeContainer</h1><p>NativeContainer都受safety system保護，Unity會追蹤所有使用到NativeContainer的對象，檢查是否有錯誤(safety checks)，<b>但這僅在Editor模式跟Play模式下可以使用</b></p>
+<p>而NactiveContainer包含了：<br>NativeArray，NativeList，NativeHashMap和NativeQueue。</p>
+<h1 id="NativeContainer-Allocator"><a href="#NativeContainer-Allocator" class="headerlink" title="NativeContainer Allocator"></a>NativeContainer Allocator</h1><p>建立 NativeContainer時，必須指定所需的記憶體分配類型。分配類型取決於Job執行的時間長度。通過這種方式，可以定製分配器以在每種情況下獲得最佳效能。 NativeContainer記憶體分配和釋放有三種類型：</p>
 <ul>
-<li>ActivationTrack ：操作物體的Active</li>
-<li>AnimationTrack ：物體的動畫軌道，可以錄製動畫</li>
-<li>AudioTrack ：音頻的軌道</li>
+<li><b>Allocator.Temp</b> ：有最快的記憶體分配速度，適用於分配一個生命週期只有一幀或更短時間的操作，</li>
+<li><b>Allocator.TempJob</b> ：是相比於Temp是一個較慢的分配類型但它比Persistent要快。這是一個生命週期爲四幀的內存分配而且它是線程安全的。如果你在四幀之內沒有調用Dispose，控制台會打印一個由原生代碼生成的警告信息。絕大部分小jobs使用這種類型的NativeContainer分配器。</li>
+<li><b>Allocator.Persistent </b>：速度最慢，可以持續整個應用程式的生命週期，它是直接呼叫malloc的包裝器。</li>
 </ul>
-<p>這邊就選Animation Track來做一段動畫。<br><br><br><br><br><img src="/2019/08/03/Unity-Timeline-快速認識/20190803022255226.png" alt><br>將物體擺上去後，會發現有個紅點可以點，它就是拿來錄製這個物體的動畫的按鈕，點下去後會發現右邊軌道上有個Recording，就代表開始錄製了，這邊就跟在Animation視窗上製作動畫一樣，可以操控它的位置、旋轉、…之類的東西。<br><br><br><br><br><b>如果不想用這個地方編輯它的動畫，也可以直接在 Recording模式中直接點擊兩下，它就會跳出Animation的視窗了</b><br><img src="/2019/08/03/Unity-Timeline-快速認識/20190803023110789.png" alt><br><br><br><br><br>然後另外一個物件同樣編輯一下動畫，就可以看見兩個物體一起動作的樣子了</p>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/kmRKZ4xzOgQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
+<p>另外還有關於Jobsystem重要的點</p>
+<p><a href="https://docs.unity3d.com/Manual/JobSystemTroubleshooting.html" target="_blank" rel="noopener">C# Job System tips and troubleshooting</a><br>這個也蠻重要的，我就是說明書都沒看完就跑進去使用的那種人，結果才會跑出另外一篇Jobsystem的NativeArray效能測試XD </p>
+<p><a href="https://docs.unity3d.com/Manual/JobSystemNativeContainer.html" target="_blank" rel="noopener">JobSystemNativeContainer</a></p>
+<p><a href="https://blogs.unity3d.com/2018/10/22/what-is-a-job-system/" target="_blank" rel="noopener">What is a Job System?</a></p>
 
       
     </div>
@@ -498,7 +474,9 @@
         
         <div class="post-tags">
           
-            <a href="/tags/Timeline/" rel="tag"><i class="fa fa-tag"></i> Timeline</a>
+            <a href="/tags/Unity/" rel="tag"><i class="fa fa-tag"></i> Unity</a>
+          
+            <a href="/tags/JobSystem/" rel="tag"><i class="fa fa-tag"></i> JobSystem</a>
           
         </div>
       
@@ -511,8 +489,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/31/MarkDown語法測試/" rel="next" title="MarkDown語法測試">
-                <i class="fa fa-chevron-left"></i> MarkDown語法測試
+              <a href="/2019/08/31/Native-Arrays/" rel="next" title="【測試】使用 Native Arrays 引起cpu處理過大?">
+                <i class="fa fa-chevron-left"></i> 【測試】使用 Native Arrays 引起cpu處理過大?
               </a>
             
           </div>
@@ -520,10 +498,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/04/Timeline/" rel="prev" title="Timeline 擴展功能類別之間的關係">
-                Timeline 擴展功能類別之間的關係 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -733,7 +707,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#用途"><span class="nav-number">1.</span> <span class="nav-text">用途</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#簡單範例"><span class="nav-number">2.</span> <span class="nav-text">簡單範例</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什麼是JobSystem"><span class="nav-number">1.</span> <span class="nav-text">什麼是JobSystem</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Race-conditions-amp-safety-system"><span class="nav-number">2.</span> <span class="nav-text">Race conditions &amp; safety system</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#競爭-Race-conditions"><span class="nav-number">2.1.</span> <span class="nav-text">競爭(Race conditions)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安全系統-safety-system"><span class="nav-number">2.2.</span> <span class="nav-text">安全系統(safety system)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NativeContainer"><span class="nav-number">3.</span> <span class="nav-text">NativeContainer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NativeContainer-Allocator"><span class="nav-number">4.</span> <span class="nav-text">NativeContainer Allocator</span></a></li></ol></div>
             
 
           </div>
@@ -902,9 +876,9 @@
 
 <script>
   var disqus_config = function() {
-    this.page.url = "http://unoniceday.github.io/2019/08/03/Unity-Timeline-快速認識/";
-    this.page.identifier = "2019/08/03/Unity-Timeline-快速認識/";
-    this.page.title = 'Timeline 快速認識';
+    this.page.url = "http://unoniceday.github.io/2019/09/01/JobSystem初次見面/";
+    this.page.identifier = "2019/09/01/JobSystem初次見面/";
+    this.page.title = 'JobSystem初次見面';
     };
   function loadComments() {
     var d = document, s = d.createElement('script');
