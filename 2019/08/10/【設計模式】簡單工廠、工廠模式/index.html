@@ -94,20 +94,21 @@
 
 
 
-  <meta name="description" content="簡單工廠前言 &amp;gt; 如何輕鬆方便的構造對象實例，而不必關心對象實例的細節和複雜的過程呢?  上面這句是工廠模式所關注的問題，這樣說有點抽象，用個情境來說： 現在飲料店來了一個顧客，他想要點紅茶跟綠茶，用UML圖表示，長的像這樣  123456789101112131415public class Customer : MonoBehaviour &amp;#123;    private void Star">
+  <meta name="description" content="簡單工廠前言 &amp;gt; 如何輕鬆方便的構造對象實例，而不必關心對象實例的細&amp;gt; 節和複雜的過程呢?  上面這句是工廠模式所關注的問題，這樣說有點抽象，用個情境來說： 現在飲料店來了一個顧客，他想要點紅茶跟綠茶，用UML圖表示，長的像這樣  123456789101112131415public class Customer : MonoBehaviour &amp;#123;    private void St">
 <meta name="keywords" content="設計模式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="設計模式 - 簡單工廠、工廠模式">
 <meta property="og:url" content="http://unoniceday.github.io/2019/08/10/【設計模式】簡單工廠、工廠模式/index.html">
 <meta property="og:site_name" content="Uno 開發日常">
-<meta property="og:description" content="簡單工廠前言 &amp;gt; 如何輕鬆方便的構造對象實例，而不必關心對象實例的細節和複雜的過程呢?  上面這句是工廠模式所關注的問題，這樣說有點抽象，用個情境來說： 現在飲料店來了一個顧客，他想要點紅茶跟綠茶，用UML圖表示，長的像這樣  123456789101112131415public class Customer : MonoBehaviour &amp;#123;    private void Star">
+<meta property="og:description" content="簡單工廠前言 &amp;gt; 如何輕鬆方便的構造對象實例，而不必關心對象實例的細&amp;gt; 節和複雜的過程呢?  上面這句是工廠模式所關注的問題，這樣說有點抽象，用個情境來說： 現在飲料店來了一個顧客，他想要點紅茶跟綠茶，用UML圖表示，長的像這樣  123456789101112131415public class Customer : MonoBehaviour &amp;#123;    private void St">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="http://unoniceday.github.io/2019/08/10/【設計模式】簡單工廠、工廠模式/20190810031005379.png">
 <meta property="og:image" content="http://unoniceday.github.io/2019/08/10/【設計模式】簡單工廠、工廠模式/20190810032704169.png">
-<meta property="og:updated_time" content="2019-08-10T08:26:05.575Z">
+<meta property="og:image" content="http://unoniceday.github.io/2019/08/10/【設計模式】簡單工廠、工廠模式/20190810033730771.png">
+<meta property="og:updated_time" content="2019-09-07T13:12:37.251Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="設計模式 - 簡單工廠、工廠模式">
-<meta name="twitter:description" content="簡單工廠前言 &amp;gt; 如何輕鬆方便的構造對象實例，而不必關心對象實例的細節和複雜的過程呢?  上面這句是工廠模式所關注的問題，這樣說有點抽象，用個情境來說： 現在飲料店來了一個顧客，他想要點紅茶跟綠茶，用UML圖表示，長的像這樣  123456789101112131415public class Customer : MonoBehaviour &amp;#123;    private void Star">
+<meta name="twitter:description" content="簡單工廠前言 &amp;gt; 如何輕鬆方便的構造對象實例，而不必關心對象實例的細&amp;gt; 節和複雜的過程呢?  上面這句是工廠模式所關注的問題，這樣說有點抽象，用個情境來說： 現在飲料店來了一個顧客，他想要點紅茶跟綠茶，用UML圖表示，長的像這樣  123456789101112131415public class Customer : MonoBehaviour &amp;#123;    private void St">
 <meta name="twitter:image" content="http://unoniceday.github.io/2019/08/10/【設計模式】簡單工廠、工廠模式/20190810031005379.png">
 
 
@@ -366,13 +367,23 @@
                 
               
 
-              <time title="創建時間：2019-08-10 14:59:11 / 修改時間：16:26:05" itemprop="dateCreated datePublished" datetime="2019-08-10T14:59:11+08:00">2019-08-10</time>
+              <time title="創建時間：2019-08-10 14:59:11" itemprop="dateCreated datePublished" datetime="2019-08-10T14:59:11+08:00">2019-08-10</time>
             </span>
           
 
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新於</span>
+                
+                <time title="修改時間：2019-09-07 21:12:37" itemprop="dateModified" datetime="2019-09-07T21:12:37+08:00">2019-09-07</time>
+              </span>
             
           
 
@@ -436,7 +447,7 @@
 
       
         <h1 id="簡單工廠"><a href="#簡單工廠" class="headerlink" title="簡單工廠"></a>簡單工廠</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><br>
-> 如何輕鬆方便的構造對象實例，而不必關心對象實例的細節和複雜的過程呢?
+> 如何輕鬆方便的構造對象實例，而不必關心對象實例的細> 節和複雜的過程呢?
 
 <p>上面這句是工廠模式所關注的問題，這樣說有點抽象，用個情境來說：</p>
 <p>現在飲料店來了一個顧客，他想要點紅茶跟綠茶，用UML圖表示，長的像這樣</p>
@@ -472,7 +483,8 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Customer</span> :</span> MonoBehaviour &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Start</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">       </span><br><span class="line">        <span class="comment">//工廠方法</span></span><br><span class="line">        BlackTeaFactory blackTeaFactory = <span class="keyword">new</span> BlackTeaFactory();</span><br><span class="line">        blackTeaFactory.OrderTea();</span><br><span class="line">        GreenTeaFactory greenTeaFactory = <span class="keyword">new</span> GreenTeaFactory();</span><br><span class="line">        greenTeaFactory.OrderTea();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <br>
-![](/【設計模式】簡單工廠、工廠模式/20190810033730771.png)
+
+<p><img src="/2019/08/10/【設計模式】簡單工廠、工廠模式/20190810033730771.png" alt></p>
 <br>
 
 <p>而且這樣的方法又有一個問題了，那就是一個具體工廠只能創建一個產品<br>像是上面的綠茶工廠，就只會生產綠茶，紅茶工廠只會生產紅茶<br>實際過程中一個工廠往往需要生產多類產品，這時候為了解決這個問題，就需要用到抽象工廠了，見下一篇~</p>
@@ -605,7 +617,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">文章</span>
                   </a>
                 </div>
