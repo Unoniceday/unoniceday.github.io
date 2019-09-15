@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://unoniceday.github.io/"/>
-  <updated>2019-09-08T14:45:43.377Z</updated>
+  <updated>2019-09-14T09:50:07.313Z</updated>
   <id>http://unoniceday.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【設計模式】享元模式 - 共享物件</title>
+    <link href="http://unoniceday.github.io/2019/09/14/%E3%80%90%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F%E3%80%91%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F---%E5%85%B1%E4%BA%AB/"/>
+    <id>http://unoniceday.github.io/2019/09/14/【設計模式】享元模式---共享/</id>
+    <published>2019-09-14T07:32:47.000Z</published>
+    <updated>2019-09-14T09:50:07.313Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="定義"><a href="#定義" class="headerlink" title="定義"></a>定義</h1><br>> 享元模式（英語：Flyweight Pattern）是一種軟體設計模式。它使用共享物件，用來儘可能減少記憶體使用量以及分享資訊給儘可能多的相似物件. ([wiki](https://zh.wikipedia.org/wiki/%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F))<p>享元模式是以提高性能為目的的設計模式，核心思想是：如果存在著多個可以重複使用的對象，那麼就只需要共享同一份就好，不需要每次都去創建新的對象。</p><p>用Unity的來比喻的話，就像是使用靜態變數Verctor2.one跟new Vector2(1,1)的感覺，而享元模式則是在一個 【<strong>享元工廠類</strong>】 中創建而且管理所需要共享的對象</p><h1 id="簡化應用"><a href="#簡化應用" class="headerlink" title="簡化應用"></a>簡化應用</h1><br>這邊講簡化是因為，跟一般別人介紹的不太一樣，但個人覺得只要有享元模式的概念就好，所以就簡化來使用![](/【設計模式】享元模式---共享/20190914054151860.png)<p>WeaponBaseAttr ：需要共享的對象<br><br>WeaponAttrFactory：在工廠內獲得想要的數據<br><br>Client ：用戶端去使用Factory<br></p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WeaponBaseAttr</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">int</span> mBulletCount;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">float</span> mBulletSpeed;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">float</span> mCdTime;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">WeaponBaseAttr</span><span class="params">(<span class="keyword">int</span> bulletCount, <span class="keyword">float</span> bulletSpeed, <span class="keyword">float</span> cdTime)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        mBulletCount = bulletCount;</span><br><span class="line">        mBulletSpeed = bulletSpeed;</span><br><span class="line">        mCdTime = cdTime;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><del>這邊在工廠內也可以不要在工廠類初始化weapon的資料，也可以繼承WeaponBaseAttr，實作每個資料的內容，但我就是這樣用了XD</del></p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WeaponAttrFactory</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Dictionary&lt;<span class="built_in">string</span>, WeaponBaseAttr&gt; mWeaponBaseAttrDictionary;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">WeaponAttrFactory</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        InitBaseAttr();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">InitBaseAttr</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        mWeaponBaseAttrDictionary = <span class="keyword">new</span> Dictionary&lt;<span class="built_in">string</span>, WeaponBaseAttr&gt;</span><br><span class="line">        &#123;</span><br><span class="line">            &#123; <span class="string">"散彈槍"</span>, <span class="keyword">new</span> WeaponBaseAttr(<span class="number">8</span>, <span class="number">10f</span>, <span class="number">3f</span>) &#125;,</span><br><span class="line">            &#123; <span class="string">"狙擊槍"</span>, <span class="keyword">new</span> WeaponBaseAttr(<span class="number">5</span>, <span class="number">20f</span>, <span class="number">7f</span>) &#125;,</span><br><span class="line">            &#123; <span class="string">"AK47"</span>, <span class="keyword">new</span> WeaponBaseAttr(<span class="number">50</span>, <span class="number">10f</span>, <span class="number">0.5f</span>) &#125;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> WeaponBaseAttr <span class="title">GetWeaponBaseAttr</span><span class="params">(<span class="built_in">string</span> name)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (mWeaponBaseAttrDictionary.ContainsKey(name))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> mWeaponBaseAttrDictionary[name];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>然後就可以在Client端那邊，使用工廠的GetWeaponBaseAttr方法來獲取資料了，如果工廠模式用成靜態或單例會更方便一些</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> :</span> MonoBehaviour</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Start</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        WeaponAttrFactory weaponAttrFactory = <span class="keyword">new</span> WeaponAttrFactory();</span><br><span class="line">        WeaponBaseAttr shotGunAttr =  weaponAttrFactory.GetWeaponBaseAttr(<span class="string">"散彈槍"</span>);</span><br><span class="line">        WeaponBaseAttr ak47Attr = weaponAttrFactory.GetWeaponBaseAttr(<span class="string">"AK47"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;定義&quot;&gt;&lt;a href=&quot;#定義&quot; class=&quot;headerlink&quot; title=&quot;定義&quot;&gt;&lt;/a&gt;定義&lt;/h1&gt;&lt;br&gt;
+&gt; 享元模式（英語：Flyweight Pattern）是一種軟體設計模式。它使用共享物件，用來儘可能減少記憶體使用量以及分享資訊給儘可
+      
+    
+    </summary>
+    
+      <category term="設計模式" scheme="http://unoniceday.github.io/categories/%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+      <category term="設計模式" scheme="http://unoniceday.github.io/tags/%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>【設計模式】建造者模式 (Builder)</title>
@@ -94,9 +120,9 @@
     
       <category term="Unity" scheme="http://unoniceday.github.io/tags/Unity/"/>
     
-      <category term="測試" scheme="http://unoniceday.github.io/tags/%E6%B8%AC%E8%A9%A6/"/>
-    
       <category term="JobSystem" scheme="http://unoniceday.github.io/tags/JobSystem/"/>
+    
+      <category term="測試" scheme="http://unoniceday.github.io/tags/%E6%B8%AC%E8%A9%A6/"/>
     
   </entry>
   
