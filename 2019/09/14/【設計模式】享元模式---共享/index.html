@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="Uno 開發日常">
 <meta property="og:description" content="定義   享元模式（英語：Flyweight Pattern）是一種軟體設計模式。它使用共享物件，用來儘可能減少記憶體使用量以及分享資訊給儘可能多的相似物件.   取自 wiki  享元模式是以提高性能為目的的設計模式，核心思想是：如果存在著多個可以重複使用的對象，那麼就只需要共享同一份就好，不需要每次都去創建新的對象。 用Unity的來比喻的話，就像是使用靜態變數Verctor2.one跟new">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:updated_time" content="2019-09-29T09:19:49.037Z">
+<meta property="og:updated_time" content="2019-09-29T11:47:00.611Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【設計模式】享元模式 - 共享物件">
 <meta name="twitter:description" content="定義   享元模式（英語：Flyweight Pattern）是一種軟體設計模式。它使用共享物件，用來儘可能減少記憶體使用量以及分享資訊給儘可能多的相似物件.   取自 wiki  享元模式是以提高性能為目的的設計模式，核心思想是：如果存在著多個可以重複使用的對象，那麼就只需要共享同一份就好，不需要每次都去創建新的對象。 用Unity的來比喻的話，就像是使用靜態變數Verctor2.one跟new">
@@ -378,7 +378,7 @@
                 
                   <span class="post-meta-item-text">更新於</span>
                 
-                <time title="修改時間：2019-09-29 17:19:49" itemprop="dateModified" datetime="2019-09-29T17:19:49+08:00">2019-09-29</time>
+                <time title="修改時間：2019-09-29 19:47:00" itemprop="dateModified" datetime="2019-09-29T19:47:00+08:00">2019-09-29</time>
               </span>
             
           
@@ -452,7 +452,7 @@
 <h1 id="簡化應用"><a href="#簡化應用" class="headerlink" title="簡化應用"></a>簡化應用</h1><br>
 這邊講簡化是因為，跟一般別人介紹的不太一樣，但個人覺得只要有享元模式的概念就好，所以就簡化來使用 
 <br>
-![](/【設計模式】享元模式---共享/20190914054151860.png)
+![](/【設計模式】享元模式 - 共享物件/20190914054151860.png)
 
 <p>WeaponBaseAttr ：需要共享的對象<br><br>WeaponAttrFactory：在工廠內獲得想要的數據<br><br>Client ：用戶端去使用Factory<br></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WeaponBaseAttr</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">int</span> mBulletCount;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">float</span> mBulletSpeed;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">float</span> mCdTime;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">WeaponBaseAttr</span><span class="params">(<span class="keyword">int</span> bulletCount, <span class="keyword">float</span> bulletSpeed, <span class="keyword">float</span> cdTime)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        mBulletCount = bulletCount;</span><br><span class="line">        mBulletSpeed = bulletSpeed;</span><br><span class="line">        mCdTime = cdTime;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -510,8 +510,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/09/29/【設計模式】組合模式/" rel="prev" title="【設計模式】組合模式">
-                【設計模式】組合模式 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/09/14/【設計模式】享元模式 - 共享物件/" rel="prev" title="【設計模式】享元模式 - 共享物件">
+                【設計模式】享元模式 - 共享物件 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -590,7 +590,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">文章</span>
                   </a>
                 </div>

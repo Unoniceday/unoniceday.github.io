@@ -94,23 +94,18 @@
 
 
 
-  <meta name="description" content="用途Timeline是Unity 在2017.1版本中推出的敘事工具，可以在時間軸內編排遊戲內各種東西，像是遊戲物件、聲音、光照、鏡頭，做成遊戲動畫、電影。像是在遊戲途中，我們常會遇到在某一個時間點，需要插入一段劇情動畫，而timeline就可以用來解決這類的事情。 Intro to Unity Timeline 簡單範例 創建一個Timeline 首先打開Timeline視窗 [ Window">
-<meta name="keywords" content="Timeline">
+  <meta name="description" content="定義   享元模式（英語：Flyweight Pattern）是一種軟體設計模式。它使用共享物件，用來儘可能減少記憶體使用量以及分享資訊給儘可能多的相似物件.   取自 wiki  享元模式是以提高性能為目的的設計模式，核心思想是：如果存在著多個可以重複使用的對象，那麼就只需要共享同一份就好，不需要每次都去創建新的對象。 用Unity的來比喻的話，就像是使用靜態變數Verctor2.one跟new">
+<meta name="keywords" content="設計模式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Timeline 快速認識">
-<meta property="og:url" content="http://unoniceday.github.io/2019/08/03/Unity-Timeline-快速認識/index.html">
+<meta property="og:title" content="【設計模式】享元模式 - 共享物件">
+<meta property="og:url" content="http://unoniceday.github.io/2019/09/14/【設計模式】享元模式 - 共享物件/index.html">
 <meta property="og:site_name" content="Uno 開發日常">
-<meta property="og:description" content="用途Timeline是Unity 在2017.1版本中推出的敘事工具，可以在時間軸內編排遊戲內各種東西，像是遊戲物件、聲音、光照、鏡頭，做成遊戲動畫、電影。像是在遊戲途中，我們常會遇到在某一個時間點，需要插入一段劇情動畫，而timeline就可以用來解決這類的事情。 Intro to Unity Timeline 簡單範例 創建一個Timeline 首先打開Timeline視窗 [ Window">
+<meta property="og:description" content="定義   享元模式（英語：Flyweight Pattern）是一種軟體設計模式。它使用共享物件，用來儘可能減少記憶體使用量以及分享資訊給儘可能多的相似物件.   取自 wiki  享元模式是以提高性能為目的的設計模式，核心思想是：如果存在著多個可以重複使用的對象，那麼就只需要共享同一份就好，不需要每次都去創建新的對象。 用Unity的來比喻的話，就像是使用靜態變數Verctor2.one跟new">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:image" content="http://unoniceday.github.io/2019/08/03/Unity-Timeline-快速認識/20190803020026895.png">
-<meta property="og:image" content="http://unoniceday.github.io/2019/08/03/Unity-Timeline-快速認識/20190803021734682.png">
-<meta property="og:image" content="http://unoniceday.github.io/2019/08/03/Unity-Timeline-快速認識/20190803022255226.png">
-<meta property="og:image" content="http://unoniceday.github.io/2019/08/03/Unity-Timeline-快速認識/20190803023110789.png">
-<meta property="og:updated_time" content="2019-09-08T14:52:31.677Z">
+<meta property="og:updated_time" content="2019-09-29T09:19:49.037Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Timeline 快速認識">
-<meta name="twitter:description" content="用途Timeline是Unity 在2017.1版本中推出的敘事工具，可以在時間軸內編排遊戲內各種東西，像是遊戲物件、聲音、光照、鏡頭，做成遊戲動畫、電影。像是在遊戲途中，我們常會遇到在某一個時間點，需要插入一段劇情動畫，而timeline就可以用來解決這類的事情。 Intro to Unity Timeline 簡單範例 創建一個Timeline 首先打開Timeline視窗 [ Window">
-<meta name="twitter:image" content="http://unoniceday.github.io/2019/08/03/Unity-Timeline-快速認識/20190803020026895.png">
+<meta name="twitter:title" content="【設計模式】享元模式 - 共享物件">
+<meta name="twitter:description" content="定義   享元模式（英語：Flyweight Pattern）是一種軟體設計模式。它使用共享物件，用來儘可能減少記憶體使用量以及分享資訊給儘可能多的相似物件.   取自 wiki  享元模式是以提高性能為目的的設計模式，核心思想是：如果存在著多個可以重複使用的對象，那麼就只需要共享同一份就好，不需要每次都去創建新的對象。 用Unity的來比喻的話，就像是使用靜態變數Verctor2.one跟new">
 
 
 
@@ -120,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="http://unoniceday.github.io/2019/08/03/Unity-Timeline-快速認識/">
+  <link rel="canonical" href="http://unoniceday.github.io/2019/09/14/【設計模式】享元模式 - 共享物件/">
 
 
 
@@ -130,7 +125,7 @@
   };
 </script>
 
-  <title>Timeline 快速認識 | Uno 開發日常</title>
+  <title>【設計模式】享元模式 - 共享物件 | Uno 開發日常</title>
   
 
 
@@ -325,7 +320,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://unoniceday.github.io/2019/08/03/Unity-Timeline-快速認識/">
+    <link itemprop="mainEntityOfPage" href="http://unoniceday.github.io/2019/09/14/【設計模式】享元模式 - 共享物件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Uno">
@@ -342,7 +337,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Timeline 快速認識
+          <h1 class="post-title" itemprop="name headline">【設計模式】享元模式 - 共享物件
 
               
             
@@ -368,7 +363,7 @@
                 
               
 
-              <time title="創建時間：2019-08-03 11:25:08" itemprop="dateCreated datePublished" datetime="2019-08-03T11:25:08+08:00">2019-08-03</time>
+              <time title="創建時間：2019-09-14 15:32:47" itemprop="dateCreated datePublished" datetime="2019-09-14T15:32:47+08:00">2019-09-14</time>
             </span>
           
 
@@ -383,7 +378,7 @@
                 
                   <span class="post-meta-item-text">更新於</span>
                 
-                <time title="修改時間：2019-09-08 22:52:31" itemprop="dateModified" datetime="2019-09-08T22:52:31+08:00">2019-09-08</time>
+                <time title="修改時間：2019-09-29 17:19:49" itemprop="dateModified" datetime="2019-09-29T17:19:49+08:00">2019-09-29</time>
               </span>
             
           
@@ -397,7 +392,7 @@
                 <span class="post-meta-item-text">分類於</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Unity/" itemprop="url" rel="index"><span itemprop="name">Unity</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/設計模式/" itemprop="url" rel="index"><span itemprop="name">設計模式</span></a></span>
 
                 
                 
@@ -415,8 +410,8 @@
                 </span>
             
                 <span class="post-meta-item-text">評論數：</span>
-                <a href="/2019/08/03/Unity-Timeline-快速認識/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/08/03/Unity-Timeline-快速認識/" itemprop="commentCount"></span>
+                <a href="/2019/09/14/【設計模式】享元模式 - 共享物件/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/09/14/【設計模式】享元模式 - 共享物件/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -447,32 +442,26 @@
       
 
       
-        <h1 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h1><p>Timeline是Unity 在2017.1版本中推出的<b>敘事工具</b>，可以在時間軸內編排遊戲內各種東西，像是遊戲物件、聲音、光照、鏡頭，做成遊戲動畫、電影。像是在遊戲途中，我們常會遇到在某一個時間點，需要插入一段劇情動畫，而timeline就可以用來解決這類的事情。</p>
-<p><a href="https://www.youtube.com/watch?v=G_uBFM3YUF4" target="_blank" rel="noopener">Intro to Unity Timeline</a></p>
-<h1 id="簡單範例"><a href="#簡單範例" class="headerlink" title="簡單範例"></a>簡單範例</h1><ol>
-<li>創建一個Timeline<ul>
-<li>首先打開Timeline視窗 [ Window -&gt; Timeline ] </li>
-<li>創建一個空物件</li>
-<li>點擊空物件，在Timeline視窗上按Create</li>
-</ul>
-</li>
-</ol>
-<p><img src="/2019/08/03/Unity-Timeline-快速認識/20190803020026895.png" alt></p>
-<ol start="2">
-<li><p>移除不必要的組件<br>由於指定了GameObject來創建這個Timeline，本身會自動添加Animator組件，但這個範例不必操作這個物體，所以把Gameobject上多餘的Animator移除掉，Timeline上的也是</p>
-</li>
-<li><p>加入要操控的物體<br>創建兩個Cube，將它拖進Timeline視窗後會出現選項<br><img src="/2019/08/03/Unity-Timeline-快速認識/20190803021734682.png" alt></p>
-</li>
-</ol>
-<ul>
-<li>ActivationTrack ：操作物體的Active</li>
-<li>AnimationTrack ：物體的動畫軌道，可以錄製動畫</li>
-<li>AudioTrack ：音頻的軌道</li>
-</ul>
-<p>這邊就選Animation Track來做一段動畫。<br><br><br><br><br><img src="/2019/08/03/Unity-Timeline-快速認識/20190803022255226.png" alt><br>將物體擺上去後，會發現有個紅點可以點，它就是拿來錄製這個物體的動畫的按鈕，點下去後會發現右邊軌道上有個Recording，就代表開始錄製了，這邊就跟在Animation視窗上製作動畫一樣，可以操控它的位置、旋轉、…之類的東西。<br><br><br><br><br><b>如果不想用這個地方編輯它的動畫，也可以直接在 Recording模式中直接點擊兩下，它就會跳出Animation的視窗了</b><br><img src="/2019/08/03/Unity-Timeline-快速認識/20190803023110789.png" alt><br><br><br><br><br>然後另外一個物件同樣編輯一下動畫，就可以看見兩個物體一起動作的樣子了</p>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/kmRKZ4xzOgQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <h1 id="定義"><a href="#定義" class="headerlink" title="定義"></a>定義</h1><br>
 
+<blockquote>
+<p>享元模式（英語：Flyweight Pattern）是一種軟體設計模式。它使用共享物件，用來儘可能減少記憶體使用量以及分享資訊給儘可能多的相似物件.   取自 <a href="https://zh.wikipedia.org/wiki/%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F" target="_blank" rel="noopener">wiki</a></p>
+</blockquote>
+<p>享元模式是以提高性能為目的的設計模式，核心思想是：如果存在著多個可以重複使用的對象，那麼就只需要共享同一份就好，不需要每次都去創建新的對象。</p>
+<p>用Unity的來比喻的話，就像是使用靜態變數Verctor2.one跟new Vector2(1,1)的感覺，而享元模式則是在一個 【<strong>享元工廠類</strong>】 中創建而且管理所需要共享的對象</p>
+<h1 id="簡化應用"><a href="#簡化應用" class="headerlink" title="簡化應用"></a>簡化應用</h1><br>
+這邊講簡化是因為，跟一般別人介紹的不太一樣，但個人覺得只要有享元模式的概念就好，所以就簡化來使用 
+<br>
+![](/【設計模式】享元模式---共享/20190914054151860.png)
 
+<p>WeaponBaseAttr ：需要共享的對象<br><br>WeaponAttrFactory：在工廠內獲得想要的數據<br><br>Client ：用戶端去使用Factory<br></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WeaponBaseAttr</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">int</span> mBulletCount;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">float</span> mBulletSpeed;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">float</span> mCdTime;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">WeaponBaseAttr</span><span class="params">(<span class="keyword">int</span> bulletCount, <span class="keyword">float</span> bulletSpeed, <span class="keyword">float</span> cdTime)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        mBulletCount = bulletCount;</span><br><span class="line">        mBulletSpeed = bulletSpeed;</span><br><span class="line">        mCdTime = cdTime;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><del>這邊在工廠內也可以不要在工廠類初始化weapon的資料，也可以繼承WeaponBaseAttr，實作每個資料的內容，但我就是這樣用了XD</del></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WeaponAttrFactory</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Dictionary&lt;<span class="built_in">string</span>, WeaponBaseAttr&gt; mWeaponBaseAttrDictionary;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">WeaponAttrFactory</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        InitBaseAttr();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">InitBaseAttr</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        mWeaponBaseAttrDictionary = <span class="keyword">new</span> Dictionary&lt;<span class="built_in">string</span>, WeaponBaseAttr&gt;</span><br><span class="line">        &#123;</span><br><span class="line">            &#123; <span class="string">"散彈槍"</span>, <span class="keyword">new</span> WeaponBaseAttr(<span class="number">8</span>, <span class="number">10f</span>, <span class="number">3f</span>) &#125;,</span><br><span class="line">            &#123; <span class="string">"狙擊槍"</span>, <span class="keyword">new</span> WeaponBaseAttr(<span class="number">5</span>, <span class="number">20f</span>, <span class="number">7f</span>) &#125;,</span><br><span class="line">            &#123; <span class="string">"AK47"</span>, <span class="keyword">new</span> WeaponBaseAttr(<span class="number">50</span>, <span class="number">10f</span>, <span class="number">0.5f</span>) &#125;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> WeaponBaseAttr <span class="title">GetWeaponBaseAttr</span><span class="params">(<span class="built_in">string</span> name)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (mWeaponBaseAttrDictionary.ContainsKey(name))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> mWeaponBaseAttrDictionary[name];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然後就可以在Client端那邊，使用工廠的GetWeaponBaseAttr方法來獲取資料了，如果工廠模式用成靜態或單例會更方便一些</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> :</span> MonoBehaviour</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Start</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        WeaponAttrFactory weaponAttrFactory = <span class="keyword">new</span> WeaponAttrFactory();</span><br><span class="line">        WeaponBaseAttr shotGunAttr =  weaponAttrFactory.GetWeaponBaseAttr(<span class="string">"散彈槍"</span>);</span><br><span class="line">        WeaponBaseAttr ak47Attr = weaponAttrFactory.GetWeaponBaseAttr(<span class="string">"AK47"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -498,7 +487,7 @@
         
         <div class="post-tags">
           
-            <a href="/tags/Timeline/" rel="tag"><i class="fa fa-tag"></i> Timeline</a>
+            <a href="/tags/設計模式/" rel="tag"><i class="fa fa-tag"></i> 設計模式</a>
           
         </div>
       
@@ -511,8 +500,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/31/MarkDown語法測試/" rel="next" title="MarkDown語法測試">
-                <i class="fa fa-chevron-left"></i> MarkDown語法測試
+              <a href="/2019/09/14/【設計模式】享元模式---共享/" rel="next" title="【設計模式】享元模式 - 共享物件">
+                <i class="fa fa-chevron-left"></i> 【設計模式】享元模式 - 共享物件
               </a>
             
           </div>
@@ -521,8 +510,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/04/Timeline/" rel="prev" title="Timeline 擴展功能類別之間的關係">
-                Timeline 擴展功能類別之間的關係 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/09/29/【設計模式】組合模式/" rel="prev" title="【設計模式】組合模式">
+                【設計模式】組合模式 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -733,7 +722,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#用途"><span class="nav-number">1.</span> <span class="nav-text">用途</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#簡單範例"><span class="nav-number">2.</span> <span class="nav-text">簡單範例</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#定義"><span class="nav-number">1.</span> <span class="nav-text">定義</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#簡化應用"><span class="nav-number">2.</span> <span class="nav-text">簡化應用</span></a></li></ol></div>
             
 
           </div>
@@ -902,9 +891,9 @@
 
 <script>
   var disqus_config = function() {
-    this.page.url = "http://unoniceday.github.io/2019/08/03/Unity-Timeline-快速認識/";
-    this.page.identifier = "2019/08/03/Unity-Timeline-快速認識/";
-    this.page.title = 'Timeline 快速認識';
+    this.page.url = "http://unoniceday.github.io/2019/09/14/【設計模式】享元模式 - 共享物件/";
+    this.page.identifier = "2019/09/14/【設計模式】享元模式 - 共享物件/";
+    this.page.title = '【設計模式】享元模式 - 共享物件';
     };
   function loadComments() {
     var d = document, s = d.createElement('script');
