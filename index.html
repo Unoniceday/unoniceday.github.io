@@ -319,6 +319,201 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://unoniceday.github.io/2019/09/29/【設計模式】組合模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Uno">
+      <meta itemprop="description" content="紀錄開發的各種問題">
+      <meta itemprop="image" content="/images/WebAvator.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Uno 開發日常">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/09/29/【設計模式】組合模式/" class="post-title-link" itemprop="url">【設計模式】組合模式</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+
+              
+                
+              
+
+              <time title="創建時間：2019-09-29 17:19:50 / 修改時間：17:37:01" itemprop="dateCreated datePublished" datetime="2019-09-29T17:19:50+08:00">2019-09-29</time>
+            </span>
+          
+
+          
+            
+
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/設計模式/" itemprop="url" rel="index"><span itemprop="name">設計模式</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">評論數：</span>
+                <a href="/2019/09/29/【設計模式】組合模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/09/29/【設計模式】組合模式/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>
+              定義
+
+組合模式，又稱為部分整體模式，把具有相似的一組對象當做一個對象處理，用一種樹狀的結構來組合對象，再提供統一的方法去訪問相似的對象，以此忽略掉對象與對象容器間的差別。
+UML圖
+
+Component ：抽象組件，為組合中的對象聲明接口，讓客戶端可以通過這個接口來訪問和管理整個對象結構，可以在裏面為定義的功能提供缺省的實現，比如上面的AbstractMenu類。
+Composite ：容器組件，繼承抽象組件，實現抽象組件中與葉子組件相關的操作，比如上面的Menu類重寫了get，set方法。
+Leaf：葉子組件，定義和實現葉子對象的行為，不再包含其它的子節點對象
+
+
+可以將組合模式理解成，樹葉跟樹枝
+樹枝會長出很多分支，樹葉卻不會長出樹枝
+也就是說，樹葉(Left)就是最小單位，而樹枝(Composite)則是它的上一級，用來儲存樹葉用的，而Component可以當作這棵樹中的根，這棵樹
+              ...
+            </p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/09/29/【設計模式】組合模式/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://unoniceday.github.io/2019/09/14/【設計模式】享元模式---共享/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -364,13 +559,23 @@
                 
               
 
-              <time title="創建時間：2019-09-14 15:32:47 / 修改時間：17:50:07" itemprop="dateCreated datePublished" datetime="2019-09-14T15:32:47+08:00">2019-09-14</time>
+              <time title="創建時間：2019-09-14 15:32:47" itemprop="dateCreated datePublished" datetime="2019-09-14T15:32:47+08:00">2019-09-14</time>
             </span>
           
 
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新於</span>
+                
+                <time title="修改時間：2019-09-29 17:19:49" itemprop="dateModified" datetime="2019-09-29T17:19:49+08:00">2019-09-29</time>
+              </span>
             
           
 
@@ -437,13 +642,18 @@
           
             <p>
               定義
-> 享元模式（英語：Flyweight Pattern）是一種軟體設計模式。它使用共享物件，用來儘可能減少記憶體使用量以及分享資訊給儘可能多的相似物件. ([wiki](https://zh.wikipedia.org/wiki/%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F))
+
+
+享元模式（英語：Flyweight Pattern）是一種軟體設計模式。它使用共享物件，用來儘可能減少記憶體使用量以及分享資訊給儘可能多的相似物件.   取自 wiki
 
 享元模式是以提高性能為目的的設計模式，核心思想是：如果存在著多個可以重複使用的對象，那麼就只需要共享同一份就好，不需要每次都去創建新的對象。
 用Unity的來比喻的話，就像是使用靜態變數Verctor2.one跟new Vector2(1,1)的感覺，而享元模式則是在一個 【享元工廠類】 中創建而且管理所需要共享的對象
 簡化應用
-這邊講簡化是因為，跟一般別人介紹的不太一樣，但個人覺得只要有享元模式的概念就好，所以就簡化來使用
-![](/【設計模式】享元模式---共享/201909
+這邊講簡化是因為，跟一般別人介紹的不太一樣，但個人覺得只要有享元模式的概念就好，所以就簡化來使用 
+
+![](/【設計模式】享元模式---共享/20190914054151860.png)
+
+WeaponBaseAttr ：需要共享的對象WeaponAttrFactory：在工廠內獲得
               ...
             </p>
           <!--noindex-->
@@ -2070,217 +2280,6 @@ public class Customer : MonoBehaviour &#123;    private void Start()    &#123;  
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://unoniceday.github.io/2019/08/04/Timeline/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Uno">
-      <meta itemprop="description" content="紀錄開發的各種問題">
-      <meta itemprop="image" content="/images/WebAvator.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Uno 開發日常">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/08/04/Timeline/" class="post-title-link" itemprop="url">Timeline 擴展功能類別之間的關係</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-
-              
-                
-              
-
-              <time title="創建時間：2019-08-04 15:09:58" itemprop="dateCreated datePublished" datetime="2019-08-04T15:09:58+08:00">2019-08-04</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新於</span>
-                
-                <time title="修改時間：2019-09-08 22:53:27" itemprop="dateModified" datetime="2019-09-08T22:53:27+08:00">2019-09-08</time>
-              </span>
-            
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Unity/" itemprop="url" rel="index"><span itemprop="name">Unity</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-              
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">評論數：</span>
-                <a href="/2019/08/04/Timeline/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/08/04/Timeline/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              前言在使用Timeline自訂腳本的時候，有需要繼承幾個類別，一開始接觸的時候還蠻混亂的，之後稍微清楚了所以紀錄一下。最常用到的幾個類別分別為：
-
-Playable 
-TrackAsset 
-PlayableAsset 
-PlayableBehaviour
-
-因為他們名字太相像，使用有些API也蠻像的，所以很容易搞不清楚它們分別是拿來幹嘛的。
-以一個Timeline編輯器來說，最主要就分為
-
-編輯器本身
-軌道
-軌道上的片段
-
-對照圖就會是
-PlayableTimeline是基於Playable API去實現的，創建Timeline的時候也可以看到副檔名是.playable，也就是說除了Timeline外，還可以使用這組API去完成各種事情。有興趣的話可以參考 UnityTaiwan的範例。
-Simple Animation組件介紹
-UNITY3D Playables API 实践(上)
-T
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/08/04/Timeline/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2329,7 +2328,7 @@ T
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">文章</span>
                   </a>
                 </div>
