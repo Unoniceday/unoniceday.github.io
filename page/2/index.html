@@ -319,6 +319,205 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://unoniceday.github.io/2019/08/10/抽象工廠/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Uno">
+      <meta itemprop="description" content="紀錄開發的各種問題">
+      <meta itemprop="image" content="/images/WebAvator.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Uno 開發日常">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/10/抽象工廠/" class="post-title-link" itemprop="url">設計模式 - 抽象工廠</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+
+              
+                
+              
+
+              <time title="創建時間：2019-08-10 15:39:56" itemprop="dateCreated datePublished" datetime="2019-08-10T15:39:56+08:00">2019-08-10</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新於</span>
+                
+                <time title="修改時間：2019-09-08 22:52:29" itemprop="dateModified" datetime="2019-09-08T22:52:29+08:00">2019-09-08</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/設計模式/" itemprop="url" rel="index"><span itemprop="name">設計模式</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">評論數：</span>
+                <a href="/2019/08/10/抽象工廠/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/08/10/抽象工廠/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>
+              抽象工廠前言現在這間工廠不僅僅是生產茶了，他還會賣果汁!這樣原本的茶工廠這名字就不足以容納新的品項了，所以重新命名將它改為飲料工廠從她衍生跑出兩間工廠，一個是coco，一個是tata
+現在跟原本一樣，新增了一個果汁的品項，從果汁衍生出了檸檬汁與橘子汁，這裡跟原本的茶的品項衍生出綠茶跟紅茶的步驟是一樣的。
+先創建一個果汁介面
+public abstract class Juice &#123; &#125;衍生出檸檬汁、橘子汁public class LemonJuice : Juice &#123; &#125;public class OrangeJuice : Juice &#123; &#125;
+
+這樣在飲料工廠介面就可以新增點果汁的選項(他原本是TeaFactory)
+interface DrinkFactory&#123;    Tea OrderTea();    Juice
+              ...
+            </p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/08/10/抽象工廠/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://unoniceday.github.io/2019/08/10/【設計模式】簡單工廠、工廠模式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1192,7 +1391,7 @@ _   底線
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">文章</span>
                   </a>
                 </div>
@@ -1254,7 +1453,13 @@ _   底線
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">標籤</span>
                   </a>
                 </div>
