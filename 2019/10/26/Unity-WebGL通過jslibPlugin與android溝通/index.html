@@ -94,22 +94,22 @@
 
 
 
-  <meta name="description" content="最終目的為    - Unity WebGL通過jslib Plugin跟Web交互    - Unity WebGL通過jslib Plugin跟android溝通 第一部分 - Unity WebGL通過jslib Plugin跟Web交互1. 創建jslib [WebGL: Interacting with browser scripting](https://docs.unity3d.co">
+  <meta name="description" content="最終目的為    - Unity WebGL通過jslib Plugin跟Web交互    - Unity WebGL通過jslib Plugin跟android溝通 第一部分 - Unity WebGL通過jslib Plugin跟Web交互1. 創建jslib [WebGL:Interacting with browser scripting](https://docs.unity3d.com">
 <meta name="keywords" content="Unity,WebGL,Webview,Android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Unity WebGL通過jslibPlugin與android溝通">
 <meta property="og:url" content="http://unoniceday.github.io/2019/10/26/Unity-WebGL通過jslibPlugin與android溝通/index.html">
 <meta property="og:site_name" content="Uno 開發日常">
-<meta property="og:description" content="最終目的為    - Unity WebGL通過jslib Plugin跟Web交互    - Unity WebGL通過jslib Plugin跟android溝通 第一部分 - Unity WebGL通過jslib Plugin跟Web交互1. 創建jslib [WebGL: Interacting with browser scripting](https://docs.unity3d.co">
+<meta property="og:description" content="最終目的為    - Unity WebGL通過jslib Plugin跟Web交互    - Unity WebGL通過jslib Plugin跟android溝通 第一部分 - Unity WebGL通過jslib Plugin跟Web交互1. 創建jslib [WebGL:Interacting with browser scripting](https://docs.unity3d.com">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="http://unoniceday.github.io/2019/10/26/Unity-WebGL通過jslibPlugin與android溝通/20191026075150089.png">
 <meta property="og:image" content="http://unoniceday.github.io/2019/10/26/Unity-WebGL通過jslibPlugin與android溝通/20191026075405186.png">
 <meta property="og:image" content="http://unoniceday.github.io/2019/10/26/Unity-WebGL通過jslibPlugin與android溝通/20191026080125741.png">
 <meta property="og:image" content="http://unoniceday.github.io/2019/10/26/Unity-WebGL通過jslibPlugin與android溝通/20191026082548677.png">
-<meta property="og:updated_time" content="2019-10-26T12:25:58.085Z">
+<meta property="og:updated_time" content="2019-10-27T11:29:24.303Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Unity WebGL通過jslibPlugin與android溝通">
-<meta name="twitter:description" content="最終目的為    - Unity WebGL通過jslib Plugin跟Web交互    - Unity WebGL通過jslib Plugin跟android溝通 第一部分 - Unity WebGL通過jslib Plugin跟Web交互1. 創建jslib [WebGL: Interacting with browser scripting](https://docs.unity3d.co">
+<meta name="twitter:description" content="最終目的為    - Unity WebGL通過jslib Plugin跟Web交互    - Unity WebGL通過jslib Plugin跟android溝通 第一部分 - Unity WebGL通過jslib Plugin跟Web交互1. 創建jslib [WebGL:Interacting with browser scripting](https://docs.unity3d.com">
 <meta name="twitter:image" content="http://unoniceday.github.io/2019/10/26/Unity-WebGL通過jslibPlugin與android溝通/20191026075150089.png">
 
 
@@ -368,13 +368,23 @@
                 
               
 
-              <time title="創建時間：2019-10-26 19:33:00 / 修改時間：20:25:58" itemprop="dateCreated datePublished" datetime="2019-10-26T19:33:00+08:00">2019-10-26</time>
+              <time title="創建時間：2019-10-26 19:33:00" itemprop="dateCreated datePublished" datetime="2019-10-26T19:33:00+08:00">2019-10-26</time>
             </span>
           
 
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新於</span>
+                
+                <time title="修改時間：2019-10-27 19:29:24" itemprop="dateModified" datetime="2019-10-27T19:29:24+08:00">2019-10-27</time>
+              </span>
             
           
 
@@ -439,10 +449,10 @@
       
         <p>最終目的為<br>    - Unity WebGL通過jslib Plugin跟Web交互<br>    - Unity WebGL通過jslib Plugin跟android溝通</p>
 <h1 id="第一部分-Unity-WebGL通過jslib-Plugin跟Web交互"><a href="#第一部分-Unity-WebGL通過jslib-Plugin跟Web交互" class="headerlink" title="第一部分 - Unity WebGL通過jslib Plugin跟Web交互"></a>第一部分 - Unity WebGL通過jslib Plugin跟Web交互</h1><h2 id="1-創建jslib"><a href="#1-創建jslib" class="headerlink" title="1. 創建jslib"></a>1. 創建jslib</h2><br>
-[WebGL: Interacting with browser scripting](https://docs.unity3d.com/Manual/webgl-interactingwithbrowserscripting.html)
+[WebGL:Interacting with browser scripting](https://docs.unity3d.com/Manual/webgl-interactingwithbrowserscripting.html)
 <br>
-通過官方文件可以得知，可以使用在Plguins底下建立.jslib的庫來跟網頁的溝通，jslib是javascript語言，之間的溝通也是透過javascript
 
+<p>通過官方文件可以得知，可以使用在Plguins底下建立.jslib的庫來跟網頁的溝通，jslib是javascript語言，之間的溝通也是透過javascript</p>
 <p>這部分直接在Asset/Plugins資料夾底下建一個text檔將後綴名改成.jslib就完成了</p>
 <p>text檔的內容：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mergeInto(LibraryManager.library, &#123;</span><br><span class="line"></span><br><span class="line">    Hello: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">window</span>.alert(<span class="string">"Hello, world!"</span>);  <span class="comment">//跳出視窗通知 - Hello,world</span></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  HelloString: <span class="function"><span class="keyword">function</span> (<span class="params">str</span>) </span>&#123;</span><br><span class="line">    android.ShowString(Pointer_stringify(str)); <span class="comment">//使用Pointer_stringify方法轉換unity傳遞過來的字符串</span></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
@@ -472,6 +482,9 @@
 <h2 id="3-MainActivity內接入webView"><a href="#3-MainActivity內接入webView" class="headerlink" title="3. MainActivity內接入webView"></a>3. MainActivity內接入webView</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> WebView webview;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span>  <span class="title">onCreate</span><span class="params">(BundlesavedInstanceState)</span></span>&#123;</span><br><span class="line"><span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">WebView webview = (WebView)findViewById(R.id.web_view);</span><br><span class="line">webview.getSettings().setJavaScriptEnabled(<span class="keyword">true</span>);<span class="comment">//設定此WebView支援Javascript</span></span><br><span class="line">webview.setWebViewClient(newWebViewClient());<span class="comment">//不調用系統瀏覽器</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">webview.addJavascriptInterface(newJSBridge(),<span class="string">"android"</span>);<span class="comment">//第一個參數是javascript對應java的物件，第二個則是js中要呼叫該物件的方法就是通過這個來呼叫，也就是對應一開始的寫的jslib內的android.ShowString(Pointer_stringify(str));的android對象</span></span><br><span class="line">webview.loadUrl(<span class="string">"https://cheesegames.net/games/2747/index.php?gameDataId=2747"</span>); <span class="comment">//這邊的網址就是最上面說的"上傳WebGL遊戲"的網址</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JSBridge</span></span>&#123;</span><br><span class="line">  </span><br><span class="line">      <span class="meta">@JavascriptInterface</span></span><br><span class="line">      <span class="comment">//從Unity端可以呼叫到的function，ShowString對應一開始的jslib內的android.ShowString(Pointer_stringify(str));</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ShowString</span><span class="params">(Stringmessage)</span></span>&#123;</span><br><span class="line">      Toast.makeText(getApplicationContext(),<span class="string">"通過Natvie傳遞的Toast:"</span>+message,Toast.LENGTH_LONG).show();</span><br><span class="line">      &#125; </span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>輸出後，在android上面打開後，在UNITY遊戲內按下按鈕就會跑出android的訊息啦~<br><img src="/2019/10/26/Unity-WebGL通過jslibPlugin與android溝通/20191026082548677.png" alt></p>
+<p>附上源碼 ： github</p>
+<p><a href="https://github.com/Unoniceday/UnityWebGL2WebApi" target="_blank" rel="noopener">UnityWebGL2WebApi</a></p>
+<p><a href="https://github.com/Unoniceday/UnityWebGL2WebView" target="_blank" rel="noopener">UnityWebGL2WebView</a></p>
 
       
     </div>
