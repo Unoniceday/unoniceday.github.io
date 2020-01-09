@@ -319,7 +319,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://unoniceday.github.io/2019/08/10/抽象工廠/">
+    <link itemprop="mainEntityOfPage" href="http://unoniceday.github.io/2019/08/10/【設計模式】抽象工廠/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Uno">
@@ -339,7 +339,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/08/10/抽象工廠/" class="post-title-link" itemprop="url">設計模式 - 抽象工廠</a>
+                <a href="/2019/08/10/【設計模式】抽象工廠/" class="post-title-link" itemprop="url">【設計模式】抽象工廠</a>
               
             
           </h1>
@@ -379,7 +379,7 @@
                 
                   <span class="post-meta-item-text">更新於</span>
                 
-                <time title="修改時間：2019-09-08 22:52:29" itemprop="dateModified" datetime="2019-09-08T22:52:29+08:00">2019-09-08</time>
+                <time title="修改時間：2020-01-09 22:11:05" itemprop="dateModified" datetime="2020-01-09T22:11:05+08:00">2020-01-09</time>
               </span>
             
           
@@ -411,8 +411,8 @@
                 </span>
             
                 <span class="post-meta-item-text">評論數：</span>
-                <a href="/2019/08/10/抽象工廠/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/08/10/抽象工廠/" itemprop="commentCount"></span>
+                <a href="/2019/08/10/【設計模式】抽象工廠/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/08/10/【設計模式】抽象工廠/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -425,7 +425,27 @@
 
           <br>
           
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">文章字數：</span>
+              
+              <span title="文章字數">1.2k</span>
+            </span>
+          
 
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              
+              <span title="所需閱讀時間">1 分鐘</span>
+            </span>
           
 
           
@@ -447,18 +467,13 @@
           
             <p>
               抽象工廠前言現在這間工廠不僅僅是生產茶了，他還會賣果汁!這樣原本的茶工廠這名字就不足以容納新的品項了，所以重新命名將它改為飲料工廠從她衍生跑出兩間工廠，一個是coco，一個是tata
-現在跟原本一樣，新增了一個果汁的品項，從果汁衍生出了檸檬汁與橘子汁，這裡跟原本的茶的品項衍生出綠茶跟紅茶的步驟是一樣的。
-先創建一個果汁介面
-public abstract class Juice &#123; &#125;衍生出檸檬汁、橘子汁public class LemonJuice : Juice &#123; &#125;public class OrangeJuice : Juice &#123; &#125;
-
-這樣在飲料工廠介面就可以新增點果汁的選項(他原本是TeaFactory)
-interface DrinkFactory&#123;    Tea OrderTea();    Juice
+現在跟原本一樣，新增了一個果汁的品項，從果汁衍生出了檸檬汁與橘子汁，這裡跟原本的茶的品項衍生出綠茶跟紅茶的步驟是一樣
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/08/10/抽象工廠/#more" rel="contents">
+              <a class="btn" href="/2019/08/10/【設計模式】抽象工廠/#more" rel="contents">
                 閱讀全文 &raquo;
               </a>
             </div>
@@ -624,7 +639,27 @@ interface DrinkFactory&#123;    Tea OrderTea();    Juice
 
           <br>
           
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">文章字數：</span>
+              
+              <span title="文章字數">2.3k</span>
+            </span>
+          
 
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              
+              <span title="所需閱讀時間">2 分鐘</span>
+            </span>
           
 
           
@@ -651,7 +686,7 @@ interface DrinkFactory&#123;    Tea OrderTea();    Juice
 上面這句是工廠模式所關注的問題，這樣說有點抽象，用個情境來說：
 現在飲料店來了一個顧客，他想要點紅茶跟綠茶，用UML圖表示，長的像這樣
 
-public class Customer : MonoBehaviour &#123;    private void Start()    &#123;        GreenTea greenTea = new GreenTea();        AddMaterial(); //加料        Blend(); //混合        Cup(); //裝杯                BlackTea blackTea = new BlackTea();        AddMaterial(); //加料        Blend(); /
+public class Customer : MonoBehavi
               ...
             </p>
           <!--noindex-->
@@ -823,7 +858,27 @@ public class Customer : MonoBehaviour &#123;    private void Start()    &#123;  
 
           <br>
           
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">文章字數：</span>
+              
+              <span title="文章字數">2.9k</span>
+            </span>
+          
 
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              
+              <span title="所需閱讀時間">3 分鐘</span>
+            </span>
           
 
           
@@ -851,18 +906,7 @@ TrackAsset
 PlayableAsset 
 PlayableBehaviour
 
-因為他們名字太相像，使用有些API也蠻像的，所以很容易搞不清楚它們分別是拿來幹嘛的。
-以一個Timeline編輯器來說，最主要就分為
-
-編輯器本身
-軌道
-軌道上的片段
-
-對照圖就會是
-PlayableTimeline是基於Playable API去實現的，創建Timeline的時候也可以看到副檔名是.playable，也就是說除了Timeline外，還可以使用這組API去完成各種事情。有興趣的話可以參考 UnityTaiwan的範例。
-Simple Animation組件介紹
-UNITY3D Playables API 实践(上)
-T
+因為他們名字太相像，使用有些API也蠻像
               ...
             </p>
           <!--noindex-->
@@ -1034,7 +1078,27 @@ T
 
           <br>
           
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">文章字數：</span>
+              
+              <span title="文章字數">687</span>
+            </span>
+          
 
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              
+              <span title="所需閱讀時間">1 分鐘</span>
+            </span>
           
 
           
@@ -1056,20 +1120,7 @@ T
           
             <p>
               用途Timeline是Unity 在2017.1版本中推出的敘事工具，可以在時間軸內編排遊戲內各種東西，像是遊戲物件、聲音、光照、鏡頭，做成遊戲動畫、電影。像是在遊戲途中，我們常會遇到在某一個時間點，需要插入一段劇情動畫，而timeline就可以用來解決這類的事情。
-Intro to Unity Timeline
-簡單範例
-創建一個Timeline
-首先打開Timeline視窗 [ Window -&gt; Timeline ] 
-創建一個空物件
-點擊空物件，在Timeline視窗上按Create
-
-
-
-
-
-移除不必要的組件由於指定了GameObject來創建這個Timeline，本身會自動添加Animator組件，但這個範例不必操作這個物體，所以把Gameobject上多餘的Animator移除掉，Timeline上的也是
-
-加入要操控的物體創建兩個Cube，將它拖進Timeline視窗
+Intro to Unity T
               ...
             </p>
           <!--noindex-->
@@ -1231,7 +1282,27 @@ Intro to Unity Timeline
 
           <br>
           
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">文章字數：</span>
+              
+              <span title="文章字數">325</span>
+            </span>
+          
 
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              
+              <span title="所需閱讀時間">1 分鐘</span>
+            </span>
           
 
           
@@ -1270,29 +1341,7 @@ int main()&#123;  return c;&#125;
 
 連結
 This is an example inline link.
-This link has no title attribute.
-
-雙底線 單星號    三星號
-
-文字超連結
-usage
-Write markdown text in this textarea.
-Click ‘HTML Preview’ button.
-
-換行小於br/大於
-
-區塊語言前面加一個大於
-
-Markdown支援在下面這些符號前面加上反斜線來幫助插入普通的符號：
-\   反斜線
-`   反引號
-*   星號
-_   底線
-{}  大括號
-[]  方括號
-()  括號
-#   井字號
-+  
+This 
               ...
             </p>
           <!--noindex-->
@@ -1540,7 +1589,21 @@ _   底線
   <span class="author" itemprop="copyrightHolder">Uno</span>
 
   
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="總字數">31k</span>
+  
 
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="所需總閱讀時間">28 分鐘</span>
   
 </div>
 
