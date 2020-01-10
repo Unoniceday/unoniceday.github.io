@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>Unity WebGL通過jslibPlugin與android溝通</title>
-    <url>/2019/10/26/Unity-WebGL%E9%80%9A%E9%81%8EjslibPlugin%E8%88%87android%E6%BA%9D%E9%80%9A/</url>
+    <url>/Unity-WebGL%E9%80%9A%E9%81%8EjslibPlugin%E8%88%87android%E6%BA%9D%E9%80%9A/</url>
     <content><![CDATA[<p>最終目的為<br>    - Unity WebGL通過jslib Plugin跟Web交互<br>    - Unity WebGL通過jslib Plugin跟android溝通</p>
 <a id="more"></a>
 <h1 id="第一部分-Unity-WebGL通過jslib-Plugin跟Web交互"><a href="#第一部分-Unity-WebGL通過jslib-Plugin跟Web交互" class="headerlink" title="第一部分 - Unity WebGL通過jslib Plugin跟Web交互"></a>第一部分 - Unity WebGL通過jslib Plugin跟Web交互</h1><h2 id="1-創建jslib"><a href="#1-創建jslib" class="headerlink" title="1. 創建jslib"></a>1. 創建jslib</h2><br>
@@ -19,11 +19,11 @@
 <h2 id="2-在unity內創建WebviewTest-cs分別對應jslib內的兩個function"><a href="#2-在unity內創建WebviewTest-cs分別對應jslib內的兩個function" class="headerlink" title="2. 在unity內創建WebviewTest.cs分別對應jslib內的兩個function"></a>2. 在unity內創建WebviewTest.cs分別對應jslib內的兩個function</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> System.Runtime.InteropServices;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebviewTest</span> :</span> MonoBehaviour &#123;</span><br><span class="line"></span><br><span class="line">    [DllImport(<span class="string">"__Internal"</span>)]</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">extern</span> <span class="keyword">void</span> <span class="title">Hello</span><span class="params">()</span></span>; <span class="comment">//分別對應第一點所製作的function</span></span><br><span class="line"></span><br><span class="line">    [DllImport(<span class="string">"__Internal"</span>)]</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">extern</span> <span class="keyword">void</span> <span class="title">HelloString</span><span class="params">(<span class="built_in">string</span> str)</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>然後建立兩個按鈕當介面來呼叫</p>
-<p><img src="/2019/10/26/Unity-WebGL通過jslibPlugin與android溝通/20191026075150089.png" alt></p>
+<p><img src="/Unity-WebGL通過jslibPlugin與android溝通/20191026075150089.png" alt></p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebviewTest</span> :</span> MonoBehaviour &#123;</span><br><span class="line">    </span><br><span class="line">     </span><br><span class="line">    [DllImport(<span class="string">"__Internal"</span>)]</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">extern</span> <span class="keyword">void</span> <span class="title">HelloString</span><span class="params">(<span class="built_in">string</span> str)</span></span>;</span><br><span class="line"></span><br><span class="line">    [DllImport(<span class="string">"__Internal"</span>)]</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">extern</span> <span class="keyword">void</span> <span class="title">Hello</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> SendString = <span class="string">"HelloString - yo"</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">HelloStringBtnClicked</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        Debug.Log(<span class="string">"call-js-HelloString("</span> + SendString + <span class="string">")"</span>);</span><br><span class="line">        HelloString(SendString);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">HelloBtnClicked</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        Debug.Log(<span class="string">"call-js-Hello()"</span>);</span><br><span class="line">        Hello();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>這樣第一個效果<br><b>Unity WebGL通過jslib Plugin跟Web交互</b><br>就完成了，將專案輸出成WebGL，直接用網頁開的話，就可以使用第一個按鈕[Hello] 達到</p>
-<p><img src="/2019/10/26/Unity-WebGL通過jslibPlugin與android溝通/20191026075405186.png" alt></p>
+<p><img src="/Unity-WebGL通過jslibPlugin與android溝通/20191026075405186.png" alt></p>
 <h1 id="第二部分-Unity-WebGL通過jslib-Plugin跟android溝通"><a href="#第二部分-Unity-WebGL通過jslib-Plugin跟android溝通" class="headerlink" title="第二部分 - Unity WebGL通過jslib Plugin跟android溝通"></a>第二部分 - Unity WebGL通過jslib Plugin跟android溝通</h1><br>
 這個實作情境是想要在android的webview上開啟unity輸出的webGL檔，並且unity內的東西可以傳遞資訊給android，
 這邊用按下unity內的按鈕後，會跑出android的訊息視窗來當範例
@@ -33,12 +33,12 @@
 <p>修改完後目前activity_main.xml長得像這樣</p>
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xmlversion="1.0"encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">android.support.constraint.ConstraintLayoutxmlns:android="http:</span>//<span class="attr">schemas.android.com</span>/<span class="attr">apk</span>/<span class="attr">res</span>/<span class="attr">android</span>"</span></span><br><span class="line"><span class="tag"><span class="attr">xmlns:app</span>=<span class="string">"http://schemas.android.com/apk/res-auto"</span></span></span><br><span class="line"><span class="tag"><span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span></span></span><br><span class="line"><span class="tag"><span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag"><span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag"><span class="attr">tools:context</span>=<span class="string">".MainActivity"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">WebViewxmlns:android="http:</span>//<span class="attr">schemas.android.com</span>/<span class="attr">apk</span>/<span class="attr">res</span>/<span class="attr">android</span>"</span></span><br><span class="line"><span class="tag"><span class="attr">android:id</span>=<span class="string">"@+id/web_view"</span></span></span><br><span class="line"><span class="tag"><span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag"><span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">WebView</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">android.support.constraint.ConstraintLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/10/26/Unity-WebGL通過jslibPlugin與android溝通/20191026080125741.png" alt></p>
+<p><img src="/Unity-WebGL通過jslibPlugin與android溝通/20191026080125741.png" alt></p>
 <h2 id="2-AndroidManifest-xml-加入網路許可"><a href="#2-AndroidManifest-xml-加入網路許可" class="headerlink" title="2. AndroidManifest.xml 加入網路許可"></a>2. AndroidManifest.xml 加入網路許可</h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xmlversion="1.0"encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">manifestxmlns:android="http:</span>//<span class="attr">schemas.android.com</span>/<span class="attr">apk</span>/<span class="attr">res</span>/<span class="attr">android</span>"</span></span><br><span class="line"><span class="tag"><span class="attr">package</span>=<span class="string">"com.nuwa.unity.unitywebview"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permissionandroid:name="android.permission.INTERNET"</span>/&gt;</span> //加這一行而已</span><br><span class="line"><span class="tag">&lt;<span class="name">application</span></span></span><br><span class="line"><span class="tag"><span class="attr">android:allowBackup</span>=<span class="string">"true"</span></span></span><br><span class="line"><span class="tag"><span class="attr">android:icon</span>=<span class="string">"@mipmap/ic_launcher"</span></span></span><br><span class="line"><span class="tag"><span class="attr">android:label</span>=<span class="string">"@string/app_name"</span></span></span><br><span class="line"><span class="tag"><span class="attr">android:roundIcon</span>=<span class="string">"@mipmap/ic_launcher_round"</span></span></span><br><span class="line"><span class="tag"><span class="attr">android:supportsRtl</span>=<span class="string">"true"</span></span></span><br><span class="line"><span class="tag"><span class="attr">android:theme</span>=<span class="string">"@style/AppTheme"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">activityandroid:name=".MainActivity"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">actionandroid:name="android.intent.action.MAIN"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">categoryandroid:name="android.intent.category.LAUNCHER"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">activity</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="3-MainActivity內接入webView"><a href="#3-MainActivity內接入webView" class="headerlink" title="3. MainActivity內接入webView"></a>3. MainActivity內接入webView</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> WebView webview;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span>  <span class="title">onCreate</span><span class="params">(BundlesavedInstanceState)</span></span>&#123;</span><br><span class="line"><span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">WebView webview = (WebView)findViewById(R.id.web_view);</span><br><span class="line">webview.getSettings().setJavaScriptEnabled(<span class="keyword">true</span>);<span class="comment">//設定此WebView支援Javascript</span></span><br><span class="line">webview.setWebViewClient(newWebViewClient());<span class="comment">//不調用系統瀏覽器</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">webview.addJavascriptInterface(newJSBridge(),<span class="string">"android"</span>);<span class="comment">//第一個參數是javascript對應java的物件，第二個則是js中要呼叫該物件的方法就是通過這個來呼叫，也就是對應一開始的寫的jslib內的android.ShowString(Pointer_stringify(str));的android對象</span></span><br><span class="line">webview.loadUrl(<span class="string">"https://cheesegames.net/games/2747/index.php?gameDataId=2747"</span>); <span class="comment">//這邊的網址就是最上面說的"上傳WebGL遊戲"的網址</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JSBridge</span></span>&#123;</span><br><span class="line">  </span><br><span class="line">      <span class="meta">@JavascriptInterface</span></span><br><span class="line">      <span class="comment">//從Unity端可以呼叫到的function，ShowString對應一開始的jslib內的android.ShowString(Pointer_stringify(str));</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ShowString</span><span class="params">(Stringmessage)</span></span>&#123;</span><br><span class="line">      Toast.makeText(getApplicationContext(),<span class="string">"通過Natvie傳遞的Toast:"</span>+message,Toast.LENGTH_LONG).show();</span><br><span class="line">      &#125; </span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>輸出後，在android上面打開後，在UNITY遊戲內按下按鈕就會跑出android的訊息啦~<br><img src="/2019/10/26/Unity-WebGL通過jslibPlugin與android溝通/20191026082548677.png" alt></p>
+<p>輸出後，在android上面打開後，在UNITY遊戲內按下按鈕就會跑出android的訊息啦~<br><img src="/Unity-WebGL通過jslibPlugin與android溝通/20191026082548677.png" alt></p>
 <p>附上源碼 ： github</p>
 <p><a href="https://github.com/Unoniceday/UnityWebGL2WebApi" target="_blank" rel="noopener">UnityWebGL2WebApi</a></p>
 <p><a href="https://github.com/Unoniceday/UnityWebGL2WebView" target="_blank" rel="noopener">UnityWebGL2WebView</a></p>
@@ -55,12 +55,12 @@
   </entry>
   <entry>
     <title>【設計模式】組合模式</title>
-    <url>/2019/09/29/%E3%80%90%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F%E3%80%91%E7%B5%84%E5%90%88%E6%A8%A1%E5%BC%8F/</url>
+    <url>/%E3%80%90%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F%E3%80%91%E7%B5%84%E5%90%88%E6%A8%A1%E5%BC%8F/</url>
     <content><![CDATA[<h1 id="定義"><a href="#定義" class="headerlink" title="定義"></a>定義</h1><br>
 
 <p>組合模式，又稱為部分整體模式，把具有相似的一組對象<br>當做一個對象處理，用一種樹狀的結構來組合對象，再提供統一<br>的方法去訪問相似的對象，以此忽略掉對象與對象容器間的差別。</p>
 <a id="more"></a>
-<h1 id="UML圖"><a href="#UML圖" class="headerlink" title="UML圖"></a>UML圖</h1><p><img src="/2019/09/29/【設計模式】組合模式/20190929052633965.png" alt></p>
+<h1 id="UML圖"><a href="#UML圖" class="headerlink" title="UML圖"></a>UML圖</h1><p><img src="/【設計模式】組合模式/20190929052633965.png" alt></p>
 <ul>
 <li><strong>Component</strong> ：抽象組件，為組合中的對象聲明接口，讓客戶端<br>可以通過這個接口來訪問和管理整個對象結構，可以在裏面為定義的<br>功能提供缺省的實現，比如上面的AbstractMenu類。</li>
 <li><strong>Composite</strong> ：容器組件，繼承抽象組件，實現抽象組件中與<br>葉子組件相關的操作，比如上面的Menu類重寫了get，set方法。</li>
@@ -76,7 +76,7 @@
 <li>想表示對象的部分-整體層次的結構</li>
 <li>忽略組合對象(樹枝)與單個對象(樹葉)的不同，用戶統一的使用組合結構中的所有對象就可以考慮使用組合模式，像是Unity內物件結構<br><br><br></li>
 </ol>
-<p><img src="/2019/09/29/【設計模式】組合模式/20190929053020468.png" alt></p>
+<p><img src="/【設計模式】組合模式/20190929053020468.png" alt></p>
 <p>另外，可以使用組合對象來得到、搜尋當中的物件，但如果有頻繁的搜尋需求，可以用緩存來改善效率。<br>像是在Unity內，如果搜尋的話使用GameObject.Find(“xxx”)，會搜尋所有物件(紅框部摁)，物件一多效率就不好，但如果只將一小部分做成組合模式，階層式的管理，只需要搜尋內部那一小部分(綠框部分)，效率就會改善許多。</p>
 <p>最後附上code參考</p>
 <h2 id="Component-抽象組件"><a href="#Component-抽象組件" class="headerlink" title="Component 抽象組件"></a>Component 抽象組件</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> abstract <span class="class"><span class="keyword">class</span> <span class="title">Component</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="built_in">string</span> mName;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> name &#123; get &#123; <span class="keyword">return</span> mName; &#125; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Component</span><span class="params">(<span class="built_in">string</span> name)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        mName = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> List&lt;Component&gt; mChildren = <span class="keyword">new</span> List&lt;Component&gt;();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> abstract <span class="keyword">void</span> <span class="title">AddChild</span><span class="params">(Component component)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> abstract <span class="keyword">void</span> <span class="title">RemoveChild</span><span class="params">(Component component)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> abstract Component <span class="title">GetChild</span><span class="params">(<span class="keyword">int</span> index)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -97,7 +97,7 @@
   </entry>
   <entry>
     <title>【設計模式】享元模式 - 共享物件</title>
-    <url>/2019/09/14/%E3%80%90%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F%E3%80%91%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F%20-%20%E5%85%B1%E4%BA%AB%E7%89%A9%E4%BB%B6/</url>
+    <url>/%E3%80%90%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F%E3%80%91%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F%20-%20%E5%85%B1%E4%BA%AB%E7%89%A9%E4%BB%B6/</url>
     <content><![CDATA[<h1 id="定義"><a href="#定義" class="headerlink" title="定義"></a>定義</h1><br>
 
 <blockquote>
@@ -110,7 +110,7 @@
 這邊講簡化是因為，跟一般別人介紹的不太一樣，但個人覺得只要有享元模式的概念就好，所以就簡化來使用 
 <br>
 
-<p><img src="/2019/09/14/【設計模式】享元模式 - 共享物件/20190914054151860.png" alt></p>
+<p><img src="/【設計模式】享元模式 - 共享物件/20190914054151860.png" alt></p>
 <p>WeaponBaseAttr ：需要共享的對象<br><br>WeaponAttrFactory：在工廠內獲得想要的數據<br><br>Client ：用戶端去使用Factory<br></p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WeaponBaseAttr</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">int</span> mBulletCount;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">float</span> mBulletSpeed;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">float</span> mCdTime;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">WeaponBaseAttr</span><span class="params">(<span class="keyword">int</span> bulletCount, <span class="keyword">float</span> bulletSpeed, <span class="keyword">float</span> cdTime)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        mBulletCount = bulletCount;</span><br><span class="line">        mBulletSpeed = bulletSpeed;</span><br><span class="line">        mCdTime = cdTime;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -128,7 +128,7 @@
   </entry>
   <entry>
     <title>【設計模式】建造者模式 (Builder)</title>
-    <url>/2019/09/06/%E3%80%90%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F%E3%80%91%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F-(Builder)/</url>
+    <url>/%E3%80%90%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F%E3%80%91%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F-(Builder)/</url>
     <content><![CDATA[<h1 id="定義"><a href="#定義" class="headerlink" title="定義"></a>定義</h1><br>
 將一個複雜對象的構建與它的表示分離，使得同樣的構造過程可以創建不同的表示。
 
@@ -137,7 +137,7 @@
 
 <p>工廠模式是將對象的全部創建過程封裝在工廠類中，由工廠類向Client提供最終的產品，而建造者類只提供產品類中各個組件，將具體如何組裝、組裝順序交給導演(Director)，然後組好的產品經由導演(Director)交給Client。</p>
 <a id="more"></a>
-<h1 id="建造者UML圖"><a href="#建造者UML圖" class="headerlink" title="建造者UML圖"></a>建造者UML圖</h1><p><img src="/2019/09/06/【設計模式】建造者模式-(Builder)/20190907023427608.png" alt></p>
+<h1 id="建造者UML圖"><a href="#建造者UML圖" class="headerlink" title="建造者UML圖"></a>建造者UML圖</h1><p><img src="/【設計模式】建造者模式-(Builder)/20190907023427608.png" alt></p>
 <ul>
 <li>Product - 產品類：產品的抽象類，可以再實作有哪些產品</li>
 <li>Builder -抽象類，規範產品的組建，一般是由子類實現具體的組件過程。</li>
@@ -166,7 +166,7 @@
 <p>現在有一個客戶(client)需要創建怪物的角色</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> :</span> MonoBehaviour</span><br><span class="line">&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        ICharacter character = <span class="keyword">new</span> Enemy_Cat();</span><br><span class="line">        ICharacter_Builder builder = <span class="keyword">new</span> Enemy_Builder(character);</span><br><span class="line"></span><br><span class="line">        ICharacter Instance = CharacterBuilderDirector.Construct(builder);</span><br><span class="line"></span><br><span class="line">        Debug.Log(Instance.AI_Name); <span class="comment">//看一下創建出來的AI名稱</span></span><br><span class="line">        Debug.Log(Instance.FBXModule_Name);</span><br><span class="line">        Debug.Log(Instance.Weapon_Name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>看起來就會像是這個樣子<br><img src="/2019/09/06/【設計模式】建造者模式-(Builder)/20190908104504581.png" alt><br>對應最上面的建造者模式的關係</p>
+<p>看起來就會像是這個樣子<br><img src="/【設計模式】建造者模式-(Builder)/20190908104504581.png" alt><br>對應最上面的建造者模式的關係</p>
 <p>ICharacter ： Poduct</p>
 <p>ICharacter_Builder ： Builder抽象類</p>
 <p>Enemy_Builder ：Builder抽象類的實作</p>
@@ -182,7 +182,7 @@
   </entry>
   <entry>
     <title>JobSystem初次見面</title>
-    <url>/2019/09/01/JobSystem%E5%88%9D%E6%AC%A1%E8%A6%8B%E9%9D%A2/</url>
+    <url>/JobSystem%E5%88%9D%E6%AC%A1%E8%A6%8B%E9%9D%A2/</url>
     <content><![CDATA[<h1 id="什麼是JobSystem"><a href="#什麼是JobSystem" class="headerlink" title="什麼是JobSystem"></a>什麼是JobSystem</h1><p>一般用unity製作遊戲，如果沒有特別去開線程的話，都是交由一個<b>主線程</b>去控制整個遊戲運行，但現在遊戲越做越大，不只需要性能強的設備，如果在製作遊戲上只使用主線程去做各項事情的話，負載過高也會導致FPS降低，而JobSystem目的就是可以讓設計師去使用更多的cpu的資源，來降低主線程的工作量進而讓整體遊戲效能優化。使用多線程可以讓原本擠在一起的任務分散到各個執行續上去執行，可以更有效的利用cpu的多核。</p>
 <a id="more"></a>
 <p>不過有一點需要注意的是，<b>UnityAPI必須在主線程中使用。</b><br><a href="https://blogs.unity3d.com/2018/10/22/what-is-a-job-system/" target="_blank" rel="noopener">https://blogs.unity3d.com/2018/10/22/what-is-a-job-system/</a></p>
@@ -211,7 +211,7 @@
   </entry>
   <entry>
     <title>【測試】使用 Native Arrays 引起cpu處理過大?</title>
-    <url>/2019/08/31/Native-Arrays/</url>
+    <url>/Native-Arrays/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>創建一個Job，使用NativeArray儲存一個整數，然後呼叫了1億次加法，發現對比於使用int來呼叫1億次，相差了10倍左右，呼叫1億次加法大概花了600毫秒，但是使用NativeArray來算1億次加法會花大概6000毫秒，於是就有個疑問了 – NativeArray呼叫太多次是不是會造成cpu處理過大?</p>
 <a id="more"></a>
 <h1 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h1><p>Editor模式中，NativeContainer會有Safety check，但在建置完後的程式是沒有Safety check的，所以!!! 在Editor模式如果呼叫了過多次NativeContainer造成遊戲之中有延遲，很有可能是因為Safety check造成的，實際上性能消耗還是build出來測試會比較準確！</p>
@@ -221,23 +221,23 @@
 <p>並在Start時呼叫</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Start</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">      OnlyCalculateJob jobData = <span class="keyword">new</span> OnlyCalculateJob();</span><br><span class="line">      JobHandle handle = jobData.Schedule();</span><br><span class="line">      handle.Complete();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>可以看到大約消耗了600毫秒<br><img src="/2019/08/31/Native-Arrays/20190831070847871.png" alt></p>
+<p>可以看到大約消耗了600毫秒<br><img src="/Native-Arrays/20190831070847871.png" alt></p>
 <h2 id="2-在Start中int計算1億次"><a href="#2-在Start中int計算1億次" class="headerlink" title="2. 在Start中int計算1億次"></a>2. 在Start中int計算1億次</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Start</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">      <span class="keyword">int</span> Result = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100000000</span>; i++)</span><br><span class="line">      &#123;</span><br><span class="line">          Result += <span class="number">5</span>;</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> <img src="/2019/08/31/Native-Arrays/20190831071339633.png" alt><br> 也是差不多600毫秒 ((這個測試好像沒什麼意義XD))</p>
+<p> <img src="/Native-Arrays/20190831071339633.png" alt><br> 也是差不多600毫秒 ((這個測試好像沒什麼意義XD))</p>
 <h2 id="3-NativeArray-lt-int-gt-執行一億次"><a href="#3-NativeArray-lt-int-gt-執行一億次" class="headerlink" title="3. NativeArray&lt; int&gt; 執行一億次"></a>3. NativeArray&lt; int&gt; 執行一億次</h2> <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Start</span><span class="params">()</span></span></span><br><span class="line"><span class="function"> </span>&#123;</span><br><span class="line">        NativeArray&lt;<span class="keyword">int</span>&gt; result = <span class="keyword">new</span> NativeArray&lt;<span class="keyword">int</span>&gt;(<span class="number">1</span>, Allocator.TempJob);</span><br><span class="line">        NativeCalculateJob jobData = <span class="keyword">new</span> NativeCalculateJob();</span><br><span class="line">        jobData.result = result;</span><br><span class="line">        JobHandle handle = jobData.Schedule();</span><br><span class="line">        handle.Complete();</span><br><span class="line">        result.Dispose();</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">struct</span> <span class="title">NativeCalculateJob</span> :</span> IJob</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> NativeArray&lt;<span class="keyword">int</span>&gt; result;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Execute</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100000000</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            result[<span class="number">0</span>] =  result[<span class="number">0</span>] + <span class="number">5</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
-<p>  <img src="/2019/08/31/Native-Arrays/20190831071715981.png" alt></p>
+<p>  <img src="/Native-Arrays/20190831071715981.png" alt></p>
 <p>  這個就有差了，整整會卡住七秒左右<br>  這邊推論應該是NativeArray造成的，測看看如果減少NativeArray次數，試試看會不會減少處理速度！</p>
 <h2 id="3-使用另外一個int運算，再將結果丟給NativeArray"><a href="#3-使用另外一個int運算，再將結果丟給NativeArray" class="headerlink" title="3.使用另外一個int運算，再將結果丟給NativeArray"></a>3.使用另外一個int運算，再將結果丟給NativeArray</h2>  <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">struct</span> <span class="title">NativeCalculateJob</span> :</span> IJob</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> NativeArray&lt;<span class="keyword">int</span>&gt; result;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> _result;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Execute</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100000000</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            _result += <span class="number">5</span>;</span><br><span class="line">            result[<span class="number">0</span>] = _result;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p> 這邊比上面第2點還少呼叫了一次NativeArray，所以如果處理速度增加，那應該很確定是NativeArray造成的了</p>
-<p> <img src="/2019/08/31/Native-Arrays/20190831072245025.png" alt></p>
+<p> <img src="/Native-Arrays/20190831072245025.png" alt></p>
 <p> 花了3800毫秒，看來的確是少差不多一半，那現在如果增加呼叫NativeArray的次數，那應該時間也會加倍吧?!</p>
 <h2 id="4-增加NativeArray呼叫次數試試看"><a href="#4-增加NativeArray呼叫次數試試看" class="headerlink" title="4. 增加NativeArray呼叫次數試試看"></a>4. 增加NativeArray呼叫次數試試看</h2>  <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">struct</span> <span class="title">NativeCalculateJob</span> :</span> IJob</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> NativeArray&lt;<span class="keyword">int</span>&gt; result;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> _result;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Execute</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100000000</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            _result += <span class="number">5</span>;</span><br><span class="line">            result[<span class="number">0</span>] = _result;</span><br><span class="line">            result[<span class="number">0</span>] = _result;</span><br><span class="line">            result[<span class="number">0</span>] = _result;</span><br><span class="line">        &#125;</span><br><span class="line">        Debug.Log(result[<span class="number">0</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>  超級沒意義的增加XD<br>  而結果果然處理速度也是倍增<br>  <img src="/2019/08/31/Native-Arrays/20190831072534134.png" alt><br>  花了將近10秒!!!</p>
+<p>  超級沒意義的增加XD<br>  而結果果然處理速度也是倍增<br>  <img src="/Native-Arrays/20190831072534134.png" alt><br>  花了將近10秒!!!</p>
 <p>  測試到這邊的時候，<b>我以為</b>結論是NativeArray要小心地增加他的呼叫次數，不能像上面那樣隨意的亂放((一般也不會有人這樣寫))，然後想來想去都覺得不對，就去查詢了一下為什麼NativeArray會消耗這麼多性能，才發現!!!</p>
 <p>  其實並不是NativeArray會消耗很多性能，而是在編輯器(Editor)模式下，會有Safety checks，一種安全檢查，他會消耗很多效能，但在build出來後會disable掉這個safety checks.</p>
 <p>  <a href="https://forum.unity.com/threads/native-arrays-approximately-an-order-of-magnitude-slower-than-arrays.535019/" target="_blank" rel="noopener">引述在Unity官方討論區看到的Unity工程師的說法</a></p>
@@ -254,7 +254,7 @@
 <p>In burst the speed gains from using NativeArray are very significant. Usually on the order of 5-15x compared to il2cpp / mono.</p>
 </blockquote>
 <p>  因此我就又測試了一下，同樣一段CODE，在編輯器模式跟在Android裝置上測出來的性能</p>
-<p>  放在編輯器下<br>  <img src="/2019/08/31/Native-Arrays/20190901123927473.png" alt><br>  放在android裝置下<br>  <img src="/2019/08/31/Native-Arrays/20190901123938634.png" alt></p>
+<p>  放在編輯器下<br>  <img src="/Native-Arrays/20190901123927473.png" alt><br>  放在android裝置下<br>  <img src="/Native-Arrays/20190901123938634.png" alt></p>
 <p>  有興趣的可以看下方連結</p>
 <p><a href="https://forum.unity.com/threads/how-nativecontainer-are-so-fast-even-it-is-allocated-in-every-frame.604357/" target="_blank" rel="noopener">How NativeContainer are so fast even it is allocated in every frame?</a></p>
 <p>  <a href="https://forum.unity.com/threads/nativearray-vs-dynamicbuffer-which-access-data-faster.584797/" target="_blank" rel="noopener">NativeArray vs DynamicBuffer : Which access data faster?</a></p>
@@ -273,7 +273,7 @@
   </entry>
   <entry>
     <title>Jenkins!自動建置Unity專案-本地建置</title>
-    <url>/2019/08/11/Jenkins!%E8%87%AA%E5%8B%95%E5%BB%BA%E7%BD%AEUnity%E5%B0%88%E6%A1%88-%E6%9C%AC%E5%9C%B0%E5%BB%BA%E7%BD%AE/</url>
+    <url>/Jenkins!%E8%87%AA%E5%8B%95%E5%BB%BA%E7%BD%AEUnity%E5%B0%88%E6%A1%88-%E6%9C%AC%E5%9C%B0%E5%BB%BA%E7%BD%AE/</url>
     <content><![CDATA[<p>Unity本身有建置APK的API可以使用，而Jenkins扮演的角色就是從外部(不使用Unity編輯器)去呼叫Unity的API來建置專案</p>
 <p>用Jenkins建置專案大致可以分為</p>
 <ul>
@@ -288,12 +288,12 @@
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> UnityEditor;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Builder</span> :</span> Editor</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    [MenuItem(<span class="string">"Build/APK"</span>)]</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Build</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        BuildTarget buildTarget = BuildTarget.Android;</span><br><span class="line">        <span class="comment">// 切換到Android平台</span></span><br><span class="line">        EditorUserBuildSettings.SwitchActiveBuildTarget(buildTarget);</span><br><span class="line">        </span><br><span class="line">        List&lt;<span class="built_in">string</span>&gt; levels = <span class="keyword">new</span> List&lt;<span class="built_in">string</span>&gt;();</span><br><span class="line">        foreach (EditorBuildSettingsScene scene in EditorBuildSettings.scenes)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (!scene.enabled) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="comment">// 獲取有效的場景</span></span><br><span class="line">            levels.Add(scene.path);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 打包出 APK 名</span></span><br><span class="line">        <span class="built_in">string</span> apkName = <span class="built_in">string</span>.Format(<span class="string">"./&#123;0&#125;.apk"</span>, <span class="string">"Test"</span>);</span><br><span class="line">        <span class="comment">// 執行打包</span></span><br><span class="line">        <span class="built_in">string</span> res = BuildPipeline.BuildPlayer(levels.ToArray(), apkName, buildTarget, BuildOptions.None);</span><br><span class="line"></span><br><span class="line">        AssetDatabase.Refresh();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>這是一個算很簡單的建置，只是單純的建置APK而已，沒有設置其他的參數，有興趣的可以再參考 <a href="https://docs.unity3d.com/ScriptReference/EditorUserBuildSettings.html" target="_blank" rel="noopener">EditorUserBuildSettings</a></p>
-<p>然後放在Editor下(不然會失敗)<br><img src="/2019/08/11/Jenkins!自動建置Unity專案-本地建置/20190811082407216.png" alt></p>
+<p>然後放在Editor下(不然會失敗)<br><img src="/Jenkins!自動建置Unity專案-本地建置/20190811082407216.png" alt></p>
 <p>然後到Jenkins上確認unity的plugin有設定好</p>
-<p><img src="/2019/08/11/Jenkins!自動建置Unity專案-本地建置/20190811082501199.png" alt></p>
-<p><img src="/2019/08/11/Jenkins!自動建置Unity專案-本地建置/20190811082506246.png" alt></p>
-<h2 id="在jenkins上建置unity專案"><a href="#在jenkins上建置unity專案" class="headerlink" title="在jenkins上建置unity專案"></a>在jenkins上建置unity專案</h2><p>選擇新增一個作業<br><img src="/2019/08/11/Jenkins!自動建置Unity專案-本地建置/20190811082601185.png" alt><br>這邊輸入專案名稱，看你要叫什麼<br><img src="/2019/08/11/Jenkins!自動建置Unity專案-本地建置/20190811082604551.png" alt></p>
-<p>這邊設定這個專案的設定，可以看到有git跟svn的選項<br>另外比較會用到的是<b> [參數化建置] </b> 這邊就先忽略<br><img src="/2019/08/11/Jenkins!自動建置Unity專案-本地建置/20190811083535700.png" alt><br>再往下拉可以看到有個建置的選項<br>選擇unity3d Editor<br><img src="/2019/08/11/Jenkins!自動建置Unity專案-本地建置/20190811082609700.png" alt><br>然後就會跑出這個視窗，它可以選擇你在Global Tool Configuration設定建置用的unity的版本，而我是用unity 2017.4.8來建置<br><img src="/2019/08/11/Jenkins!自動建置Unity專案-本地建置/20190811083911494.png" alt></p>
+<p><img src="/Jenkins!自動建置Unity專案-本地建置/20190811082501199.png" alt></p>
+<p><img src="/Jenkins!自動建置Unity專案-本地建置/20190811082506246.png" alt></p>
+<h2 id="在jenkins上建置unity專案"><a href="#在jenkins上建置unity專案" class="headerlink" title="在jenkins上建置unity專案"></a>在jenkins上建置unity專案</h2><p>選擇新增一個作業<br><img src="/Jenkins!自動建置Unity專案-本地建置/20190811082601185.png" alt><br>這邊輸入專案名稱，看你要叫什麼<br><img src="/Jenkins!自動建置Unity專案-本地建置/20190811082604551.png" alt></p>
+<p>這邊設定這個專案的設定，可以看到有git跟svn的選項<br>另外比較會用到的是<b> [參數化建置] </b> 這邊就先忽略<br><img src="/Jenkins!自動建置Unity專案-本地建置/20190811083535700.png" alt><br>再往下拉可以看到有個建置的選項<br>選擇unity3d Editor<br><img src="/Jenkins!自動建置Unity專案-本地建置/20190811082609700.png" alt><br>然後就會跑出這個視窗，它可以選擇你在Global Tool Configuration設定建置用的unity的版本，而我是用unity 2017.4.8來建置<br><img src="/Jenkins!自動建置Unity專案-本地建置/20190811083911494.png" alt></p>
 <p>而下面這一欄!!! 【Editor command line arguments】 很重要!!!! 這個就是建置的命令</p>
 <p>先介紹一些基本的命令</p>
 <ul>
@@ -306,13 +306,13 @@
 <p>那綜合以上，最終得到的結果是：</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line">-projectPath <span class="string">"C:\Users\User\Documents\TestJenkins\Jenkin"</span> -logFile <span class="string">"C:\Users\User\Documents\TestJenkins\Jenkin/unity3d_editor.log"</span> -quit -batchmode -nographics -executeMethod Builder.Build -output <span class="string">"C:\Users\User\Documents\TestJenkins\Jenkin/test.exe"</span></span><br></pre></td></tr></table></figure>
 
-<p>輸入在Editor command line arguments內後按Apply就好了<br><img src="/2019/08/11/Jenkins!自動建置Unity專案-本地建置/20190811085952975.png" alt><br>設定完後就可以跑去建置了<br><img src="/2019/08/11/Jenkins!自動建置Unity專案-本地建置/20190811090010203.png" alt><br>因為#1是我建失敗的等待#2跑完，就會看到你的成品了!!<br><img src="/2019/08/11/Jenkins!自動建置Unity專案-本地建置/20190811090038797.png" alt></p>
+<p>輸入在Editor command line arguments內後按Apply就好了<br><img src="/Jenkins!自動建置Unity專案-本地建置/20190811085952975.png" alt><br>設定完後就可以跑去建置了<br><img src="/Jenkins!自動建置Unity專案-本地建置/20190811090010203.png" alt><br>因為#1是我建失敗的等待#2跑完，就會看到你的成品了!!<br><img src="/Jenkins!自動建置Unity專案-本地建置/20190811090038797.png" alt></p>
 <br>
 <br>
 # 常跑出來的問題
 
-<h2 id="沒有設定android-sdk路徑"><a href="#沒有設定android-sdk路徑" class="headerlink" title="沒有設定android sdk路徑"></a>沒有設定android sdk路徑</h2><p><img src="/2019/08/11/Jenkins!自動建置Unity專案-本地建置/20190811090141167.png" alt></p>
-<h2 id="LogFile也可以在Jenkins上看"><a href="#LogFile也可以在Jenkins上看" class="headerlink" title="LogFile也可以在Jenkins上看"></a>LogFile也可以在Jenkins上看</h2><p><img src="/2019/08/11/Jenkins!自動建置Unity專案-本地建置/20190811090204760.png" alt></p>
+<h2 id="沒有設定android-sdk路徑"><a href="#沒有設定android-sdk路徑" class="headerlink" title="沒有設定android sdk路徑"></a>沒有設定android sdk路徑</h2><p><img src="/Jenkins!自動建置Unity專案-本地建置/20190811090141167.png" alt></p>
+<h2 id="LogFile也可以在Jenkins上看"><a href="#LogFile也可以在Jenkins上看" class="headerlink" title="LogFile也可以在Jenkins上看"></a>LogFile也可以在Jenkins上看</h2><p><img src="/Jenkins!自動建置Unity專案-本地建置/20190811090204760.png" alt></p>
 <br>
 <br>
 <br>
@@ -336,7 +336,7 @@ https://dotblogs.com.tw/echo/2018/03/22/jenkins_plugin_git
   </entry>
   <entry>
     <title>Jenkins!自動建置Unity專案-環境準備</title>
-    <url>/2019/08/10/Jenkins!%E8%87%AA%E5%8B%95%E5%BB%BA%E7%BD%AEUnity%E5%B0%88%E6%A1%88-%E7%92%B0%E5%A2%83%E6%BA%96%E5%82%99/</url>
+    <url>/Jenkins!%E8%87%AA%E5%8B%95%E5%BB%BA%E7%BD%AEUnity%E5%B0%88%E6%A1%88-%E7%92%B0%E5%A2%83%E6%BA%96%E5%82%99/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><br>
 最近用的專案需要在一個Unity專案內選擇製作的場景build出6個apk，在客戶不斷要求更改下每次都要重新選擇場景去輸出超級麻煩的啦!!! 
 
@@ -348,22 +348,22 @@ https://dotblogs.com.tw/echo/2018/03/22/jenkins_plugin_git
 https://jenkins.io/zh/download/
 選擇你的作業系統，由於我是windows，所以以下都是用windows環境建置
 
-<p><img src="/2019/08/10/Jenkins!自動建置Unity專案-環境準備/20190810080530877.png" alt></p>
+<p><img src="/Jenkins!自動建置Unity專案-環境準備/20190810080530877.png" alt></p>
 <p>如果出現網路錯誤沒辦法連上網站的話<br>可以到 C:\Program Files (x86)\Jenkins下的jenkins.exe 按一下他會跑一些東西出來<br>然後再手動輸入 <a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a> </p>
 <p>之後他會到一個頁面是 Unlock Jenkins<br>會給你一個路徑，<b>看中間那一行紅色的</b>，打開那個路徑的檔案<br>裡面會有一串密碼，貼上去後就可以了</p>
-<p><img src="/2019/08/10/Jenkins!自動建置Unity專案-環境準備/20190810080709960.png" alt></p>
-<p>↓ 這邊一般是選建議就好了<br><img src="/2019/08/10/Jenkins!自動建置Unity專案-環境準備/20190810080752791.png" alt></p>
+<p><img src="/Jenkins!自動建置Unity專案-環境準備/20190810080709960.png" alt></p>
+<p>↓ 這邊一般是選建議就好了<br><img src="/Jenkins!自動建置Unity專案-環境準備/20190810080752791.png" alt></p>
 <p>然後他就會開始跑安裝</p>
-<p><img src="/2019/08/10/Jenkins!自動建置Unity專案-環境準備/20190810080838099.png" alt></p>
+<p><img src="/Jenkins!自動建置Unity專案-環境準備/20190810080838099.png" alt></p>
 <p>這邊如果你安裝的東西他都是綠燈那很好，如果都是紅燈也沒關係，以後要用到的時候裡面還有頁面給你去選要安裝哪個。</p>
-<p>這邊帳密記得記起來<br><img src="/2019/08/10/Jenkins!自動建置Unity專案-環境準備/20190810083925029.png" alt></p>
-<p>然後他就會自動跳出頁面了<br>進來的時候長這樣<br><img src="/2019/08/10/Jenkins!自動建置Unity專案-環境準備/20190810084008343.png" alt></p>
+<p>這邊帳密記得記起來<br><img src="/Jenkins!自動建置Unity專案-環境準備/20190810083925029.png" alt></p>
+<p>然後他就會自動跳出頁面了<br>進來的時候長這樣<br><img src="/Jenkins!自動建置Unity專案-環境準備/20190810084008343.png" alt></p>
 <p>如果沒自動跳就在網頁上打localhost:8080就會出現了</p>
-<h2 id="新增Unity外掛"><a href="#新增Unity外掛" class="headerlink" title="新增Unity外掛"></a>新增Unity外掛</h2><p>左邊側板 -&gt; 管理Jenkins -&gt; 管理外掛程式<br>選擇【可用的】並且過濾條件打【Unity】<br>就會出現unity3d plugin，安裝它吧!<br><img src="/2019/08/10/Jenkins!自動建置Unity專案-環境準備/20190810085021723.png" alt></p>
+<h2 id="新增Unity外掛"><a href="#新增Unity外掛" class="headerlink" title="新增Unity外掛"></a>新增Unity外掛</h2><p>左邊側板 -&gt; 管理Jenkins -&gt; 管理外掛程式<br>選擇【可用的】並且過濾條件打【Unity】<br>就會出現unity3d plugin，安裝它吧!<br><img src="/Jenkins!自動建置Unity專案-環境準備/20190810085021723.png" alt></p>
 <h2 id="設定unity的版本"><a href="#設定unity的版本" class="headerlink" title="設定unity的版本"></a>設定unity的版本</h2><p>管理Jenkins -&gt; Global Tool Configuration<br>往下拉會有個unity3d，將你會拿來build apk的版本填進去並指定路徑</p>
-<p><img src="/2019/08/10/Jenkins!自動建置Unity專案-環境準備/20190810085314663.png" alt></p>
+<p><img src="/Jenkins!自動建置Unity專案-環境準備/20190810085314663.png" alt></p>
 <h2 id="設定android-sdk"><a href="#設定android-sdk" class="headerlink" title="設定android sdk"></a>設定android sdk</h2><p> 管理Jenkins -&gt; 設定系統的全域屬性填入AndroidSdk的資料夾</p>
-<p><img src="/2019/08/10/Jenkins!自動建置Unity專案-環境準備/20190810084701891.png" alt></p>
+<p><img src="/Jenkins!自動建置Unity專案-環境準備/20190810084701891.png" alt></p>
 ]]></content>
       <categories>
         <category>Jenkins</category>
@@ -375,7 +375,7 @@ https://jenkins.io/zh/download/
   </entry>
   <entry>
     <title>【設計模式】策略模式</title>
-    <url>/2019/08/10/%E3%80%90%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F%E3%80%91%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/</url>
+    <url>/%E3%80%90%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F%E3%80%91%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><br>
 
 <p>現在有個情境如下<br><br>你的面前有紅藥水跟毒藥水<br><br>依照你的等級，會有不同效果<br><br>紅藥水： 加 (等級 x 10) 的血量<br><br>毒藥水： 減少 (等級 x 15 )的血量<br></p>
@@ -390,7 +390,7 @@ https://jenkins.io/zh/download/
 <br>
 
 <p>先上一個策略模式的圖</p>
-<p><img src="/2019/08/10/【設計模式】策略模式/20190810055108084.png" alt><br><br></p>
+<p><img src="/【設計模式】策略模式/20190810055108084.png" alt><br><br></p>
 <p>紅藥水跟毒藥水，差別在於一個扣血一個損血<br>所以我們可以把他抽出來做成一個介面</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> interface I_HpItem</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">HpControl</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -419,7 +419,7 @@ https://jenkins.io/zh/download/
   </entry>
   <entry>
     <title>【設計模式】抽象工廠</title>
-    <url>/2019/08/10/%E3%80%90%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F%E3%80%91%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%BB%A0/</url>
+    <url>/%E3%80%90%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F%E3%80%91%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%BB%A0/</url>
     <content><![CDATA[<h1 id="抽象工廠"><a href="#抽象工廠" class="headerlink" title="抽象工廠"></a>抽象工廠</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>現在這間工廠不僅僅是生產茶了，他還會賣果汁!<br>這樣原本的茶工廠這名字就不足以容納新的品項了，所以重新命名將它改為飲料工廠<br>從她衍生跑出兩間工廠，一個是coco，一個是tata</p>
 <a id="more"></a>
 <p>現在跟原本一樣，新增了一個果汁的品項，從果汁衍生出了檸檬汁與橘子汁，這裡跟原本的茶的品項衍生出綠茶跟紅茶的步驟是一樣的。</p>
@@ -434,10 +434,10 @@ https://jenkins.io/zh/download/
 
 <br>
 
-<p><img src="/2019/08/10/【設計模式】抽象工廠/20190810045947643.png" alt></p>
+<p><img src="/【設計模式】抽象工廠/20190810045947643.png" alt></p>
 <h2 id="增加工廠"><a href="#增加工廠" class="headerlink" title="增加工廠"></a>增加工廠</h2><p>假設我們需要增加一家飲料店<br>那今天如果又多了一家飲料店叫WaWa的來搶生意，就只需要繼承於DrinkFactory然後實作就可以了</p>
-<p><img src="/2019/08/10/【設計模式】抽象工廠/20190810044926274.png" alt></p>
-<h2 id="增加品項"><a href="#增加品項" class="headerlink" title="增加品項"></a>增加品項</h2><p><img src="/2019/08/10/【設計模式】抽象工廠/20190810044944551.png" alt></p>
+<p><img src="/【設計模式】抽象工廠/20190810044926274.png" alt></p>
+<h2 id="增加品項"><a href="#增加品項" class="headerlink" title="增加品項"></a>增加品項</h2><p><img src="/【設計模式】抽象工廠/20190810044944551.png" alt></p>
 ]]></content>
       <categories>
         <category>設計模式</category>
@@ -449,7 +449,7 @@ https://jenkins.io/zh/download/
   </entry>
   <entry>
     <title>設計模式 - 簡單工廠、工廠模式</title>
-    <url>/2019/08/10/%E3%80%90%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F%E3%80%91%E7%B0%A1%E5%96%AE%E5%B7%A5%E5%BB%A0%E3%80%81%E5%B7%A5%E5%BB%A0%E6%A8%A1%E5%BC%8F/</url>
+    <url>/%E3%80%90%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F%E3%80%91%E7%B0%A1%E5%96%AE%E5%B7%A5%E5%BB%A0%E3%80%81%E5%B7%A5%E5%BB%A0%E6%A8%A1%E5%BC%8F/</url>
     <content><![CDATA[<h1 id="簡單工廠"><a href="#簡單工廠" class="headerlink" title="簡單工廠"></a>簡單工廠</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><br>
 
 <blockquote>
@@ -458,7 +458,7 @@ https://jenkins.io/zh/download/
 <a id="more"></a>
 <p>上面這句是工廠模式所關注的問題，這樣說有點抽象，用個情境來說：</p>
 <p>現在飲料店來了一個顧客，他想要點紅茶跟綠茶，用UML圖表示，長的像這樣</p>
-<p><img src="/2019/08/10/【設計模式】簡單工廠、工廠模式/20190810031005379.png" alt></p>
+<p><img src="/【設計模式】簡單工廠、工廠模式/20190810031005379.png" alt></p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Customer</span> :</span> MonoBehaviour &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Start</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        GreenTea greenTea = <span class="keyword">new</span> GreenTea();</span><br><span class="line">        AddMaterial(); <span class="comment">//加料</span></span><br><span class="line">        Blend(); <span class="comment">//混合</span></span><br><span class="line">        Cup(); <span class="comment">//裝杯</span></span><br><span class="line">        </span><br><span class="line">        BlackTea blackTea = <span class="keyword">new</span> BlackTea();</span><br><span class="line">        AddMaterial(); <span class="comment">//加料</span></span><br><span class="line">        Blend(); <span class="comment">//混合</span></span><br><span class="line">        Cup(); <span class="comment">//裝杯</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>但這樣顧客就需要知道綠茶的製造流程 ( 加料、混合、裝杯) 這不是很奇怪嗎，為什麼顧客需要知道你加什麼料啦！用程式的角度來說，就是顧客就跟製造的飲料緊密的耦合在一起。<br>        以後越來越多品項的話，在顧客那就需要知道更多製作方法，這樣顧客都可以開店了呢！ 於是為了解決這個問題，就會使用到這次的主題 — 簡單工廠。</p>
@@ -472,7 +472,7 @@ https://jenkins.io/zh/download/
 <p>這樣在顧客那，就可以使用茶工廠的OrderTea傳入想要點的茶來拿到茶了，與之前不一樣的是<br>這樣顧客不需要知道這杯茶是怎麼做的，只需要知道茶的名字就可以得到想要的茶，實作都會在茶工廠內部實作。</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Customer</span> :</span> MonoBehaviour &#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Start</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        TeaFactory teaFactory = <span class="keyword">new</span> TeaFactory();</span><br><span class="line">        Tea greenTea = teaFactory.OrderTea(<span class="string">"GreenTea"</span>);</span><br><span class="line">        Tea blackTea = teaFactory.OrderTea(<span class="string">"BlackTea"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/08/10/【設計模式】簡單工廠、工廠模式/20190810032704169.png" alt></p>
+<p><img src="/【設計模式】簡單工廠、工廠模式/20190810032704169.png" alt></p>
 <p>但是!! 簡單工廠並不符合設計模式的開閉原則，每次修改的時候就得在原始代碼上新增對應，這樣一旦東西多了，不止每次修改都有風險出Bug，而且程式碼擠在一起也很難閱讀，因此這時候就需要使用到工廠模式啦</p>
 <h1 id="工廠模式"><a href="#工廠模式" class="headerlink" title="工廠模式"></a>工廠模式</h1><br>
 
@@ -491,7 +491,7 @@ https://jenkins.io/zh/download/
 
 <br>
 
-<p><img src="/2019/08/10/【設計模式】簡單工廠、工廠模式/20190810033730771.png" alt></p>
+<p><img src="/【設計模式】簡單工廠、工廠模式/20190810033730771.png" alt></p>
 <br>
 
 <p>而且這樣的方法又有一個問題了，那就是一個具體工廠只能創建一個產品<br>像是上面的綠茶工廠，就只會生產綠茶，紅茶工廠只會生產紅茶<br>實際過程中一個工廠往往需要生產多類產品，這時候為了解決這個問題，就需要用到抽象工廠了，見下一篇~</p>
@@ -505,7 +505,7 @@ https://jenkins.io/zh/download/
   </entry>
   <entry>
     <title>Timeline 擴展功能類別之間的關係</title>
-    <url>/2019/08/04/Timeline/</url>
+    <url>/Timeline/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在使用Timeline自訂腳本的時候，有需要繼承幾個類別，一開始接觸的時候還蠻混亂的，之後稍微清楚了所以紀錄一下。<br>最常用到的幾個類別分別為：</p>
 <ul>
 <li>Playable </li>
@@ -520,7 +520,7 @@ https://jenkins.io/zh/download/
 <li>軌道</li>
 <li>軌道上的片段</li>
 </ol>
-<p>對照圖就會是<br><img src="/2019/08/04/Timeline/20190804065103222.png" alt></p>
+<p>對照圖就會是<br><img src="/Timeline/20190804065103222.png" alt></p>
 <h1 id="Playable"><a href="#Playable" class="headerlink" title="Playable"></a>Playable</h1><p>Timeline是基於Playable API去實現的，創建Timeline的時候<br>也可以看到副檔名是.playable，也就是說除了Timeline外，還可以使用這組API去完成各種事情。<br>有興趣的話可以參考 UnityTaiwan的範例。</p>
 <p><a href="https://unitytaiwan.blogspot.com/2017/12/simple-animation.html?fbclid=IwAR1kCohLj5Sgr1AdseZ2_LQDspVoM4PJj1z19d78D-D7IuvoXDJxDDCB4dM" target="_blank" rel="noopener">Simple Animation組件介紹</a></p>
 <p><a href="https://vrast.cn/posts/5df16bd2/" target="_blank" rel="noopener">UNITY3D Playables API 实践(上)</a></p>
@@ -530,7 +530,7 @@ https://jenkins.io/zh/download/
 <p>第1行 是宣告這個Track的顏色</p>
 <p>第2行TrackClipType宣告了這個Track綁的Clip，通常會是擴充功能中繼承了PlayableAsset的類別，放進編輯器的話畫面是下方紅圈那樣</p>
 <p>第3行則是這一個Track綁的物件，這邊綁的是隨便一個遊戲物體，在編輯器上位於最前方，見下方藍圈。</p>
-<p><img src="/2019/08/04/Timeline/20190804084733309.png" alt><br><br></p>
+<p><img src="/Timeline/20190804084733309.png" alt><br><br></p>
 <h1 id="PlayableAsset與PlayableBehaviour"><a href="#PlayableAsset與PlayableBehaviour" class="headerlink" title="PlayableAsset與PlayableBehaviour"></a>PlayableAsset與PlayableBehaviour</h1><br>
 這兩個會放在一起的原因是，Playable API的核心原則是分離數據與邏輯，這兩個分別代表了一個Clip中的數據與邏輯。
 
@@ -562,7 +562,7 @@ https://jenkins.io/zh/download/
   </entry>
   <entry>
     <title>Timeline 快速認識</title>
-    <url>/2019/08/03/Unity-Timeline-%E5%BF%AB%E9%80%9F%E8%AA%8D%E8%AD%98/</url>
+    <url>/Unity-Timeline-%E5%BF%AB%E9%80%9F%E8%AA%8D%E8%AD%98/</url>
     <content><![CDATA[<h1 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h1><p>Timeline是Unity 在2017.1版本中推出的<b>敘事工具</b>，可以在時間軸內編排遊戲內各種東西，像是遊戲物件、聲音、光照、鏡頭，做成遊戲動畫、電影。像是在遊戲途中，我們常會遇到在某一個時間點，需要插入一段劇情動畫，而timeline就可以用來解決這類的事情。</p>
 <a id="more"></a>
 <p><a href="https://www.youtube.com/watch?v=G_uBFM3YUF4" target="_blank" rel="noopener">Intro to Unity Timeline</a></p>
@@ -574,16 +574,16 @@ https://jenkins.io/zh/download/
 </ul>
 </li>
 </ol>
-<p><img src="/2019/08/03/Unity-Timeline-快速認識/20190803020026895.png" alt><br> 2. 移除不必要的組件<br>由於指定了GameObject來創建這個Timeline，本身會自動添加Animator組件，但這個範例不必操作這個物體，所以把Gameobject上多餘的Animator移除掉，Timeline上的也是</p>
+<p><img src="/Unity-Timeline-快速認識/20190803020026895.png" alt><br> 2. 移除不必要的組件<br>由於指定了GameObject來創建這個Timeline，本身會自動添加Animator組件，但這個範例不必操作這個物體，所以把Gameobject上多餘的Animator移除掉，Timeline上的也是</p>
 <ol start="3">
-<li>加入要操控的物體<br>創建兩個Cube，將它拖進Timeline視窗後會出現選項<br><img src="/2019/08/03/Unity-Timeline-快速認識/20190803021734682.png" alt></li>
+<li>加入要操控的物體<br>創建兩個Cube，將它拖進Timeline視窗後會出現選項<br><img src="/Unity-Timeline-快速認識/20190803021734682.png" alt></li>
 </ol>
 <ul>
 <li>ActivationTrack ：操作物體的Active</li>
 <li>AnimationTrack ：物體的動畫軌道，可以錄製動畫</li>
 <li>AudioTrack ：音頻的軌道</li>
 </ul>
-<p>這邊就選Animation Track來做一段動畫。<br><br><br><br><br><img src="/2019/08/03/Unity-Timeline-快速認識/20190803022255226.png" alt><br>將物體擺上去後，會發現有個紅點可以點，它就是拿來錄製這個物體的動畫的按鈕，點下去後會發現右邊軌道上有個Recording，就代表開始錄製了，這邊就跟在Animation視窗上製作動畫一樣，可以操控它的位置、旋轉、…之類的東西。<br><br><br><br><br><b>如果不想用這個地方編輯它的動畫，也可以直接在 Recording模式中直接點擊兩下，它就會跳出Animation的視窗了</b><br><img src="/2019/08/03/Unity-Timeline-快速認識/20190803023110789.png" alt><br><br><br><br><br>然後另外一個物件同樣編輯一下動畫，就可以看見兩個物體一起動作的樣子了</p>
+<p>這邊就選Animation Track來做一段動畫。<br><br><br><br><br><img src="/Unity-Timeline-快速認識/20190803022255226.png" alt><br>將物體擺上去後，會發現有個紅點可以點，它就是拿來錄製這個物體的動畫的按鈕，點下去後會發現右邊軌道上有個Recording，就代表開始錄製了，這邊就跟在Animation視窗上製作動畫一樣，可以操控它的位置、旋轉、…之類的東西。<br><br><br><br><br><b>如果不想用這個地方編輯它的動畫，也可以直接在 Recording模式中直接點擊兩下，它就會跳出Animation的視窗了</b><br><img src="/Unity-Timeline-快速認識/20190803023110789.png" alt><br><br><br><br><br>然後另外一個物件同樣編輯一下動畫，就可以看見兩個物體一起動作的樣子了</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/kmRKZ4xzOgQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ]]></content>
@@ -596,7 +596,7 @@ https://jenkins.io/zh/download/
   </entry>
   <entry>
     <title>MarkDown語法測試</title>
-    <url>/2019/07/31/MarkDown%E8%AA%9E%E6%B3%95%E6%B8%AC%E8%A9%A6/</url>
+    <url>/MarkDown%E8%AA%9E%E6%B3%95%E6%B8%AC%E8%A9%A6/</url>
     <content><![CDATA[<h1 id="標題"><a href="#標題" class="headerlink" title="標題"></a>標題</h1><h2 id="再來一個標題"><a href="#再來一個標題" class="headerlink" title="再來一個標題"></a>再來一個標題</h2><h3 id="還來一個標題"><a href="#還來一個標題" class="headerlink" title="還來一個標題"></a>還來一個標題</h3><h4 id="四個井字的標題"><a href="#四個井字的標題" class="headerlink" title="四個井字的標題"></a>四個井字的標題</h4><h5 id="五個"><a href="#五個" class="headerlink" title="五個"></a>五個</h5><h6 id="六個"><a href="#六個" class="headerlink" title="六個"></a>六個</h6><a id="more"></a>
 <ul>
 <li>清單</li>

@@ -95,16 +95,28 @@
 
 
 
-  <meta name="description" content="紀錄開發的各種問題">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Uno 開發日常">
-<meta property="og:url" content="http://unoniceday.github.io/tags/markdown/index.html">
+  <meta name="description" content="前言 最近用的專案需要在一個Unity專案內選擇製作的場景build出6個apk，在客戶不斷要求更改下每次都要重新選擇場景去輸出超級麻煩的啦!!!   然後手動去選場景一個不注意就會選錯，然後又要重新輸出，根本無限輪迴地獄!!!加上長期合作所以這個地獄如果手動的話根本會崩潰，所以就去尋找可不可以自動build出apk的東西，於是就發現了Jenkins。 簡單來說用在unity上的話，他可以在你不開">
+<meta name="keywords" content="Jenkins,Unity">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jenkins!自動建置Unity專案-環境準備">
+<meta property="og:url" content="http://unoniceday.github.io/Jenkins!自動建置Unity專案-環境準備/index.html">
 <meta property="og:site_name" content="Uno 開發日常">
-<meta property="og:description" content="紀錄開發的各種問題">
+<meta property="og:description" content="前言 最近用的專案需要在一個Unity專案內選擇製作的場景build出6個apk，在客戶不斷要求更改下每次都要重新選擇場景去輸出超級麻煩的啦!!!   然後手動去選場景一個不注意就會選錯，然後又要重新輸出，根本無限輪迴地獄!!!加上長期合作所以這個地獄如果手動的話根本會崩潰，所以就去尋找可不可以自動build出apk的東西，於是就發現了Jenkins。 簡單來說用在unity上的話，他可以在你不開">
 <meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="http://unoniceday.github.io/Jenkins!自動建置Unity專案-環境準備/20190810080530877.png">
+<meta property="og:image" content="http://unoniceday.github.io/Jenkins!自動建置Unity專案-環境準備/20190810080709960.png">
+<meta property="og:image" content="http://unoniceday.github.io/Jenkins!自動建置Unity專案-環境準備/20190810080752791.png">
+<meta property="og:image" content="http://unoniceday.github.io/Jenkins!自動建置Unity專案-環境準備/20190810080838099.png">
+<meta property="og:image" content="http://unoniceday.github.io/Jenkins!自動建置Unity專案-環境準備/20190810083925029.png">
+<meta property="og:image" content="http://unoniceday.github.io/Jenkins!自動建置Unity專案-環境準備/20190810084008343.png">
+<meta property="og:image" content="http://unoniceday.github.io/Jenkins!自動建置Unity專案-環境準備/20190810085021723.png">
+<meta property="og:image" content="http://unoniceday.github.io/Jenkins!自動建置Unity專案-環境準備/20190810085314663.png">
+<meta property="og:image" content="http://unoniceday.github.io/Jenkins!自動建置Unity專案-環境準備/20190810084701891.png">
+<meta property="og:updated_time" content="2020-01-09T15:44:01.938Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Uno 開發日常">
-<meta name="twitter:description" content="紀錄開發的各種問題">
+<meta name="twitter:title" content="Jenkins!自動建置Unity專案-環境準備">
+<meta name="twitter:description" content="前言 最近用的專案需要在一個Unity專案內選擇製作的場景build出6個apk，在客戶不斷要求更改下每次都要重新選擇場景去輸出超級麻煩的啦!!!   然後手動去選場景一個不注意就會選錯，然後又要重新輸出，根本無限輪迴地獄!!!加上長期合作所以這個地獄如果手動的話根本會崩潰，所以就去尋找可不可以自動build出apk的東西，於是就發現了Jenkins。 簡單來說用在unity上的話，他可以在你不開">
+<meta name="twitter:image" content="http://unoniceday.github.io/Jenkins!自動建置Unity專案-環境準備/20190810080530877.png">
 
 
 
@@ -114,7 +126,7 @@
 
   
   
-  <link rel="canonical" href="http://unoniceday.github.io/tags/markdown/">
+  <link rel="canonical" href="http://unoniceday.github.io/Jenkins!自動建置Unity專案-環境準備/">
 
 
 
@@ -124,7 +136,7 @@
   };
 </script>
 
-  <title>標籤: markdown | Uno 開發日常</title>
+  <title>Jenkins!自動建置Unity專案-環境準備 | Uno 開發日常</title>
   
 
 
@@ -172,7 +184,7 @@
     
   
 
-  <div class="container sidebar-position-right ">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -226,7 +238,7 @@
         
         
           
-          <li class="menu-item menu-item-tags menu-item-active">
+          <li class="menu-item menu-item-tags">
 
     
     
@@ -328,80 +340,288 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>markdown<small>標籤</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://unoniceday.github.io/Jenkins!自動建置Unity專案-環境準備/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Uno">
+      <meta itemprop="description" content="紀錄開發的各種問題">
+      <meta itemprop="image" content="/images/WebAvator.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Uno 開發日常">
+    </span>
+
+    
+      <header class="post-header">
+
         
-          <a class="post-title-link" href="/MarkDown語法測試/" itemprop="url">
-            
-              <span itemprop="name">MarkDown語法測試</span>
-            
-          </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Jenkins!自動建置Unity專案-環境準備
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-31T22:02:06+08:00" content="2019-07-31">
-          07-31
-        </time>
-      </div>
+              
+            
+          </h1>
+        
 
-    </header>
-  </article>
+        <div class="post-meta">
 
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+
+              
+                
+              
+
+              <time title="創建時間：2019-08-10 19:46:02" itemprop="dateCreated datePublished" datetime="2019-08-10T19:46:02+08:00">2019-08-10</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新於</span>
+                
+                <time title="修改時間：2020-01-09 23:44:01" itemprop="dateModified" datetime="2020-01-09T23:44:01+08:00">2020-01-09</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Jenkins/" itemprop="url" rel="index"><span itemprop="name">Jenkins</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">評論數：</span>
+                <a href="/Jenkins!自動建置Unity專案-環境準備/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="Jenkins!自動建置Unity專案-環境準備/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+                 閱讀次數： 
+                <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+              </span>
+            </span>
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">文章字數：</span>
+              
+              <span title="文章字數">911</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              
+              <span title="所需閱讀時間">1 分鐘</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><br>
+最近用的專案需要在一個Unity專案內選擇製作的場景build出6個apk，在客戶不斷要求更改下每次都要重新選擇場景去輸出超級麻煩的啦!!! 
+
+<p>然後手動去選場景一個不注意就會選錯，然後又要重新輸出，根本無限輪迴地獄!!!<br>加上長期合作所以這個地獄如果手動的話根本會崩潰，所以就去尋找可不可以自動build出apk的東西，於是就發現了Jenkins。</p>
+<p>簡單來說用在unity上的話，他可以在你<b>不開啟untiy的情況下幫你輸出apk</b>，如果你的unity專案有上git 還可以偵測git如果有commit就幫你build出apk，讓團隊協作的時候不用由某個人輸出，直接改完後去取檔案就好，好處當然不止這些，詳細就看後續介紹囉</p>
+<a id="more"></a>
+<h1 id="環境建置"><a href="#環境建置" class="headerlink" title="環境建置"></a>環境建置</h1><br>
+首先先到官網去下載
+https://jenkins.io/zh/download/
+選擇你的作業系統，由於我是windows，所以以下都是用windows環境建置
+
+<p><img src="/Jenkins!自動建置Unity專案-環境準備/20190810080530877.png" alt></p>
+<p>如果出現網路錯誤沒辦法連上網站的話<br>可以到 C:\Program Files (x86)\Jenkins下的jenkins.exe 按一下他會跑一些東西出來<br>然後再手動輸入 <a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a> </p>
+<p>之後他會到一個頁面是 Unlock Jenkins<br>會給你一個路徑，<b>看中間那一行紅色的</b>，打開那個路徑的檔案<br>裡面會有一串密碼，貼上去後就可以了</p>
+<p><img src="/Jenkins!自動建置Unity專案-環境準備/20190810080709960.png" alt></p>
+<p>↓ 這邊一般是選建議就好了<br><img src="/Jenkins!自動建置Unity專案-環境準備/20190810080752791.png" alt></p>
+<p>然後他就會開始跑安裝</p>
+<p><img src="/Jenkins!自動建置Unity專案-環境準備/20190810080838099.png" alt></p>
+<p>這邊如果你安裝的東西他都是綠燈那很好，如果都是紅燈也沒關係，以後要用到的時候裡面還有頁面給你去選要安裝哪個。</p>
+<p>這邊帳密記得記起來<br><img src="/Jenkins!自動建置Unity專案-環境準備/20190810083925029.png" alt></p>
+<p>然後他就會自動跳出頁面了<br>進來的時候長這樣<br><img src="/Jenkins!自動建置Unity專案-環境準備/20190810084008343.png" alt></p>
+<p>如果沒自動跳就在網頁上打localhost:8080就會出現了</p>
+<h2 id="新增Unity外掛"><a href="#新增Unity外掛" class="headerlink" title="新增Unity外掛"></a>新增Unity外掛</h2><p>左邊側板 -&gt; 管理Jenkins -&gt; 管理外掛程式<br>選擇【可用的】並且過濾條件打【Unity】<br>就會出現unity3d plugin，安裝它吧!<br><img src="/Jenkins!自動建置Unity專案-環境準備/20190810085021723.png" alt></p>
+<h2 id="設定unity的版本"><a href="#設定unity的版本" class="headerlink" title="設定unity的版本"></a>設定unity的版本</h2><p>管理Jenkins -&gt; Global Tool Configuration<br>往下拉會有個unity3d，將你會拿來build apk的版本填進去並指定路徑</p>
+<p><img src="/Jenkins!自動建置Unity專案-環境準備/20190810085314663.png" alt></p>
+<h2 id="設定android-sdk"><a href="#設定android-sdk" class="headerlink" title="設定android sdk"></a>設定android sdk</h2><p> 管理Jenkins -&gt; 設定系統的全域屬性填入AndroidSdk的資料夾</p>
+<p><img src="/Jenkins!自動建置Unity專案-環境準備/20190810084701891.png" alt></p>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Jenkins/" rel="tag"><i class="fa fa-tag"></i> Jenkins</a>
+          
+            <a href="/tags/Unity/" rel="tag"><i class="fa fa-tag"></i> Unity</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/【設計模式】策略模式/" rel="next" title="【設計模式】策略模式">
+                <i class="fa fa-chevron-left"></i> 【設計模式】策略模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Jenkins!自動建置Unity專案-本地建置/" rel="prev" title="Jenkins!自動建置Unity專案-本地建置">
+                Jenkins!自動建置Unity專案-本地建置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -421,8 +641,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            本站概要
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -566,6 +795,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#環境建置"><span class="nav-number">2.</span> <span class="nav-text">環境建置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#新增Unity外掛"><span class="nav-number">2.1.</span> <span class="nav-text">新增Unity外掛</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#設定unity的版本"><span class="nav-number">2.2.</span> <span class="nav-text">設定unity的版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#設定android-sdk"><span class="nav-number">2.3.</span> <span class="nav-text">設定android sdk</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -739,6 +985,10 @@
 
 
   
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
 
   
 
@@ -766,9 +1016,28 @@
 </script>
 
 
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://unoniceday.github.io/Jenkins!自動建置Unity專案-環境準備/";
+    this.page.identifier = "Jenkins!自動建置Unity專案-環境準備/";
+    this.page.title = 'Jenkins!自動建置Unity專案-環境準備';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://r-uno.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    window.addEventListener('load', loadComments, false);
+  
+</script>
 
 
 
+
+
+  
 
 
   

@@ -95,16 +95,20 @@
 
 
 
-  <meta name="description" content="紀錄開發的各種問題">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Uno 開發日常">
-<meta property="og:url" content="http://unoniceday.github.io/tags/markdown/index.html">
+  <meta name="description" content="定義   享元模式（英語：Flyweight Pattern）是一種軟體設計模式。它使用共享物件，用來儘可能減少記憶體使用量以及分享資訊給儘可能多的相似物件.   取自 wiki  享元模式是以提高性能為目的的設計模式，核心思想是：如果存在著多個可以重複使用的對象，那麼就只需要共享同一份就好，不需要每次都去創建新的對象。">
+<meta name="keywords" content="設計模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【設計模式】享元模式 - 共享物件">
+<meta property="og:url" content="http://unoniceday.github.io/【設計模式】享元模式 - 共享物件/index.html">
 <meta property="og:site_name" content="Uno 開發日常">
-<meta property="og:description" content="紀錄開發的各種問題">
+<meta property="og:description" content="定義   享元模式（英語：Flyweight Pattern）是一種軟體設計模式。它使用共享物件，用來儘可能減少記憶體使用量以及分享資訊給儘可能多的相似物件.   取自 wiki  享元模式是以提高性能為目的的設計模式，核心思想是：如果存在著多個可以重複使用的對象，那麼就只需要共享同一份就好，不需要每次都去創建新的對象。">
 <meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="http://unoniceday.github.io/【設計模式】享元模式%20-%20共享物件/20190914054151860.png">
+<meta property="og:updated_time" content="2020-01-09T15:39:29.339Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Uno 開發日常">
-<meta name="twitter:description" content="紀錄開發的各種問題">
+<meta name="twitter:title" content="【設計模式】享元模式 - 共享物件">
+<meta name="twitter:description" content="定義   享元模式（英語：Flyweight Pattern）是一種軟體設計模式。它使用共享物件，用來儘可能減少記憶體使用量以及分享資訊給儘可能多的相似物件.   取自 wiki  享元模式是以提高性能為目的的設計模式，核心思想是：如果存在著多個可以重複使用的對象，那麼就只需要共享同一份就好，不需要每次都去創建新的對象。">
+<meta name="twitter:image" content="http://unoniceday.github.io/【設計模式】享元模式%20-%20共享物件/20190914054151860.png">
 
 
 
@@ -114,7 +118,7 @@
 
   
   
-  <link rel="canonical" href="http://unoniceday.github.io/tags/markdown/">
+  <link rel="canonical" href="http://unoniceday.github.io/【設計模式】享元模式 - 共享物件/">
 
 
 
@@ -124,7 +128,7 @@
   };
 </script>
 
-  <title>標籤: markdown | Uno 開發日常</title>
+  <title>【設計模式】享元模式 - 共享物件 | Uno 開發日常</title>
   
 
 
@@ -172,7 +176,7 @@
     
   
 
-  <div class="container sidebar-position-right ">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -226,7 +230,7 @@
         
         
           
-          <li class="menu-item menu-item-tags menu-item-active">
+          <li class="menu-item menu-item-tags">
 
     
     
@@ -328,80 +332,279 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>markdown<small>標籤</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://unoniceday.github.io/【設計模式】享元模式 - 共享物件/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Uno">
+      <meta itemprop="description" content="紀錄開發的各種問題">
+      <meta itemprop="image" content="/images/WebAvator.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Uno 開發日常">
+    </span>
+
+    
+      <header class="post-header">
+
         
-          <a class="post-title-link" href="/MarkDown語法測試/" itemprop="url">
-            
-              <span itemprop="name">MarkDown語法測試</span>
-            
-          </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">【設計模式】享元模式 - 共享物件
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-31T22:02:06+08:00" content="2019-07-31">
-          07-31
-        </time>
-      </div>
+              
+            
+          </h1>
+        
 
-    </header>
-  </article>
+        <div class="post-meta">
 
+          
+          
+          
 
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+
+              
+                
+              
+
+              <time title="創建時間：2019-09-14 15:32:47" itemprop="dateCreated datePublished" datetime="2019-09-14T15:32:47+08:00">2019-09-14</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新於</span>
+                
+                <time title="修改時間：2020-01-09 23:39:29" itemprop="dateModified" datetime="2020-01-09T23:39:29+08:00">2020-01-09</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/設計模式/" itemprop="url" rel="index"><span itemprop="name">設計模式</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">評論數：</span>
+                <a href="/【設計模式】享元模式 - 共享物件/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="【設計模式】享元模式 - 共享物件/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+                 閱讀次數： 
+                <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+              </span>
+            </span>
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">文章字數：</span>
+              
+              <span title="文章字數">1.7k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              
+              <span title="所需閱讀時間">2 分鐘</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="定義"><a href="#定義" class="headerlink" title="定義"></a>定義</h1><br>
+
+<blockquote>
+<p>享元模式（英語：Flyweight Pattern）是一種軟體設計模式。它使用共享物件，用來儘可能減少記憶體使用量以及分享資訊給儘可能多的相似物件.   取自 <a href="https://zh.wikipedia.org/wiki/%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F" target="_blank" rel="noopener">wiki</a></p>
+</blockquote>
+<p>享元模式是以提高性能為目的的設計模式，核心思想是：如果存在著多個可以重複使用的對象，那麼就只需要共享同一份就好，不需要每次都去創建新的對象。</p>
+<a id="more"></a>
+<p>用Unity的來比喻的話，就像是使用靜態變數Verctor2.one跟new Vector2(1,1)的感覺，而享元模式則是在一個 【<strong>享元工廠類</strong>】 中創建而且管理所需要共享的對象。</p>
+<h1 id="簡化應用"><a href="#簡化應用" class="headerlink" title="簡化應用"></a>簡化應用</h1><br>
+這邊講簡化是因為，跟一般別人介紹的不太一樣，但個人覺得只要有享元模式的概念就好，所以就簡化來使用 
+<br>
+
+<p><img src="/【設計模式】享元模式 - 共享物件/20190914054151860.png" alt></p>
+<p>WeaponBaseAttr ：需要共享的對象<br><br>WeaponAttrFactory：在工廠內獲得想要的數據<br><br>Client ：用戶端去使用Factory<br></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WeaponBaseAttr</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">int</span> mBulletCount;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">float</span> mBulletSpeed;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">float</span> mCdTime;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">WeaponBaseAttr</span><span class="params">(<span class="keyword">int</span> bulletCount, <span class="keyword">float</span> bulletSpeed, <span class="keyword">float</span> cdTime)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        mBulletCount = bulletCount;</span><br><span class="line">        mBulletSpeed = bulletSpeed;</span><br><span class="line">        mCdTime = cdTime;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><del>這邊在工廠內也可以不要在工廠類初始化weapon的資料，也可以繼承WeaponBaseAttr，實作每個資料的內容，但我就是這樣用了XD</del></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WeaponAttrFactory</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Dictionary&lt;<span class="built_in">string</span>, WeaponBaseAttr&gt; mWeaponBaseAttrDictionary;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">WeaponAttrFactory</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        InitBaseAttr();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">InitBaseAttr</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        mWeaponBaseAttrDictionary = <span class="keyword">new</span> Dictionary&lt;<span class="built_in">string</span>, WeaponBaseAttr&gt;</span><br><span class="line">        &#123;</span><br><span class="line">            &#123; <span class="string">"散彈槍"</span>, <span class="keyword">new</span> WeaponBaseAttr(<span class="number">8</span>, <span class="number">10f</span>, <span class="number">3f</span>) &#125;,</span><br><span class="line">            &#123; <span class="string">"狙擊槍"</span>, <span class="keyword">new</span> WeaponBaseAttr(<span class="number">5</span>, <span class="number">20f</span>, <span class="number">7f</span>) &#125;,</span><br><span class="line">            &#123; <span class="string">"AK47"</span>, <span class="keyword">new</span> WeaponBaseAttr(<span class="number">50</span>, <span class="number">10f</span>, <span class="number">0.5f</span>) &#125;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> WeaponBaseAttr <span class="title">GetWeaponBaseAttr</span><span class="params">(<span class="built_in">string</span> name)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (mWeaponBaseAttrDictionary.ContainsKey(name))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> mWeaponBaseAttrDictionary[name];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然後就可以在Client端那邊，使用工廠的GetWeaponBaseAttr方法來獲取資料了，如果工廠模式用成靜態或單例會更方便一些</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> :</span> MonoBehaviour</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Start</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        WeaponAttrFactory weaponAttrFactory = <span class="keyword">new</span> WeaponAttrFactory();</span><br><span class="line">        WeaponBaseAttr shotGunAttr =  weaponAttrFactory.GetWeaponBaseAttr(<span class="string">"散彈槍"</span>);</span><br><span class="line">        WeaponBaseAttr ak47Attr = weaponAttrFactory.GetWeaponBaseAttr(<span class="string">"AK47"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/設計模式/" rel="tag"><i class="fa fa-tag"></i> 設計模式</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/【設計模式】建造者模式-(Builder)/" rel="next" title="【設計模式】建造者模式 (Builder)">
+                <i class="fa fa-chevron-left"></i> 【設計模式】建造者模式 (Builder)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/【設計模式】組合模式/" rel="prev" title="【設計模式】組合模式">
+                【設計模式】組合模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -421,8 +624,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            本站概要
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -566,6 +778,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#定義"><span class="nav-number">1.</span> <span class="nav-text">定義</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#簡化應用"><span class="nav-number">2.</span> <span class="nav-text">簡化應用</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -739,6 +968,10 @@
 
 
   
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
 
   
 
@@ -766,9 +999,28 @@
 </script>
 
 
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://unoniceday.github.io/【設計模式】享元模式 - 共享物件/";
+    this.page.identifier = "【設計模式】享元模式 - 共享物件/";
+    this.page.title = '【設計模式】享元模式 - 共享物件';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://r-uno.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    window.addEventListener('load', loadComments, false);
+  
+</script>
 
 
 
+
+
+  
 
 
   

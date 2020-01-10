@@ -95,16 +95,32 @@
 
 
 
-  <meta name="description" content="紀錄開發的各種問題">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Uno 開發日常">
-<meta property="og:url" content="http://unoniceday.github.io/tags/markdown/index.html">
+  <meta name="description" content="Unity本身有建置APK的API可以使用，而Jenkins扮演的角色就是從外部(不使用Unity編輯器)去呼叫Unity的API來建置專案 用Jenkins建置專案大致可以分為  連接git建置 連接svn建置 本地建置">
+<meta name="keywords" content="Jenkins,Unity">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jenkins!自動建置Unity專案-本地建置">
+<meta property="og:url" content="http://unoniceday.github.io/Jenkins!自動建置Unity專案-本地建置/index.html">
 <meta property="og:site_name" content="Uno 開發日常">
-<meta property="og:description" content="紀錄開發的各種問題">
+<meta property="og:description" content="Unity本身有建置APK的API可以使用，而Jenkins扮演的角色就是從外部(不使用Unity編輯器)去呼叫Unity的API來建置專案 用Jenkins建置專案大致可以分為  連接git建置 連接svn建置 本地建置">
 <meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="http://unoniceday.github.io/Jenkins!自動建置Unity專案-本地建置/20190811082407216.png">
+<meta property="og:image" content="http://unoniceday.github.io/Jenkins!自動建置Unity專案-本地建置/20190811082501199.png">
+<meta property="og:image" content="http://unoniceday.github.io/Jenkins!自動建置Unity專案-本地建置/20190811082506246.png">
+<meta property="og:image" content="http://unoniceday.github.io/Jenkins!自動建置Unity專案-本地建置/20190811082601185.png">
+<meta property="og:image" content="http://unoniceday.github.io/Jenkins!自動建置Unity專案-本地建置/20190811082604551.png">
+<meta property="og:image" content="http://unoniceday.github.io/Jenkins!自動建置Unity專案-本地建置/20190811083535700.png">
+<meta property="og:image" content="http://unoniceday.github.io/Jenkins!自動建置Unity專案-本地建置/20190811082609700.png">
+<meta property="og:image" content="http://unoniceday.github.io/Jenkins!自動建置Unity專案-本地建置/20190811083911494.png">
+<meta property="og:image" content="http://unoniceday.github.io/Jenkins!自動建置Unity專案-本地建置/20190811085952975.png">
+<meta property="og:image" content="http://unoniceday.github.io/Jenkins!自動建置Unity專案-本地建置/20190811090010203.png">
+<meta property="og:image" content="http://unoniceday.github.io/Jenkins!自動建置Unity專案-本地建置/20190811090038797.png">
+<meta property="og:image" content="http://unoniceday.github.io/Jenkins!自動建置Unity專案-本地建置/20190811090141167.png">
+<meta property="og:image" content="http://unoniceday.github.io/Jenkins!自動建置Unity專案-本地建置/20190811090204760.png">
+<meta property="og:updated_time" content="2020-01-09T15:43:36.314Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Uno 開發日常">
-<meta name="twitter:description" content="紀錄開發的各種問題">
+<meta name="twitter:title" content="Jenkins!自動建置Unity專案-本地建置">
+<meta name="twitter:description" content="Unity本身有建置APK的API可以使用，而Jenkins扮演的角色就是從外部(不使用Unity編輯器)去呼叫Unity的API來建置專案 用Jenkins建置專案大致可以分為  連接git建置 連接svn建置 本地建置">
+<meta name="twitter:image" content="http://unoniceday.github.io/Jenkins!自動建置Unity專案-本地建置/20190811082407216.png">
 
 
 
@@ -114,7 +130,7 @@
 
   
   
-  <link rel="canonical" href="http://unoniceday.github.io/tags/markdown/">
+  <link rel="canonical" href="http://unoniceday.github.io/Jenkins!自動建置Unity專案-本地建置/">
 
 
 
@@ -124,7 +140,7 @@
   };
 </script>
 
-  <title>標籤: markdown | Uno 開發日常</title>
+  <title>Jenkins!自動建置Unity專案-本地建置 | Uno 開發日常</title>
   
 
 
@@ -172,7 +188,7 @@
     
   
 
-  <div class="container sidebar-position-right ">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -226,7 +242,7 @@
         
         
           
-          <li class="menu-item menu-item-tags menu-item-active">
+          <li class="menu-item menu-item-tags">
 
     
     
@@ -328,80 +344,312 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>markdown<small>標籤</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://unoniceday.github.io/Jenkins!自動建置Unity專案-本地建置/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Uno">
+      <meta itemprop="description" content="紀錄開發的各種問題">
+      <meta itemprop="image" content="/images/WebAvator.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Uno 開發日常">
+    </span>
+
+    
+      <header class="post-header">
+
         
-          <a class="post-title-link" href="/MarkDown語法測試/" itemprop="url">
-            
-              <span itemprop="name">MarkDown語法測試</span>
-            
-          </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Jenkins!自動建置Unity專案-本地建置
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-31T22:02:06+08:00" content="2019-07-31">
-          07-31
-        </time>
-      </div>
+              
+            
+          </h1>
+        
 
-    </header>
-  </article>
+        <div class="post-meta">
 
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+
+              
+                
+              
+
+              <time title="創建時間：2019-08-11 14:30:00" itemprop="dateCreated datePublished" datetime="2019-08-11T14:30:00+08:00">2019-08-11</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新於</span>
+                
+                <time title="修改時間：2020-01-09 23:43:36" itemprop="dateModified" datetime="2020-01-09T23:43:36+08:00">2020-01-09</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Jenkins/" itemprop="url" rel="index"><span itemprop="name">Jenkins</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">評論數：</span>
+                <a href="/Jenkins!自動建置Unity專案-本地建置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="Jenkins!自動建置Unity專案-本地建置/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+                 閱讀次數： 
+                <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+              </span>
+            </span>
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">文章字數：</span>
+              
+              <span title="文章字數">2.3k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              
+              <span title="所需閱讀時間">2 分鐘</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Unity本身有建置APK的API可以使用，而Jenkins扮演的角色就是從外部(不使用Unity編輯器)去呼叫Unity的API來建置專案</p>
+<p>用Jenkins建置專案大致可以分為</p>
+<ul>
+<li>連接git建置</li>
+<li>連接svn建置</li>
+<li>本地建置<a id="more"></a>
+第一跟第二種都算是屬於遠端建置，多人協作的時候可以使用，第三種的話就是單純使用本機去建置，用到Jenkin的功能很少。</li>
+</ul>
+<p>這邊先從本地建置開始弄</p>
+<h1 id="本地建置"><a href="#本地建置" class="headerlink" title="本地建置"></a>本地建置</h1><h2 id="Unity-編譯apk的Script"><a href="#Unity-編譯apk的Script" class="headerlink" title="Unity 編譯apk的Script"></a>Unity 編譯apk的Script</h2><p>由於Jenkins只是呼叫unity的api來建置apk的，因此在unity內還是必須寫一個script來定義這個apk怎麼建置</p>
+<p>建立一個Builder</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> UnityEditor;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Builder</span> :</span> Editor</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    [MenuItem(<span class="string">"Build/APK"</span>)]</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Build</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        BuildTarget buildTarget = BuildTarget.Android;</span><br><span class="line">        <span class="comment">// 切換到Android平台</span></span><br><span class="line">        EditorUserBuildSettings.SwitchActiveBuildTarget(buildTarget);</span><br><span class="line">        </span><br><span class="line">        List&lt;<span class="built_in">string</span>&gt; levels = <span class="keyword">new</span> List&lt;<span class="built_in">string</span>&gt;();</span><br><span class="line">        foreach (EditorBuildSettingsScene scene in EditorBuildSettings.scenes)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (!scene.enabled) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="comment">// 獲取有效的場景</span></span><br><span class="line">            levels.Add(scene.path);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 打包出 APK 名</span></span><br><span class="line">        <span class="built_in">string</span> apkName = <span class="built_in">string</span>.Format(<span class="string">"./&#123;0&#125;.apk"</span>, <span class="string">"Test"</span>);</span><br><span class="line">        <span class="comment">// 執行打包</span></span><br><span class="line">        <span class="built_in">string</span> res = BuildPipeline.BuildPlayer(levels.ToArray(), apkName, buildTarget, BuildOptions.None);</span><br><span class="line"></span><br><span class="line">        AssetDatabase.Refresh();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這是一個算很簡單的建置，只是單純的建置APK而已，沒有設置其他的參數，有興趣的可以再參考 <a href="https://docs.unity3d.com/ScriptReference/EditorUserBuildSettings.html" target="_blank" rel="noopener">EditorUserBuildSettings</a></p>
+<p>然後放在Editor下(不然會失敗)<br><img src="/Jenkins!自動建置Unity專案-本地建置/20190811082407216.png" alt></p>
+<p>然後到Jenkins上確認unity的plugin有設定好</p>
+<p><img src="/Jenkins!自動建置Unity專案-本地建置/20190811082501199.png" alt></p>
+<p><img src="/Jenkins!自動建置Unity專案-本地建置/20190811082506246.png" alt></p>
+<h2 id="在jenkins上建置unity專案"><a href="#在jenkins上建置unity專案" class="headerlink" title="在jenkins上建置unity專案"></a>在jenkins上建置unity專案</h2><p>選擇新增一個作業<br><img src="/Jenkins!自動建置Unity專案-本地建置/20190811082601185.png" alt><br>這邊輸入專案名稱，看你要叫什麼<br><img src="/Jenkins!自動建置Unity專案-本地建置/20190811082604551.png" alt></p>
+<p>這邊設定這個專案的設定，可以看到有git跟svn的選項<br>另外比較會用到的是<b> [參數化建置] </b> 這邊就先忽略<br><img src="/Jenkins!自動建置Unity專案-本地建置/20190811083535700.png" alt><br>再往下拉可以看到有個建置的選項<br>選擇unity3d Editor<br><img src="/Jenkins!自動建置Unity專案-本地建置/20190811082609700.png" alt><br>然後就會跑出這個視窗，它可以選擇你在Global Tool Configuration設定建置用的unity的版本，而我是用unity 2017.4.8來建置<br><img src="/Jenkins!自動建置Unity專案-本地建置/20190811083911494.png" alt></p>
+<p>而下面這一欄!!! 【Editor command line arguments】 很重要!!!! 這個就是建置的命令</p>
+<p>先介紹一些基本的命令</p>
+<ul>
+<li>-projectPath ：unity要build 的專案的路徑</li>
+<li>-logFile：Build專案的log的路徑，可以來看輸出的時候出現什麼問題</li>
+<li>-executeMethos：就是要執行靜態程序，也就是剛剛我們scripts上的Builder.Build</li>
+<li>-output：輸出的路徑</li>
+</ul>
+<p>還有其他命令參數可以參考：<a href="https://blog.csdn.net/wenzhilu/article/details/51668588" target="_blank" rel="noopener">Unity3D游戏开发之“unity3D命令行参数”</a></p>
+<p>那綜合以上，最終得到的結果是：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-projectPath <span class="string">"C:\Users\User\Documents\TestJenkins\Jenkin"</span> -logFile <span class="string">"C:\Users\User\Documents\TestJenkins\Jenkin/unity3d_editor.log"</span> -quit -batchmode -nographics -executeMethod Builder.Build -output <span class="string">"C:\Users\User\Documents\TestJenkins\Jenkin/test.exe"</span></span><br></pre></td></tr></table></figure>
+
+<p>輸入在Editor command line arguments內後按Apply就好了<br><img src="/Jenkins!自動建置Unity專案-本地建置/20190811085952975.png" alt><br>設定完後就可以跑去建置了<br><img src="/Jenkins!自動建置Unity專案-本地建置/20190811090010203.png" alt><br>因為#1是我建失敗的等待#2跑完，就會看到你的成品了!!<br><img src="/Jenkins!自動建置Unity專案-本地建置/20190811090038797.png" alt></p>
+<br>
+<br>
+# 常跑出來的問題
+
+<h2 id="沒有設定android-sdk路徑"><a href="#沒有設定android-sdk路徑" class="headerlink" title="沒有設定android sdk路徑"></a>沒有設定android sdk路徑</h2><p><img src="/Jenkins!自動建置Unity專案-本地建置/20190811090141167.png" alt></p>
+<h2 id="LogFile也可以在Jenkins上看"><a href="#LogFile也可以在Jenkins上看" class="headerlink" title="LogFile也可以在Jenkins上看"></a>LogFile也可以在Jenkins上看</h2><p><img src="/Jenkins!自動建置Unity專案-本地建置/20190811090204760.png" alt></p>
+<br>
+<br>
+<br>
+<br>
+<br>
+參考
+<br>
+https://dev.twsiyuan.com/2016/04/continuous-integration-with-unity-using-jenkins.html
+http://hoseex.blogspot.com/2017/12/jenkinsunity3d.html
+https://blog.csdn.net/cgy56191948/article/details/81263982
+https://blog.csdn.net/liqiangeastsun/article/details/78867309
+https://dotblogs.com.tw/echo/2018/03/22/jenkins_plugin_git
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Jenkins/" rel="tag"><i class="fa fa-tag"></i> Jenkins</a>
+          
+            <a href="/tags/Unity/" rel="tag"><i class="fa fa-tag"></i> Unity</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Jenkins!自動建置Unity專案-環境準備/" rel="next" title="Jenkins!自動建置Unity專案-環境準備">
+                <i class="fa fa-chevron-left"></i> Jenkins!自動建置Unity專案-環境準備
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Native-Arrays/" rel="prev" title="【測試】使用 Native Arrays 引起cpu處理過大?">
+                【測試】使用 Native Arrays 引起cpu處理過大? <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -421,8 +669,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            本站概要
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -566,6 +823,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#本地建置"><span class="nav-number">1.</span> <span class="nav-text">本地建置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Unity-編譯apk的Script"><span class="nav-number">1.1.</span> <span class="nav-text">Unity 編譯apk的Script</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在jenkins上建置unity專案"><span class="nav-number">1.2.</span> <span class="nav-text">在jenkins上建置unity專案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#沒有設定android-sdk路徑"><span class="nav-number">1.3.</span> <span class="nav-text">沒有設定android sdk路徑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LogFile也可以在Jenkins上看"><span class="nav-number">1.4.</span> <span class="nav-text">LogFile也可以在Jenkins上看</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -739,6 +1013,10 @@
 
 
   
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
 
   
 
@@ -766,9 +1044,28 @@
 </script>
 
 
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://unoniceday.github.io/Jenkins!自動建置Unity專案-本地建置/";
+    this.page.identifier = "Jenkins!自動建置Unity專案-本地建置/";
+    this.page.title = 'Jenkins!自動建置Unity專案-本地建置';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://r-uno.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    window.addEventListener('load', loadComments, false);
+  
+</script>
 
 
 
+
+
+  
 
 
   

@@ -95,16 +95,18 @@
 
 
 
-  <meta name="description" content="紀錄開發的各種問題">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Uno 開發日常">
-<meta property="og:url" content="http://unoniceday.github.io/tags/markdown/index.html">
+  <meta name="description" content="什麼是JobSystem一般用unity製作遊戲，如果沒有特別去開線程的話，都是交由一個主線程去控制整個遊戲運行，但現在遊戲越做越大，不只需要性能強的設備，如果在製作遊戲上只使用主線程去做各項事情的話，負載過高也會導致FPS降低，而JobSystem目的就是可以讓設計師去使用更多的cpu的資源，來降低主線程的工作量進而讓整體遊戲效能優化。使用多線程可以讓原本擠在一起的任務分散到各個執行續上去執行，">
+<meta name="keywords" content="Unity,JobSystem">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JobSystem初次見面">
+<meta property="og:url" content="http://unoniceday.github.io/JobSystem初次見面/index.html">
 <meta property="og:site_name" content="Uno 開發日常">
-<meta property="og:description" content="紀錄開發的各種問題">
+<meta property="og:description" content="什麼是JobSystem一般用unity製作遊戲，如果沒有特別去開線程的話，都是交由一個主線程去控制整個遊戲運行，但現在遊戲越做越大，不只需要性能強的設備，如果在製作遊戲上只使用主線程去做各項事情的話，負載過高也會導致FPS降低，而JobSystem目的就是可以讓設計師去使用更多的cpu的資源，來降低主線程的工作量進而讓整體遊戲效能優化。使用多線程可以讓原本擠在一起的任務分散到各個執行續上去執行，">
 <meta property="og:locale" content="zh-TW">
+<meta property="og:updated_time" content="2020-01-09T15:44:22.255Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Uno 開發日常">
-<meta name="twitter:description" content="紀錄開發的各種問題">
+<meta name="twitter:title" content="JobSystem初次見面">
+<meta name="twitter:description" content="什麼是JobSystem一般用unity製作遊戲，如果沒有特別去開線程的話，都是交由一個主線程去控制整個遊戲運行，但現在遊戲越做越大，不只需要性能強的設備，如果在製作遊戲上只使用主線程去做各項事情的話，負載過高也會導致FPS降低，而JobSystem目的就是可以讓設計師去使用更多的cpu的資源，來降低主線程的工作量進而讓整體遊戲效能優化。使用多線程可以讓原本擠在一起的任務分散到各個執行續上去執行，">
 
 
 
@@ -114,7 +116,7 @@
 
   
   
-  <link rel="canonical" href="http://unoniceday.github.io/tags/markdown/">
+  <link rel="canonical" href="http://unoniceday.github.io/JobSystem初次見面/">
 
 
 
@@ -124,7 +126,7 @@
   };
 </script>
 
-  <title>標籤: markdown | Uno 開發日常</title>
+  <title>JobSystem初次見面 | Uno 開發日常</title>
   
 
 
@@ -172,7 +174,7 @@
     
   
 
-  <div class="container sidebar-position-right ">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -226,7 +228,7 @@
         
         
           
-          <li class="menu-item menu-item-tags menu-item-active">
+          <li class="menu-item menu-item-tags">
 
     
     
@@ -328,80 +330,278 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>markdown<small>標籤</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://unoniceday.github.io/JobSystem初次見面/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Uno">
+      <meta itemprop="description" content="紀錄開發的各種問題">
+      <meta itemprop="image" content="/images/WebAvator.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Uno 開發日常">
+    </span>
+
+    
+      <header class="post-header">
+
         
-          <a class="post-title-link" href="/MarkDown語法測試/" itemprop="url">
-            
-              <span itemprop="name">MarkDown語法測試</span>
-            
-          </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">JobSystem初次見面
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-31T22:02:06+08:00" content="2019-07-31">
-          07-31
-        </time>
-      </div>
+              
+            
+          </h1>
+        
 
-    </header>
-  </article>
+        <div class="post-meta">
 
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+
+              
+                
+              
+
+              <time title="創建時間：2019-09-01 16:48:50" itemprop="dateCreated datePublished" datetime="2019-09-01T16:48:50+08:00">2019-09-01</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新於</span>
+                
+                <time title="修改時間：2020-01-09 23:44:22" itemprop="dateModified" datetime="2020-01-09T23:44:22+08:00">2020-01-09</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Unity/" itemprop="url" rel="index"><span itemprop="name">Unity</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">評論數：</span>
+                <a href="/JobSystem初次見面/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="JobSystem初次見面/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+                 閱讀次數： 
+                <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+              </span>
+            </span>
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">文章字數：</span>
+              
+              <span title="文章字數">1.5k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              
+              <span title="所需閱讀時間">1 分鐘</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="什麼是JobSystem"><a href="#什麼是JobSystem" class="headerlink" title="什麼是JobSystem"></a>什麼是JobSystem</h1><p>一般用unity製作遊戲，如果沒有特別去開線程的話，都是交由一個<b>主線程</b>去控制整個遊戲運行，但現在遊戲越做越大，不只需要性能強的設備，如果在製作遊戲上只使用主線程去做各項事情的話，負載過高也會導致FPS降低，而JobSystem目的就是可以讓設計師去使用更多的cpu的資源，來降低主線程的工作量進而讓整體遊戲效能優化。使用多線程可以讓原本擠在一起的任務分散到各個執行續上去執行，可以更有效的利用cpu的多核。</p>
+<a id="more"></a>
+<p>不過有一點需要注意的是，<b>UnityAPI必須在主線程中使用。</b><br><a href="https://blogs.unity3d.com/2018/10/22/what-is-a-job-system/" target="_blank" rel="noopener">https://blogs.unity3d.com/2018/10/22/what-is-a-job-system/</a></p>
+<h1 id="Race-conditions-amp-safety-system"><a href="#Race-conditions-amp-safety-system" class="headerlink" title="Race conditions &amp; safety system"></a>Race conditions &amp; safety system</h1><h2 id="競爭-Race-conditions"><a href="#競爭-Race-conditions" class="headerlink" title="競爭(Race conditions)"></a>競爭(Race conditions)</h2><p>在編寫多線程的code時，總會存在<a href="https://en.wikipedia.org/wiki/Race_condition" target="_blank" rel="noopener">(Race condition)競爭</a>的風險，假設現在有兩條線程：A線程和B線程，在A設定了數據，在B也設定了，而兩個線程之間對這個數據進行搶奪，就是資源競爭，這一點會讓編寫多線程的代碼變得困難。</p>
+<h2 id="安全系統-safety-system"><a href="#安全系統-safety-system" class="headerlink" title="安全系統(safety system)"></a>安全系統(safety system)</h2><p>而這一點Unity會幫你解決!  Job System它會檢測所有潛在的競爭條件並保護你免受它們可能導致的bug。<br>Job System解決這個問題的方式是：如果你在主線程要丟數據給job，那就<b>傳遞一個複製的數據</b>過去，而不是<b>傳遞數據的引用</b>給Job。這個數據複製的，不管怎麼操控都不會影響到主線程的數據，所以可以避免資源競爭的問題。以這種方式複製數據意味著Job只能訪問blittable數據，而不是管理（託管）類型。這會導致很大限制，因為你不能從任務中返回任何結果，而為了解決不能返回任何結果的問題，就得需要使用到NativeContainer了！</p>
+<h1 id="NativeContainer"><a href="#NativeContainer" class="headerlink" title="NativeContainer"></a>NativeContainer</h1><p>NativeContainer都受safety system保護，Unity會追蹤所有使用到NativeContainer的對象，檢查是否有錯誤(safety checks)，<b>但這僅在Editor模式跟Play模式下可以使用</b></p>
+<p>而NactiveContainer包含了：<br>NativeArray，NativeList，NativeHashMap和NativeQueue。</p>
+<h1 id="NativeContainer-Allocator"><a href="#NativeContainer-Allocator" class="headerlink" title="NativeContainer Allocator"></a>NativeContainer Allocator</h1><p>建立 NativeContainer時，必須指定所需的記憶體分配類型。分配類型取決於Job執行的時間長度。通過這種方式，可以定製分配器以在每種情況下獲得最佳效能。 NativeContainer記憶體分配和釋放有三種類型：</p>
+<ul>
+<li><b>Allocator.Temp</b> ：有最快的記憶體分配速度，適用於分配一個生命週期只有一幀或更短時間的操作，</li>
+<li><b>Allocator.TempJob</b> ：是相比於Temp是一個較慢的分配類型但它比Persistent要快。這是一個生命週期爲四幀的內存分配而且它是線程安全的。如果你在四幀之內沒有調用Dispose，控制台會打印一個由原生代碼生成的警告信息。絕大部分小jobs使用這種類型的NativeContainer分配器。</li>
+<li><b>Allocator.Persistent </b>：速度最慢，可以持續整個應用程式的生命週期，它是直接呼叫malloc的包裝器。</li>
+</ul>
+<p>另外還有關於Jobsystem重要的點</p>
+<p><a href="https://docs.unity3d.com/Manual/JobSystemTroubleshooting.html" target="_blank" rel="noopener">C# Job System tips and troubleshooting</a><br>這個也蠻重要的，我就是說明書都沒看完就跑進去使用的那種人，結果才會跑出另外一篇Jobsystem的NativeArray效能測試XD </p>
+<p><a href="https://docs.unity3d.com/Manual/JobSystemNativeContainer.html" target="_blank" rel="noopener">JobSystemNativeContainer</a></p>
+<p><a href="https://blogs.unity3d.com/2018/10/22/what-is-a-job-system/" target="_blank" rel="noopener">What is a Job System?</a></p>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Unity/" rel="tag"><i class="fa fa-tag"></i> Unity</a>
+          
+            <a href="/tags/JobSystem/" rel="tag"><i class="fa fa-tag"></i> JobSystem</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Native-Arrays/" rel="next" title="【測試】使用 Native Arrays 引起cpu處理過大?">
+                <i class="fa fa-chevron-left"></i> 【測試】使用 Native Arrays 引起cpu處理過大?
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/【設計模式】建造者模式-(Builder)/" rel="prev" title="【設計模式】建造者模式 (Builder)">
+                【設計模式】建造者模式 (Builder) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -421,8 +621,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            本站概要
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -566,6 +775,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什麼是JobSystem"><span class="nav-number">1.</span> <span class="nav-text">什麼是JobSystem</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Race-conditions-amp-safety-system"><span class="nav-number">2.</span> <span class="nav-text">Race conditions &amp; safety system</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#競爭-Race-conditions"><span class="nav-number">2.1.</span> <span class="nav-text">競爭(Race conditions)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安全系統-safety-system"><span class="nav-number">2.2.</span> <span class="nav-text">安全系統(safety system)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NativeContainer"><span class="nav-number">3.</span> <span class="nav-text">NativeContainer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NativeContainer-Allocator"><span class="nav-number">4.</span> <span class="nav-text">NativeContainer Allocator</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -739,6 +965,10 @@
 
 
   
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
 
   
 
@@ -766,9 +996,28 @@
 </script>
 
 
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://unoniceday.github.io/JobSystem初次見面/";
+    this.page.identifier = "JobSystem初次見面/";
+    this.page.title = 'JobSystem初次見面';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://r-uno.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    window.addEventListener('load', loadComments, false);
+  
+</script>
 
 
 
+
+
+  
 
 
   
