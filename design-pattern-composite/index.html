@@ -16,8 +16,7 @@
 
 <html class="theme-next pisces use-motion" lang="zh-TW">
 <head><meta name="generator" content="Hexo 3.9.0">
-  <meta name="google-site-verification" content="u-avy-YW4cd2WfnN7dh1ahV5_K4Sx1ACruLOA5Nj3RI">
-<meta charset="UTF-8">
+  <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -97,20 +96,21 @@
 
 
 
-  <meta name="description" content="前言  現在有個情境如下你的面前有紅藥水跟毒藥水依照你的等級，會有不同效果紅藥水： 加 (等級 x 10) 的血量毒藥水： 減少 (等級 x 15 )的血量">
-<meta name="keywords" content="設計模式,策略模式">
+  <meta name="description" content="定義  組合模式，又稱為部分整體模式，把具有相似的一組對象當做一個對象處理，用一種樹狀的結構來組合對象，再提供統一的方法去訪問相似的對象，以此忽略掉對象與對象容器間的差別。">
+<meta name="keywords" content="設計模式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【設計模式】策略模式">
-<meta property="og:url" content="http://unoniceday.github.io/【設計模式】策略模式/index.html">
+<meta property="og:title" content="【設計模式】組合模式">
+<meta property="og:url" content="http://unoniceday.github.io/design-pattern-composite/index.html">
 <meta property="og:site_name" content="Uno - Unity開發紀錄">
-<meta property="og:description" content="前言  現在有個情境如下你的面前有紅藥水跟毒藥水依照你的等級，會有不同效果紅藥水： 加 (等級 x 10) 的血量毒藥水： 減少 (等級 x 15 )的血量">
+<meta property="og:description" content="定義  組合模式，又稱為部分整體模式，把具有相似的一組對象當做一個對象處理，用一種樹狀的結構來組合對象，再提供統一的方法去訪問相似的對象，以此忽略掉對象與對象容器間的差別。">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:image" content="http://unoniceday.github.io/【設計模式】策略模式/20190810055108084.png">
-<meta property="og:updated_time" content="2020-01-09T15:42:34.193Z">
+<meta property="og:image" content="http://unoniceday.github.io/design-pattern-composite/20190929052633965.png">
+<meta property="og:image" content="http://unoniceday.github.io/design-pattern-composite/20190929053020468.png">
+<meta property="og:updated_time" content="2020-01-11T04:26:52.628Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【設計模式】策略模式">
-<meta name="twitter:description" content="前言  現在有個情境如下你的面前有紅藥水跟毒藥水依照你的等級，會有不同效果紅藥水： 加 (等級 x 10) 的血量毒藥水： 減少 (等級 x 15 )的血量">
-<meta name="twitter:image" content="http://unoniceday.github.io/【設計模式】策略模式/20190810055108084.png">
+<meta name="twitter:title" content="【設計模式】組合模式">
+<meta name="twitter:description" content="定義  組合模式，又稱為部分整體模式，把具有相似的一組對象當做一個對象處理，用一種樹狀的結構來組合對象，再提供統一的方法去訪問相似的對象，以此忽略掉對象與對象容器間的差別。">
+<meta name="twitter:image" content="http://unoniceday.github.io/design-pattern-composite/20190929052633965.png">
 
 
 
@@ -120,7 +120,7 @@
 
   
   
-  <link rel="canonical" href="http://unoniceday.github.io/【設計模式】策略模式/">
+  <link rel="canonical" href="http://unoniceday.github.io/design-pattern-composite/">
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>【設計模式】策略模式 | Uno - Unity開發紀錄</title>
+  <title>【設計模式】組合模式 | Uno - Unity開發紀錄</title>
   
 
 
@@ -354,7 +354,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://unoniceday.github.io/【設計模式】策略模式/">
+    <link itemprop="mainEntityOfPage" href="http://unoniceday.github.io/design-pattern-composite/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Uno">
@@ -371,11 +371,11 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">【設計模式】策略模式
+          <h2 class="post-title" itemprop="name headline">【設計模式】組合模式
 
               
             
-          </h1>
+          </h2>
         
 
         <div class="post-meta">
@@ -397,24 +397,10 @@
                 
               
 
-              <time title="創建時間：2019-08-10 17:20:01" itemprop="dateCreated datePublished" datetime="2019-08-10T17:20:01+08:00">2019-08-10</time>
+              <time title="創建時間：2019-09-29 17:19:50" itemprop="dateCreated datePublished" datetime="2019-09-29T17:19:50+08:00">2019-09-29</time>
             </span>
           
 
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新於</span>
-                
-                <time title="修改時間：2020-01-09 23:42:34" itemprop="dateModified" datetime="2020-01-09T23:42:34+08:00">2020-01-09</time>
-              </span>
-            
           
 
           
@@ -444,8 +430,8 @@
                 </span>
             
                 <span class="post-meta-item-text">評論數：</span>
-                <a href="/【設計模式】策略模式/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="【設計模式】策略模式/" itemprop="commentCount"></span>
+                <a href="/design-pattern-composite/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="design-pattern-composite/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -454,14 +440,6 @@
           
           
 
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-                 閱讀次數： 
-                <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
-              </span>
-            </span>
           
 
           <br>
@@ -473,7 +451,7 @@
               
                 <span class="post-meta-item-text">文章字數：</span>
               
-              <span title="文章字數">2.2k</span>
+              <span title="文章字數">2.3k</span>
             </span>
           
 
@@ -485,7 +463,7 @@
               
                 <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
               
-              <span title="所需閱讀時間">2 分鐘</span>
+              <span title="所需閱讀時間">4 分鐘</span>
             </span>
           
 
@@ -504,39 +482,38 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><br>
+        <h1 id="定義"><a href="#定義" class="headerlink" title="定義"></a>定義</h1><br>
 
-<p>現在有個情境如下<br><br>你的面前有紅藥水跟毒藥水<br><br>依照你的等級，會有不同效果<br><br>紅藥水： 加 (等級 x 10) 的血量<br><br>毒藥水： 減少 (等級 x 15 )的血量<br></p>
+<p>組合模式，又稱為部分整體模式，把具有相似的一組對象<br>當做一個對象處理，用一種樹狀的結構來組合對象，再提供統一<br>的方法去訪問相似的對象，以此忽略掉對象與對象容器間的差別。</p>
 <a id="more"></a>
-<p>那如果用程式寫的話，一般會是這樣<br></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">Main：</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Start</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Character p1 = <span class="keyword">new</span> Character();</span><br><span class="line">    p1.UseItem(Character.HpItem.RedWater);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">角色：</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Character</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> hp = <span class="number">1000</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> ChacaterLevel = <span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">enum</span> HpItem</span><br><span class="line">    &#123;</span><br><span class="line">        RedWater,</span><br><span class="line">        ToxinWater</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">UseItem</span><span class="params">(HpItem item)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (item)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">case</span> HpItem.RedWater:</span><br><span class="line">                hp += <span class="number">10</span> * ChacaterLevel;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> HpItem.ToxinWater:</span><br><span class="line">                hp += <span class="number">-15</span> * ChacaterLevel;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>這樣的確會得到想要的效果，但如果新增藥水的話，又要回到角色這邊來新增使用物品後的效果，違反了開閉原則。</p>
-<p>然後，如果企劃要喊說改紅藥水的數值，變成每等級補50滴，那也是要修改程式碼<br>日後如果又改回每等級10滴，又要跑回來修改程式碼，不管怎麼樣改，都會一直修改原始代碼。<br>因此策略模式就跑出來解決這個問題了！</p>
+<h1 id="UML圖"><a href="#UML圖" class="headerlink" title="UML圖"></a>UML圖</h1><p><img src="/design-pattern-composite/20190929052633965.png" alt></p>
+<ul>
+<li><strong>Component</strong> ：抽象組件，為組合中的對象聲明接口，讓客戶端<br>可以通過這個接口來訪問和管理整個對象結構，可以在裏面為定義的<br>功能提供缺省的實現，比如上面的AbstractMenu類。</li>
+<li><strong>Composite</strong> ：容器組件，繼承抽象組件，實現抽象組件中與<br>葉子組件相關的操作，比如上面的Menu類重寫了get，set方法。</li>
+<li><strong>Leaf</strong>：葉子組件，定義和實現葉子對象的行為，不再包含其它<br>的子節點對象</li>
+</ul>
 <br>
-# 應用策略模式
-<br>
+可以將組合模式理解成，樹葉跟樹枝
+樹枝會長出很多分支，樹葉卻不會長出樹枝
+也就是說，樹葉(Left)就是最小單位，而樹枝(Composite)則是它的上一級，用來儲存樹葉用的，而Component可以當作這棵樹中的根，這棵樹所有子節點都會實現它
 
-<p>先上一個策略模式的圖</p>
-<p><img src="/【設計模式】策略模式/20190810055108084.png" alt><br><br></p>
-<p>紅藥水跟毒藥水，差別在於一個扣血一個損血<br>所以我們可以把他抽出來做成一個介面</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> interface I_HpItem</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">HpControl</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="應用場合"><a href="#應用場合" class="headerlink" title="應用場合"></a>應用場合</h1><p>其他日常看到的例子的話有【文件、文件夾】，【菜單與菜單上的菜】<br>只要是</p>
+<ol>
+<li>想表示對象的部分-整體層次的結構</li>
+<li>忽略組合對象(樹枝)與單個對象(樹葉)的不同，用戶統一的使用組合結構中的所有對象就可以考慮使用組合模式，像是Unity內物件結構<br><br><br></li>
+</ol>
+<p><img src="/design-pattern-composite/20190929053020468.png" alt></p>
+<p>另外，可以使用組合對象來得到、搜尋當中的物件，但如果有頻繁的搜尋需求，可以用緩存來改善效率。<br>像是在Unity內，如果搜尋的話使用GameObject.Find(“xxx”)，會搜尋所有物件(紅框部摁)，物件一多效率就不好，但如果只將一小部分做成組合模式，階層式的管理，只需要搜尋內部那一小部分(綠框部分)，效率就會改善許多。</p>
+<p>最後附上code參考</p>
+<h2 id="Component-抽象組件"><a href="#Component-抽象組件" class="headerlink" title="Component 抽象組件"></a>Component 抽象組件</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> abstract <span class="class"><span class="keyword">class</span> <span class="title">Component</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="built_in">string</span> mName;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> name &#123; get &#123; <span class="keyword">return</span> mName; &#125; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Component</span><span class="params">(<span class="built_in">string</span> name)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        mName = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> List&lt;Component&gt; mChildren = <span class="keyword">new</span> List&lt;Component&gt;();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> abstract <span class="keyword">void</span> <span class="title">AddChild</span><span class="params">(Component component)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> abstract <span class="keyword">void</span> <span class="title">RemoveChild</span><span class="params">(Component component)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> abstract Component <span class="title">GetChild</span><span class="params">(<span class="keyword">int</span> index)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>有了這個介面，就可以再往下分為紅藥水跟毒藥水</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedWater</span> :</span> I_HpItem</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">HpControl</span><span class="params">()</span> </span>&#123; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ToxinWater</span> :</span> I_HpItem</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">HpControl</span><span class="params">()</span> </span>&#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Composite-容器組件"><a href="#Composite-容器組件" class="headerlink" title="Composite 容器組件"></a>Composite 容器組件</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Composite</span> :</span> Component</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    public Composite(string name) : base(name) &#123; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> override <span class="keyword">void</span> <span class="title">AddChild</span><span class="params">(Component component)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        mChildren.Add(component);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> override <span class="keyword">void</span> <span class="title">RemoveChild</span><span class="params">(Component component)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        mChildren.Remove(component);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> override Component <span class="title">GetChild</span><span class="params">(<span class="keyword">int</span> index)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> mChildren[index];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>現在就可以將上面講的藥水公式帶進來了</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedWater</span> :</span> I_HpItem</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> level;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RedWater</span><span class="params">(<span class="keyword">int</span> _level)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        level = _level;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">HpControl</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">10</span> * level;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ToxinWater</span> :</span> I_HpItem</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> level;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ToxinWater</span><span class="params">(<span class="keyword">int</span> _level)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        level = _level;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">HpControl</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-15</span> * level;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="葉子組件-Left"><a href="#葉子組件-Left" class="headerlink" title="葉子組件 Left"></a>葉子組件 Left</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Leaf</span> :</span> Component</span><br><span class="line">&#123;</span><br><span class="line">    public Leaf(string name) : base(name) &#123; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> override <span class="keyword">void</span> <span class="title">AddChild</span><span class="params">(Component component)</span> </span>&#123; <span class="keyword">return</span>; &#125; <span class="comment">//不需要實作</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> override <span class="keyword">void</span> <span class="title">RemoveChild</span><span class="params">(Component component)</span> </span>&#123; <span class="keyword">return</span>; &#125; <span class="comment">//不需要實作</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> override Component <span class="title">GetChild</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123; <span class="keyword">return</span> null; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>這樣以後如果要新增藥水的話，也只需要再使用I_HpItem介面做一個藥水，而不用改Character內的程式碼<br>而且這樣的好處也有可以將公式與角色分離，看起來也不會那麼凌亂</p>
-<p>最後，使用起來像這樣</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Start</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">        Character p1 = <span class="keyword">new</span> Character();</span><br><span class="line">        </span><br><span class="line">        p1.UseItem(<span class="keyword">new</span> RedWater(p1.ChacaterLevel));</span><br><span class="line">        p1.ChacaterLevel = <span class="number">2</span>;</span><br><span class="line">        p1.UseItem(<span class="keyword">new</span> RedWater(p1.ChacaterLevel));</span><br><span class="line"></span><br><span class="line">        p1.UseItem(<span class="keyword">new</span> ToxinWater(p1.ChacaterLevel));</span><br><span class="line">        p1.UseItem(<span class="keyword">new</span> ToxinWater(p1.ChacaterLevel));</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> :</span> MonoBehaviour &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Start</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        Composite root = <span class="keyword">new</span> Composite(<span class="string">"RootGameObject"</span>);</span><br><span class="line"></span><br><span class="line">        Leaf left1 = <span class="keyword">new</span> Leaf(<span class="string">"A"</span>);</span><br><span class="line">        Leaf left2 = <span class="keyword">new</span> Leaf(<span class="string">"B"</span>);</span><br><span class="line">        Composite gameObject1 = <span class="keyword">new</span> Composite(<span class="string">"GameObject1"</span>);</span><br><span class="line"></span><br><span class="line">        root.AddChild(left1);</span><br><span class="line">        root.AddChild(gameObject1);</span><br><span class="line">        root.AddChild(left2);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        Leaf child1 = <span class="keyword">new</span> Leaf(<span class="string">"C"</span>);</span><br><span class="line">        Leaf child2 = <span class="keyword">new</span> Leaf(<span class="string">"D"</span>);</span><br><span class="line">        gameObject1.AddChild(child1);</span><br><span class="line">        gameObject1.AddChild(child2);</span><br><span class="line">        </span><br><span class="line">        Debug.Log(root.GetChild(<span class="number">0</span>).GetChild(<span class="number">0</span>).name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>當使用策略模式的時候，如果下次企劃跟你說要修改毒藥水為扣 玩家等級 x 30的血，就不用去修改原始的藥水數值<br>直接新增一個 [  ToxinWater_MinusDouble ]</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ToxinWater_MinusDouble</span> :</span> I_HpItem</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> level;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ToxinWater</span><span class="params">(<span class="keyword">int</span> _level)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        level = _level;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">HpControl</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-30</span> * level;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>然後在Main那邊就多了一個雙倍毒藥水可以用了，下次當企劃又覺得雙倍毒藥有點太難了，改回原始的好了，就可以直接使用原本的毒藥水了，就不用去修改毒藥水的扣血方式了！</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Start</span><span class="params">()</span></span></span><br><span class="line"><span class="function"> </span>&#123;</span><br><span class="line">        Character p1 = <span class="keyword">new</span> Character();</span><br><span class="line">        </span><br><span class="line">        p1.ChacaterLevel = <span class="number">2</span>;</span><br><span class="line">        p1.UseItem(<span class="keyword">new</span> ToxinWater_MinusDouble(p1.ChacaterLevel));</span><br><span class="line">        p1.UseItem(<span class="keyword">new</span> ToxinWater(p1.ChacaterLevel));</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -564,8 +541,6 @@
           
             <a href="/tags/設計模式/" rel="tag"><i class="fa fa-tag"></i> 設計模式</a>
           
-            <a href="/tags/策略模式/" rel="tag"><i class="fa fa-tag"></i> 策略模式</a>
-          
         </div>
       
 
@@ -577,8 +552,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/【設計模式】抽象工廠/" rel="next" title="【設計模式】抽象工廠">
-                <i class="fa fa-chevron-left"></i> 【設計模式】抽象工廠
+              <a href="/design-pattern-flyweight/" rel="next" title="【設計模式】享元模式 - 共享物件">
+                <i class="fa fa-chevron-left"></i> 【設計模式】享元模式 - 共享物件
               </a>
             
           </div>
@@ -587,8 +562,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/Jenkins!自動建置Unity專案-環境準備/" rel="prev" title="Jenkins!自動建置Unity專案-環境準備">
-                Jenkins!自動建置Unity專案-環境準備 <i class="fa fa-chevron-right"></i>
+              <a href="/unity-webgl-jslib-android/" rel="prev" title="Unity WebGL通過jslibPlugin與android溝通">
+                Unity WebGL通過jslibPlugin與android溝通 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -765,7 +740,7 @@
                   
                     
                   
-                  <a href="https://github.com/unoniceday" title="GitHub &rarr; https://github.com/unoniceday" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  <a href="https://github.com/unoniceday" title="GitHub &rarr; https://github.com/unoniceday" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
                 </span>
               
                 <span class="links-of-author-item">
@@ -776,7 +751,7 @@
                   
                     
                   
-                  <a href="mailto:uno.niceday@gmail.com" title="E-Mail &rarr; mailto:uno.niceday@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  <a href="mailto:uno.niceday@gmail.com" title="E-Mail &rarr; mailto:uno.niceday@gmail.com" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
                 </span>
               
             </div>
@@ -805,7 +780,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#定義"><span class="nav-number">1.</span> <span class="nav-text">定義</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UML圖"><span class="nav-number">2.</span> <span class="nav-text">UML圖</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#應用場合"><span class="nav-number">3.</span> <span class="nav-text">應用場合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Component-抽象組件"><span class="nav-number">3.1.</span> <span class="nav-text">Component 抽象組件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Composite-容器組件"><span class="nav-number">3.2.</span> <span class="nav-text">Composite 容器組件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#葉子組件-Left"><span class="nav-number">3.3.</span> <span class="nav-text">葉子組件 Left</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">3.4.</span> <span class="nav-text">使用</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -826,7 +801,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -847,54 +822,20 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="所需總閱讀時間">26 分鐘</span>
+    <span title="所需總閱讀時間">53 分鐘</span>
   
 </div>
 
 
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v3.9.0</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主題 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.2.0</div>
 
 
 
 
-<span id="busuanzi_container_site_uv">本站訪問次數：<span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-</span>
+
+
+
 
         
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-  
-    <span class="post-meta-item-icon">
-      <i class="fa fa-user"></i>
-    </span>
-    <span class="site-uv" title="訪客總數">
-      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-    </span>
-  
-
-  
-    <span class="post-meta-divider">|</span>
-  
-
-  
-    <span class="post-meta-item-icon">
-      <i class="fa fa-eye"></i>
-    </span>
-    <span class="site-pv" title="總瀏覽次數">
-      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-    </span>
-  
-</div>
-
 
 
 
@@ -1017,9 +958,9 @@
 
 <script>
   var disqus_config = function() {
-    this.page.url = "http://unoniceday.github.io/【設計模式】策略模式/";
-    this.page.identifier = "【設計模式】策略模式/";
-    this.page.title = '【設計模式】策略模式';
+    this.page.url = "http://unoniceday.github.io/design-pattern-composite/";
+    this.page.identifier = "design-pattern-composite/";
+    this.page.title = '【設計模式】組合模式';
     };
   function loadComments() {
     var d = document, s = d.createElement('script');
@@ -1367,6 +1308,102 @@
   
 
   
+  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
+  
+  <script>
+    (function () {
+
+      firebase.initializeApp({
+        apiKey: 'AIzaSyBo3mlO53-PVLxdUZ6-XsICPJewLu6su7Q',
+        projectId: 'unowebpage'
+      })
+
+      function getCount(doc, increaseCount) {
+        //increaseCount will be false when not in article page
+
+        return doc.get().then(function (d) {
+          var count
+          if (!d.exists) { //has no data, initialize count
+            if (increaseCount) {
+              doc.set({
+                count: 1
+              })
+              count = 1
+            }
+            else {
+              count = 0
+            }
+          }
+          else { //has data
+            count = d.data().count
+            if (increaseCount) {
+              if (!(window.localStorage && window.localStorage.getItem(title))) { //if first view this article
+                doc.set({ //increase count
+                  count: count + 1
+                })
+                count++
+              }
+            }
+          }
+          if (window.localStorage && increaseCount) { //mark as visited
+            localStorage.setItem(title, true)
+          }
+
+          return count
+        })
+      }
+
+      function appendCountTo(el) {
+        return function (count) {
+          $(el).append(
+            $('<span>').addClass('post-visitors-count').append(
+              $('<span>').addClass('post-meta-divider').text('|')
+            ).append(
+              $('<span>').addClass('post-meta-item-icon').append(
+                $('<i>').addClass('fa fa-users')
+              )
+              ).append($('<span>').text('閱讀次數 ' + count))
+          )
+        }
+      }
+
+      var db = firebase.firestore()
+      var articles = db.collection('articles')
+
+      //https://hexo.io/docs/variables.html
+      var isPost = '【設計模式】組合模式'.length > 0
+      var isArchive = '' === 'true'
+      var isCategory = ''.length > 0
+      var isTag = ''.length > 0
+
+      if (isPost) { //is article page
+        var title = '【設計模式】組合模式'
+        var doc = articles.doc(title)
+
+        getCount(doc, true).then(appendCountTo($('.post-meta')))
+      }
+      else if (!isArchive && !isCategory && !isTag) { //is index page
+        var titles = [] //array to titles
+
+        var postsstr = '' //if you have a better way to get titles of posts, please change it
+        eval(postsstr)
+
+        var promises = titles.map(function (title) {
+          return articles.doc(title)
+        }).map(function (doc) {
+          return getCount(doc)
+        })
+        Promise.all(promises).then(function (counts) {
+          var metas = $('.post-meta')
+          counts.forEach(function (val, idx) {
+            appendCountTo(metas[idx])(val)
+          })
+        })
+      }
+    })()
+  </script>
+
 
   
 
@@ -1387,6 +1424,47 @@
   
 
   
+<script>
+  $('.highlight').not('.gist .highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('複製').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      const selection = document.getSelection();
+      const selected = selection.rangeCount > 0 ? selection.getRangeAt(0) : false;
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+        if (result) $(this).text('複製成功');
+        else $(this).text('複製失敗');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+      if (selected) {
+        selection.removeAllRanges();
+        selection.addRange(selected);
+      }
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('複製');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
 
   
 
