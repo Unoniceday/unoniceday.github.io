@@ -267,8 +267,8 @@
       </categories>
       <tags>
         <tag>Unity</tag>
-        <tag>測試</tag>
         <tag>JobSystem</tag>
+        <tag>測試</tag>
       </tags>
   </entry>
   <entry>
@@ -648,6 +648,728 @@ https://jenkins.io/zh/download/
       </categories>
       <tags>
         <tag>markdown</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Unity】Timeout while trying to pause the Unity Engine</title>
+    <url>/timeout-while-trying-to-pause-the-Unity-Engine/</url>
+    <content><![CDATA[<p>這個BUG其實也不知道從何說起，這篇是默認看的人已經知道android跟java那些知識了，細節就不加以詳述了，因為大多都是以自己的理解去解釋，沒追證過，如果理解有誤還麻煩告知我XD</p>
+<a id="more"></a>
+
+<p>引發這個的可能性有很多，這裡只談到我遇到的這一種</p>
+<p>當視窗沒有失焦，然後你可能使用了任何一個改變視窗的function((像是投影到電腦))，在這之後，如果單純觸發了activity的onPause方法，沒有讓onWindowChangeFocus一起被觸發的話，在onResume的時候，unity就會當掉了，這時候如果又要onPause Unity的話就會出現</p>
+<p>Timeout while trying to pause the Unity Engine. </p>
+<p>這裡是我解這bug幾天的心得，可能跟事實不一定完全相同，知識點可能也有誤，可以看看就好。</p>
+<p>Unity內有許多系統的function ，其中有個 OnApplicationPause 跟 onApplicationfocus</p>
+<p>官方連結:<br><a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnApplicationPause.html" rel="external nofollow noopener noreferrer" target="_blank">https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnApplicationPause.html</a><br><a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnApplicationFocus.html" rel="external nofollow noopener noreferrer" target="_blank">https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnApplicationFocus.html</a></p>
+<p>OnApplicationFocus他是在UnityPlayerActivity內的 onWindowChangeFocus上觸發的，((如果我沒記錯的話))，然後OnApplicationPause也是UnityPlayerActivity內的 onPause 去觸發的</p>
+<p>其中onWindowChangeFocus這個很重要，他是在<b>渲染完成</b>的時候調用的</p>
+<p><b>所以當現在你的螢幕視窗被改變了，像是miracast到電腦，如果你沒觸發mUnityPlayer.windowChangeFocus讓unity去改變底層的東西，就直接pause他並resume的話就會出現問題，所以疑似在pause之前(或之後?) 必須call [mUnityPlayer.windowChangeFocus ] </b> </p>
+]]></content>
+      <categories>
+        <category>Bug</category>
+      </categories>
+      <tags>
+        <tag>Unity</tag>
+        <tag>Timeout</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Unity】製作AndroidPlugin的重點與可能遇到的坑</title>
+    <url>/unity-android-plugin-problem/</url>
+    <content><![CDATA[<p>有時候使用unity的時候會想要更改或使用到android內建的東西，像是android的鍵盤、android的通知欄(Toast)</p>
+<p>這個時候單單使用unity能做到的事是有限的，所以必須使用android的plugin才能解決這類的問題</p>
+<p>PluginsForAndroid 官方這邊就可以看到了</p>
+<p><a href="https://docs.unity3d.com/Manual/PluginsForAndroid.html" rel="external nofollow noopener noreferrer" target="_blank">https://docs.unity3d.com/Manual/PluginsForAndroid.html</a></p>
+<a id="more"></a>
+
+
+
+<h4 id="android-plugin-的兩種格式"><a href="#android-plugin-的兩種格式" class="headerlink" title="android plugin 的兩種格式"></a>android plugin 的兩種格式</h4><p>一個是用jar檔一個是aar檔，兩個都可以在unity內使用</p>
+<p>兩者區別是：</p>
+<p>jar檔只包含純code的模式，以下示意圖，每個jar檔可能都不一樣，當然還包含一些目錄的文件夾</p>
+<p><a href="https://4.bp.blogspot.com/-ZZ1P7fOuroc/We3sddyl8oI/AAAAAAAAApo/QopN6A6i7AQxv3nSeBhEbBtFcbBdY2waQCLcBGAs/s1600/%E7%B4%94CODEpng.png" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://4.bp.blogspot.com/-ZZ1P7fOuroc/We3sddyl8oI/AAAAAAAAApo/QopN6A6i7AQxv3nSeBhEbBtFcbBdY2waQCLcBGAs/s400/%25E7%25B4%2594CODEpng.png" alt="img"></a></p>
+<p>aar檔則是有包含布局阿、圖檔阿…等這個plugin用到的資源，看起來像這樣</p>
+<p><a href="https://3.bp.blogspot.com/-QVnQ0xeZ_EE/We3r7Dyk8UI/AAAAAAAAApc/XRdVW-wdLroJjSN97_0Kosg3NQETSu7QwCLcBGAs/s1600/aar%E6%AA%94%E6%A1%88.png" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://3.bp.blogspot.com/-QVnQ0xeZ_EE/We3r7Dyk8UI/AAAAAAAAApc/XRdVW-wdLroJjSN97_0Kosg3NQETSu7QwCLcBGAs/s320/aar%25E6%25AA%2594%25E6%25A1%2588.png" alt="img"></a></p>
+<p>Unity官方則是推薦使用aar來當作plugin使用</p>
+<p>製作android plugin的文章已經很多了，這邊講一下比較重要跟比較容易遇坑的幾點</p>
+<h4 id="導入classes-UNITY內的"><a href="#導入classes-UNITY內的" class="headerlink" title="導入classes (UNITY內的)"></a><strong>導入classes (UNITY內的)</strong></h4><p>**<br>**unity有提供一個jar檔作為android 與 unity的橋樑，</p>
+<p>大致路徑是C:\Program Files\Unity\Editor\Data\PlaybackEngines\AndroidPlayer\Variations\mono\Release\Classes</p>
+<p>ps.如果最後輸出的是aar檔，最後要將aar檔內的libs/classes.jar刪除，以免與unity重複打包</p>
+<h4 id="app資料夾內build-gradle內"><a href="#app資料夾內build-gradle內" class="headerlink" title="app資料夾內build.gradle內"></a><strong>app資料夾內build.gradle內</strong></h4><p>**<br>**1. apply plugin: ‘com.android.application’改成apply plugin: ‘com.android.library’ //因為是要當成plugin使用，所以要將application改成library，不然會輸出成apk</p>
+<p>\2. applicationId “com.xx.xxxxx” //這一行刪除</p>
+<p>\3. dependencies內新增compile files(‘libs/classes.jar’) //後面這個路徑是unity plugin接入的路徑跟檔名</p>
+<p>\4. minSdkVersion 21 對應到 unity BuildSetting內的MinimumAPI LEVEL (下面有)</p>
+<h4 id="AndroidManifest"><a href="#AndroidManifest" class="headerlink" title="AndroidManifest"></a><strong>AndroidManifest</strong></h4><p>這個是一個xml檔案，用來指向unity連接android的入口與一些app屬性的操作，像是</p>
+<p>裡面比較重要的是packgeName ，unity BuildSetting內的packgeName要跟AndroidManifest內的packgeName一樣，minSdkVersion 也必須跟BuildSetting內MinimumAPI Level一樣 (見下圖)</p>
+<p><a href="http://1.bp.blogspot.com/-38fN_9364QU/We4HziZWPcI/AAAAAAAAAqM/OAQsUGqXCSIsfngvTAaMEHohTL7hG0AcQCK4BGAYYCw/s1600/UNITYASS.png" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://1.bp.blogspot.com/-38fN_9364QU/We4HziZWPcI/AAAAAAAAAqM/OAQsUGqXCSIsfngvTAaMEHohTL7hG0AcQCK4BGAYYCw/s400/UNITYASS.png" alt="img"></a></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&lt;meta-data android:name=<span class="string">"unityplayer.UnityActivity"</span> android:value=<span class="string">"true"</span>/&gt;</span><br></pre></td></tr></table></figure>
+
+<p>放在下面 上面</p>
+<p>完整版：</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span>?&gt;</span><br><span class="line">&lt;manifest xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    package=<span class="string">"com.u2a.testconnect"</span> &gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;application</span><br><span class="line">     </span><br><span class="line">      android:label=<span class="string">"@string/app_name"</span>  <span class="comment">// 如果你打沒這行，你在unity build出來的app名字會跟你在productName設定的不相符</span></span><br><span class="line">      android:theme=<span class="string">"@android:style/Theme.NoTitleBar"</span>&gt;</span><br><span class="line">    &lt;activity android:name=<span class="string">"com.u2a.testconnect.MainActivity"</span>&gt;</span><br><span class="line">      &lt;intent-filter&gt;</span><br><span class="line">        &lt;action android:name=<span class="string">"android.intent.action.MAIN"</span> /&gt;</span><br><span class="line"></span><br><span class="line">        &lt;category android:name=<span class="string">"android.intent.category.LAUNCHER"</span> /&gt;</span><br><span class="line">      &lt;/intent-filter&gt;</span><br><span class="line">      &lt;meta-data android:name=<span class="string">"unityplayer.UnityActivity"</span> android:<span class="keyword">value</span>=<span class="string">"true"</span> /&gt;</span><br><span class="line">    &lt;/activity&gt;</span><br><span class="line"></span><br><span class="line">  &lt;/application&gt;</span><br><span class="line"></span><br><span class="line">&lt;/manifest&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="如果製作jar檔，可能會遇到的坑"><a href="#如果製作jar檔，可能會遇到的坑" class="headerlink" title="如果製作jar檔，可能會遇到的坑"></a>如果製作jar檔，可能會遇到的坑</h4><p>上面一經贅述了很多，至於怎麼製作jar檔，參考連結應該會有，筆者爬了很多製作jar檔的方式，發現有個小坑，會讓你按export jar之後，資料夾與jar檔都沒出現在目錄上</p>
+<p><a href="http://3.bp.blogspot.com/-XqabUS3ssp4/We33ktU5ktI/AAAAAAAAAp8/k2fJLHFcPGoL6x6vXwccommyK4FI9eW2ACK4BGAYYCw/s1600/XAS.png" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://3.bp.blogspot.com/-XqabUS3ssp4/We33ktU5ktI/AAAAAAAAAp8/k2fJLHFcPGoL6x6vXwccommyK4FI9eW2ACK4BGAYYCw/s640/XAS.png" alt="img"></a></p>
+<p>對，就是gradle的版本，默認情況下會使用2.3.3版本，可是這樣照著網路上的資料來做的話，並不會出現想要的jar檔，我是改成2.2.3之後重build一次才出現jar檔的。</p>
+<p>Extra： ((由於不多，所以不想多占一篇))</p>
+<p>接上unity的plugin後，通常都會在MainActivity繼承UnityPlayerActivity (( 當然其他的Activity也可以，但是記得AndroidMainfest上的入口要修改為你用UnityPlayerActivity的那個 ))，那這時已經建立連接口了，創建其他Activity的時候就不用再import UnityPlayerActivity了，除非有特殊需求，而如果要在unity內讀取其他Activity的話，則只需要使用AndroidJavaClass來指定讀取的路徑就可以了，像是我的packgeName為com.u2a.testconnect，第二個Activity 叫做SecondActivity，裡面有個靜態方GetSecondActivityNumber，回傳一個int，則會寫成這樣</p>
+<p>Code:</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> Text log;</span><br><span class="line"><span class="keyword">int</span> secondActivityNum = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">OnGUI</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">      </span><br><span class="line">    <span class="keyword">if</span> (GUI.Button(<span class="keyword">new</span> Rect(<span class="number">50</span>, <span class="number">500</span>, <span class="number">200</span>, <span class="number">100</span>), <span class="string">"呼叫 SecondActivity的GetNumber"</span>))</span><br><span class="line">    &#123;</span><br><span class="line">           </span><br><span class="line">        <span class="keyword">using</span> ( AndroidJavaClass unity = <span class="keyword">new</span> AndroidJavaClass(<span class="string">"com.u2a.testconnect.SecondActivity"</span>)) <span class="comment">//找出packge內的SecondActivity類別</span></span><br><span class="line">        &#123;</span><br><span class="line">            secondActivityNum =   unity.CallStatic&lt;<span class="keyword">int</span>&gt;(<span class="string">"GetSecondActivityNumber"</span>);</span><br><span class="line">            ShowSecondActivityNum();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ShowSecondActivityNum</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    log.text = <span class="string">"顯示的數字(預設0) :"</span>+secondActivityNum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>關於<code>``UnityPlayer.UnitySendMessage 看一下文件使用方法就知道了，這邊就不再多說。</code></p>
+<p>成品：<a href="https://drive.google.com/file/d/0Bw5k_cD7U5w7azNxM0JUVDFwcHc/view?usp=sharing" rel="external nofollow noopener noreferrer" target="_blank">GOOGLE雲端</a></p>
+<p>如果上述文章有任何疑問或錯誤理解，請留言告知我，感謝。</p>
+<hr>
+<p>參考資料與延伸閱讀：</p>
+<p>Android Activity與 UnityPlayer Activity</p>
+<p><a href="http://eppz.eu/blog/unity-android-plugin-tutorial-1/" rel="external nofollow noopener noreferrer" target="_blank">http://eppz.eu/blog/unity-android-plugin-tutorial-1/</a></p>
+<p>Android和Unity混合开发——Activity和Unity脚本交互和信息传递</p>
+<p><a href="http://www.jianshu.com/p/a7d82b3ac0c4" rel="external nofollow noopener noreferrer" target="_blank">http://www.jianshu.com/p/a7d82b3ac0c4</a></p>
+<p>Android studio中如何生成引用 .aar 和 .jar</p>
+<p><a href="http://www.jianshu.com/p/76559da9ab39" rel="external nofollow noopener noreferrer" target="_blank">http://www.jianshu.com/p/76559da9ab39</a></p>
+<p>Android Studio导出并使用aar和jar</p>
+<p><a href="http://chiahaolu.github.io/2016/06/27/Android-Studio%E5%AF%BC%E5%87%BA%E5%B9%B6%E4%BD%BF%E7%94%A8aar%E5%92%8Cjar/" rel="external nofollow noopener noreferrer" target="_blank">http://chiahaolu.github.io/2016/06/27/Android-Studio%E5%AF%BC%E5%87%BA%E5%B9%B6%E4%BD%BF%E7%94%A8aar%E5%92%8Cjar/</a></p>
+<p>Android Studio 打包及引用 aar</p>
+<p><a href="http://www.androidchina.net/2467.html" rel="external nofollow noopener noreferrer" target="_blank">http://www.androidchina.net/2467.html</a></p>
+]]></content>
+      <categories>
+        <category>Unity</category>
+      </categories>
+      <tags>
+        <tag>Unity</tag>
+        <tag>Android</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【演算法實作筆記】二分搜尋法 C#實作in Unity</title>
+    <url>/algorithm-binary-search/</url>
+    <content><![CDATA[<p>用以搜尋<strong>已排序</strong>的一串資料，由小排到大</p>
+<p>輸入：正整數n</p>
+<p>輸出 ：n在S中的位置</p>
+<p>原理</p>
+<p>輸入值與S陣列的中間值比大小</p>
+<p>當輸入值比較大時，接下來只需要判斷S陣列中間值的右邊那一串陣列即可</p>
+<p>反之亦然。</p>
+<a id="more"></a>
+
+
+
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">BinarySearch_</span> : <span class="title">MonoBehaviour</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> middle;</span><br><span class="line">    <span class="keyword">int</span>[] hi = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">5</span>]&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        middle = Location (hi, <span class="number">0</span>, <span class="number">5</span>, <span class="number">3</span>);</span><br><span class="line">        binarysearch (hi, <span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//遞迴版 二元搜尋</span></span><br><span class="line">    <span class="comment">//遞迴呼叫時如果不改變質卻傳進去會消耗很多變數的地址</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">Location</span>(<span class="params"><span class="keyword">int</span>[] data,<span class="keyword">int</span> low , <span class="keyword">int</span> high,<span class="keyword">int</span> search</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> mid;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (low &gt; high)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            mid = (low + high) / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (search == data [mid])</span><br><span class="line">                <span class="keyword">return</span> mid;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (search &lt;= data [mid])</span><br><span class="line">                <span class="keyword">return</span> Location (data, low, mid - <span class="number">1</span>, search);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="keyword">return</span> Location (data, mid + <span class="number">1</span>, high,search);</span><br><span class="line">                </span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//普通版</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">binarysearch</span>(<span class="params"><span class="keyword">int</span>[] data,<span class="keyword">int</span> search</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">int</span> low = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> high = data.Length;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (low &lt;= high) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (low+high) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (data [mid] == search) &#123;</span><br><span class="line">                Debug.Log (<span class="string">"key"</span> + mid);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (data [mid] &gt; search) &#123;</span><br><span class="line">                high = mid - <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (data [mid] &lt; search) &#123;</span><br><span class="line">                low = mid + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Algorithm</category>
+      </categories>
+      <tags>
+        <tag>Unity</tag>
+        <tag>Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【C#】讀書會簡報</title>
+    <url>/csharp-learning-doc/</url>
+    <content><![CDATA[<p>由於前一陣子有朋友幾個人開讀書會複習<br>做了挺多個的<br>用完擺著不看也是浪費<br>所以就分享出來啦~<br>有錯的煩請下面留言說一下<br>一起學習~</p>
+<a id="more"></a>
+
+<p><a href="https://docs.google.com/presentation/d/13jqBAfeGTBh-NkLyWUe0OIfxS6lSDV0gCHOUQRj44YY/edit" rel="external nofollow noopener noreferrer" target="_blank">類別、封裝</a></p>
+<p><a href="https://docs.google.com/presentation/d/15zsBkyatwpMkKDX4zlV4iGXNpOxjvsu8WhPgEEAW45Y/edit" rel="external nofollow noopener noreferrer" target="_blank">多載、屬性</a></p>
+<p><a href="https://docs.google.com/presentation/d/1ZUe4nsGe5s3ZnmugpXSJ7aSYFc8TukDLJZTiuu3GIV0/edit" rel="external nofollow noopener noreferrer" target="_blank">匿名委派、Lambda</a></p>
+<p><a href="https://docs.google.com/presentation/d/1VVlCO2a1eMPMBPW1qyXkhi4_LwcbPApOXhp6QHbH574/edit" rel="external nofollow noopener noreferrer" target="_blank">執行序</a></p>
+<p><a href="https://docs.google.com/presentation/d/1tCJtmRai86k1Bri3d60_qIMHjesw_S90Xq-3a-Hrmis/edit" rel="external nofollow noopener noreferrer" target="_blank">LinQ</a></p>
+]]></content>
+      <categories>
+        <category>C#</category>
+      </categories>
+      <tags>
+        <tag>C#</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Unity】xml文件讀取</title>
+    <url>/unity-read-xml/</url>
+    <content><![CDATA[<p>之前做了一個用csv存取對話讀檔的系統，但是最近要用到大量的事件表<br>發現用csv會一大堆空格，不夠彈性，所以又跑回去以前不怎麼喜歡的xml格式<br>一開始想說xml好麻煩還要學，才跑去用csv比較直覺的<br>結果最近幾天看才發現，嗯?! 完全不會到入門其實蠻短的</p>
+<a id="more"></a>
+<p>這是一份簡單的xml檔</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">DailyEvent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Day</span> <span class="attr">id</span>=<span class="string">"1"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Event</span>&gt;</span></span><br><span class="line">            event1</span><br><span class="line">        <span class="tag">&lt;/<span class="name">Event</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Dialog</span>&gt;</span></span><br><span class="line">            "第一天"</span><br><span class="line">        <span class="tag">&lt;/<span class="name">Dialog</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">Day</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Day</span> <span class="attr">id</span>=<span class="string">"2"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Event</span>&gt;</span></span><br><span class="line">            event2</span><br><span class="line">        <span class="tag">&lt;/<span class="name">Event</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Dialog</span>&gt;</span></span><br><span class="line">            "第二天"</span><br><span class="line">        <span class="tag">&lt;/<span class="name">Dialog</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">Day</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">DailyEvent</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>從外到內分別為</p>
+<h1 id="宣告xml的資訊"><a href="#宣告xml的資訊" class="headerlink" title="宣告xml的資訊"></a>宣告xml的資訊</h1><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>通常出現在XML文件的第一行，可寫可不寫<br>如果宣告了，version是必要寫上去的，然後後面的encoding則是選填<br>宣告了之後就可識別使用哪個編碼來代表文件中的字元了<br>像是使用日文編碼就是↓</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="Shift-JIS"?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="先進後出"><a href="#先進後出" class="headerlink" title="先進後出"></a>先進後出</h1><p>格式很像html那樣的寫法<br>基本上就是&lt; &gt;跟&lt;/ &gt; 成雙成對出現<br>並且回文，意思就是先進後出，先寫的&lt; &gt;，最後再用&lt;/ &gt;把它封起來<br>像上面的 &lt; DailyEvent&gt; 一開始就寫了，如果裡面還要用別的&lt;&gt;就先擱著，如果沒有其他要寫的標籤，就可以封起來了<br>用文字表達就是 </p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">1</span>&gt;</span> <span class="tag">&lt;<span class="name">2</span>&gt;</span> <span class="tag">&lt;/<span class="name">2</span>&gt;</span><span class="tag">&lt;/<span class="name">1</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>的感覺</p>
+<h1 id="樹狀結構"><a href="#樹狀結構" class="headerlink" title="樹狀結構"></a>樹狀結構</h1><p>就跟樹一樣，只會有一個Root(父節點)，指的就是上面範例的DailyEvent<br>不會有其他的Root了，然後再用這個Root去往下延伸<br>上面範例的第一個子節點是</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Day</span> <span class="attr">id</span>=<span class="string">"1"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>同階層的另外一個子節點就是</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Day</span> <span class="attr">id</span>=<span class="string">"2"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>而這兩個子節點又分別有兩個子節點</p>
+<p>那資料就是可以儲存在某個節點的 &lt;&gt; 與 &lt;/&gt; 中間那段空白，就像上面寫的第一天，第二天那樣</p>
+<h1 id="屬性"><a href="#屬性" class="headerlink" title="屬性"></a>屬性</h1><p>&lt;&gt;內可以填屬性，像是</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Day</span> <span class="attr">id</span>=<span class="string">"1"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>id=”1”，就是他的屬性，在unity內等等會用到</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> System.Xml.Linq;</span><br><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReadXML</span> :</span> MonoBehaviour &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> id;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> eventContent;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> DialogContent;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span> <span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        var AllDays = XDocument.Load(<span class="string">"Assets/DailyEvent_1.xml"</span>).Element(<span class="string">"DailyEvent"</span>).Elements(<span class="string">"Day"</span>);</span><br><span class="line"></span><br><span class="line">        foreach (var day in AllDays)</span><br><span class="line">        &#123;</span><br><span class="line">            id            = day.Attribute(<span class="string">"id"</span>).Value.Trim();<span class="comment">// 屬性</span></span><br><span class="line">            eventContent  = day.Element(<span class="string">"Event"</span>).Value.Trim();  <span class="comment">// 內容                      </span></span><br><span class="line">            DialogContent = day.Element(<span class="string">"Dialog"</span>).Value.Trim(); <span class="comment">//也是內容</span></span><br><span class="line"></span><br><span class="line">            Debug.Log(<span class="string">"day ID = "</span> + id);</span><br><span class="line">            Debug.Log(<span class="string">"eventContent"</span> + eventContent);</span><br><span class="line">            Debug.Log(<span class="string">"DialogContent"</span> + DialogContent);</span><br><span class="line">          </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在Unity要讀取到xml檔案有兩種方法</p>
+<p>一種是以前的XmlDocument<br>因為我用的不是這種的，所以這邊就先跳過了<br>有興趣的參考以下網頁</p>
+<p>XML的簡單讀取與寫入<br>XML檔案基本操作-XmlDocument</p>
+<p>第二種是比較新的XDocuments<br>可以用比較直覺地去讀取xml中的資料</p>
+<p>要使用前先加入標頭檔</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Xml.Linq;</span><br></pre></td></tr></table></figure>
+
+<p>接下來就是開起xml檔了<br>先把輸入好的xml丟到unity內的Asset資料夾裡面，我是直接丟外面，當然也可以創建資料夾放到裡面，以下示範直接丟在外面的方式</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">XDocument AllDays = XDocument.Load(<span class="string">"Assets/DailyEvent_1.xml"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>那讀取完之後就是拿取裡面資料了<br>首先要先獲得它的節點<br>獲取節點有兩種方法<br>一種是你有很多個節點，使用的就是<br>根節點.Elements(“XXXX”);<br>另外一種就是只有單一節點<br>根節點.Element(“XXXX”);<br>基本上兩種方法就可以獲取到不同深度的節點了</p>
+<p>拿取節點後要獲取內容的話就在後面.value就能拿到&lt;與 &gt;之間的值了</p>
+<p>拿取根節點的時候有比較步驟的方法，以下兩行都是相等的</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">var AllDays = XDocument.Load(<span class="string">"Assets/DailyEvent_1.xml"</span>).Element(<span class="string">"DailyEvent"</span>);</span><br><span class="line">var AllDays = XDocument.Load(<span class="string">"Assets/DailyEvent_1.xml"</span>).Root;</span><br></pre></td></tr></table></figure>
+
+<p>然後還有讀取節點的屬性</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">day.Attribute("id").Value</span><br></pre></td></tr></table></figure>
+
+<p>然後大致上就可以使用啦~ 還蠻直覺的</p>
+]]></content>
+      <categories>
+        <category>Unity</category>
+      </categories>
+      <tags>
+        <tag>Unity</tag>
+        <tag>XML</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【C#】ref與out傳值與傳址</title>
+    <url>/csharp-ref-out/</url>
+    <content><![CDATA[<p>傳值Call by Value 與 傳址 Call by Reference<br>學過c++的一定會遇到<br>傳值與傳址<br>一開始聽到整個<br>wtf 這兩個是尛阿<br>到最近看了一下ref跟out之後才比較了解</p>
+<p>一般資料型別分為兩種<br>一個是實質型別<br>一個是參考型別</p>
+<a id="more"></a>
+
+<h1 id="測試看看"><a href="#測試看看" class="headerlink" title="測試看看"></a>測試看看</h1><p>實質型別就是 int float char…等基礎的型別<br>而他變數記憶體存放的內容是”<strong>值</strong>“所以稱為實”<strong>值</strong>“型別<br>也就是”<strong>傳值</strong>“，當你在使用他的時候<br>他們之間傳遞的方式都是把值copy一份後再傳進去<br>像是以下</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> A=<span class="number">5</span>, B=<span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ChangeValue</span>(<span class="params"><span class="keyword">int</span> a,<span class="keyword">int</span> b</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    a = <span class="number">1</span>;</span><br><span class="line">    b = <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>之後在Start方法內調用</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line">Debug.Log(<span class="string">" A  :"</span> + A + <span class="string">" b :"</span> + B);</span><br><span class="line">ChangeValue(A, B);</span><br><span class="line">Debug.Log(<span class="string">" A  :"</span> + A + <span class="string">" b :"</span> + B);</span><br></pre></td></tr></table></figure>
+
+<p>下圖分別是將AB傳進去前跟傳進去後的結果</p>
+<p><img src="/csharp-ref-out/20200112021027842.png" alt></p>
+<p>可以看到傳進去後<strong>值都沒改變</strong>，這是因為使用的方式只是傳值(call by value)而已<br>意思就是把<strong>“值”複製給對方，而複製完改變的東西並不會影響到本身的值</strong>，因此不會做任何改變</p>
+<p>而下面對照</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line">Car car11 = <span class="keyword">new</span> Car(<span class="string">"car11"</span>);</span><br><span class="line">Car car22 = <span class="keyword">new</span> Car(<span class="string">"car22"</span>);</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ChangeNewCarValue</span>(<span class="params">Car _car11, Car _car22</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    _car11._carName = <span class="string">"ChangeCAR11"</span>;</span><br><span class="line">    _car22._carName = <span class="string">"ChangeCAR22"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>同樣的宣告 同樣的方法 同樣在Start內打上</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line">Debug.Log(<span class="string">" car11 :"</span> + car11._carName + <span class="string">" car22 :"</span> + car22._carName);</span><br><span class="line">ChangeNewCarValue(car11, car22);</span><br><span class="line">Debug.Log(<span class="string">" car11 :"</span> + car11._carName + <span class="string">" car22 :"</span> + car22._carName);</span><br></pre></td></tr></table></figure>
+
+<p>出來的結果則為</p>
+<p><img src="/csharp-ref-out/20200112030733582.png" alt></p>
+<p>結果卻改變了，因此從上<strong>可以推論出來Car是一個傳址Call by Reference</strong><br>意思就是，它<strong>傳遞的不是複製一份出來的值，而是傳遞丟入物件的記憶體位址</strong><br>然後間接透過它來操作物件，跟指標很類似。</p>
+<p>其實在C/C++的時候 正確是有三個名詞的<br>call by value 傳值、call by reference 傳參考、call by address傳址<br>但由於這裡要講的是C#，所以用官方的翻譯來敘述 -&gt;</p>
+<p>如果要詳細了解這三個有什麼差別 可以再去google</p>
+<h1 id="ref、out"><a href="#ref、out" class="headerlink" title="ref、out"></a>ref、out</h1><h2 id="ref-關鍵字"><a href="#ref-關鍵字" class="headerlink" title="ref 關鍵字"></a>ref 關鍵字</h2><p>會導致引數由參考加以傳遞，而非透過值。<br>參考程式碼 ：</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">RefExample</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Method</span>(<span class="params"><span class="keyword">ref</span> <span class="keyword">int</span> i</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="comment">// Rest the mouse pointer over i to verify that it is an int.</span></span><br><span class="line">        <span class="comment">// The following statement would cause a compiler error if i</span></span><br><span class="line">        <span class="comment">// were boxed as an object.</span></span><br><span class="line">        i = i + <span class="number">44</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">int</span> val = <span class="number">1</span>;</span><br><span class="line">        Method(<span class="keyword">ref</span> val);</span><br><span class="line">        Console.WriteLine(val);</span><br><span class="line">        <span class="comment">// Output: 45</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以發現實質類型使用ref關鍵字之後，就會變得像是上面參考類型一樣<br>可以修改傳入的參數了</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class RefExample</span><br><span class="line">&#123;</span><br><span class="line">    static void Method(ref int i)</span><br><span class="line">    &#123;</span><br><span class="line">        // Rest the mouse pointer over i to verify that it is an int.</span><br><span class="line">        // The following statement would cause a compiler error if i</span><br><span class="line">        // were boxed as an object.</span><br><span class="line">        i = i + 44;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    static void Main()</span><br><span class="line">    &#123;</span><br><span class="line">        int val = 1;</span><br><span class="line">        Method(ref val);</span><br><span class="line">        Console.WriteLine(val);</span><br><span class="line">    </span><br><span class="line">        // Output: 45</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那問題來了，參考類型本身傳遞就可以直接修改值了<br>為何還會使用ref關鍵字加到參考型別身上呢?</p>
+<ol>
+<li><strong>明確提示</strong><br>加了之後 不管給別人用還是自己用 都可以知道 傳入的參數是會被改變值得<br>不管傳入實質或參考都一樣</li>
+<li><strong>string的不變性</strong>       <a href="https://www.cnblogs.com/Cwj-XFH/p/4915553.html" rel="external nofollow noopener noreferrer" target="_blank">參考連結</a></li>
+<li><strong>為了修改默認值類型</strong></li>
+</ol>
+<h3 id="ref重點："><a href="#ref重點：" class="headerlink" title="- ref重點："></a>- ref重點：</h3><ol>
+<li>傳遞至 ref 參數的引數，在傳遞之前必須先初始化。</li>
+<li>不能將ref和out用於async修飾詞定義的非同步方法。</li>
+<li>有進有出</li>
+</ol>
+<h2 id="out-關鍵字"><a href="#out-關鍵字" class="headerlink" title="out 關鍵字"></a>out 關鍵字</h2><p>基本上跟ref一樣<br>想要多個回傳值的時候，可以使用out</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">OutReturnExample</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Method</span>(<span class="params"><span class="keyword">out</span> <span class="keyword">int</span> i, <span class="keyword">out</span> <span class="keyword">string</span> s1, <span class="keyword">out</span> <span class="keyword">string</span> s2</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        i = <span class="number">44</span>;</span><br><span class="line">        s1 = <span class="string">"I've been returned"</span>;</span><br><span class="line">        s2 = <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">int</span> <span class="keyword">value</span>;</span><br><span class="line">        <span class="keyword">string</span> str1, str2;</span><br><span class="line">        Method(<span class="keyword">out</span> <span class="keyword">value</span>, <span class="keyword">out</span> str1, <span class="keyword">out</span> str2);</span><br><span class="line">        <span class="comment">// value is now 44</span></span><br><span class="line">        <span class="comment">// str1 is now "I've been returned"</span></span><br><span class="line">        <span class="comment">// str2 is (still) null;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ref跟out在使用上有很微小的差距</p>
+<p>使用out的話，他不需要在被調用前初始化<br>但是調用者需要在返回之前指定輸出的參數</p>
+<p>另一方面，可以用這樣去想<br>out類似於將方法附加返回值，也就是回傳多個值</p>
+]]></content>
+      <categories>
+        <category>C#</category>
+      </categories>
+      <tags>
+        <tag>Unity</tag>
+        <tag>C#</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【演算法實作筆記】合併排序法 C# Unity內使用</title>
+    <url>/algorithm-merge-sort/</url>
+    <content><![CDATA[<p>實作一下最近學的演算法</p>
+<p><a href="https://www.youtube.com/watch?v=TzeBrDU-JaY" rel="external nofollow noopener noreferrer" target="_blank">分條逐步講解 大綱</a></p>
+<p><a href="https://www.youtube.com/watch?annotation_id=annotation_4105982965&feature=iv&list=PLG6ePePp5vvYVEjRanyndt7ZSqTzillom&src_vid=e5ik2UGjHBk&v=2ScKuAH2_vM" rel="external nofollow noopener noreferrer" target="_blank">合併的逐步</a></p>
+<a id="more"></a>
+
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">MergeSort_</span> : <span class="title">MonoBehaviour</span> &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span>[] S = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">8</span>]&#123;<span class="number">10</span>,<span class="number">15</span>,<span class="number">0</span>,<span class="number">4</span>,<span class="number">9</span>,<span class="number">55</span>,<span class="number">70</span>,<span class="number">66</span>&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        MergeSort (<span class="number">8</span>, S);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; S.Length; i++) &#123;</span><br><span class="line">            Debug.Log (S [i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">MergeSort</span>(<span class="params"><span class="keyword">int</span> n, <span class="keyword">int</span>[] data</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">if</span> (n &gt; <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> h = n / <span class="number">2</span> , m= n - h;</span><br><span class="line">            <span class="keyword">int</span>[] left = <span class="keyword">new</span> <span class="keyword">int</span>[h];</span><br><span class="line">            <span class="keyword">int</span>[] right = <span class="keyword">new</span> <span class="keyword">int</span>[m];</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> x = <span class="number">0</span>; x &lt; h; x++) &#123;</span><br><span class="line">                left [x] = data [x];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> y = <span class="number">0</span>; y &lt; m; y++) &#123;</span><br><span class="line">                right [y] = data [h + y];</span><br><span class="line">            &#125;</span><br><span class="line">            MergeSort (h, left);</span><br><span class="line">            MergeSort (m, right);</span><br><span class="line">            Merge (data, left, right);</span><br><span class="line">        &#125; </span><br><span class="line">    </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Merge</span>(<span class="params"><span class="keyword">int</span>[] data, <span class="keyword">int</span>[] left, <span class="keyword">int</span>[] right</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>,k = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (j&lt;left.Length&amp;&amp;k&lt;right.Length) &#123;</span><br><span class="line">        </span><br><span class="line">            <span class="keyword">if</span> (left [j] &lt; right [k]) &#123;</span><br><span class="line">                data [i] = left [j];</span><br><span class="line">                j += <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                data [i] = right [k];</span><br><span class="line">                k += <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            i += <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">if</span> (j == left.Length<span class="number">-1</span>)</span><br><span class="line">            <span class="keyword">while</span> (k &lt; left.Length) </span><br><span class="line">                data [i++] = right [k++];</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">while</span> (j &lt; right.Length) </span><br><span class="line">                data [i++] = left [j++];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Algorithm</category>
+      </categories>
+      <tags>
+        <tag>Unity</tag>
+        <tag>Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Unity】使用動畫曲線 — AnimationCurve</title>
+    <url>/unity-animation-curve/</url>
+    <content><![CDATA[<p>有使用過Unity動畫狀態機的想必會覺得可以隨意新增Key來調整曲線這些功能很方便</p>
+<p>那如果有天我只是想簡單做個事，像是把一張圖片放大，我個人會比較想能少一點東西就少一點東西，因此就可以使用到 AnimationCruve ，跟動畫機一樣可以調整曲線的類別。</p>
+<a id="more"></a>
+
+
+
+<p>關於AnimationCruve 在官方文檔中有詳細說明</p>
+<p><a href="https://docs.unity3d.com/ScriptReference/AnimationCurve.html" rel="external nofollow noopener noreferrer" target="_blank">https://docs.unity3d.com/ScriptReference/AnimationCurve.html</a></p>
+<p>使用的時候就直接在腳本內宣告AnimationCruve</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> AnimationCurve Curve;</span><br></pre></td></tr></table></figure>
+
+<p>在script外看來是這樣</p>
+<p><a href="https://4.bp.blogspot.com/-nLMtYRGYXFM/V_JQr1HTzPI/AAAAAAAAAP4/JewzJI7bI603x2k2h2zQLoV779XUvt4fACLcB/s1600/WAVE.png" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://4.bp.blogspot.com/-nLMtYRGYXFM/V_JQr1HTzPI/AAAAAAAAAP4/JewzJI7bI603x2k2h2zQLoV779XUvt4fACLcB/s320/WAVE.png" alt="img"></a></p>
+<p>夠簡單吧! 點開就能跟Animator一樣的使用了</p>
+<p>點進去後可以操作keyframe，對某個keyframe點右鍵-&gt;editKey…可以設定他的值如下圖</p>
+<p><a href="https://2.bp.blogspot.com/-el8SRpN_GDM/V_JSlXMMcMI/AAAAAAAAAQE/NvSip10GriwU2bE6YEVIDKcOhOWFua7YwCLcB/s1600/CURVE.png" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://2.bp.blogspot.com/-el8SRpN_GDM/V_JSlXMMcMI/AAAAAAAAAQE/NvSip10GriwU2bE6YEVIDKcOhOWFua7YwCLcB/s320/CURVE.png" alt="img"></a></p>
+<p>仔細看會看到上面的value跟time分別是旁邊的y軸跟x軸可以手動輸入比較精準</p>
+<p>那要取出這些值呢，就是使用一個Evaluate方法(<a href="https://docs.unity3d.com/ScriptReference/AnimationCurve.Evaluate.html" rel="external nofollow noopener noreferrer" target="_blank">官方文檔</a>)，該方法就是丟入一個(time)，他會返回一個(value)</p>
+<p>那如果你要讓他像個動畫，想當然就是放在update裡面啦，不然你放在Start裡只會執行一次，也就是只拿到一個對應值而已</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>在這裡使用IEnumerator是因為我不想把放在Update裡面，然後又要每次停留1偵，不然while迴圈執行太快導致你看不清楚他有沒有變化</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="function">IEnumerator <span class="title">PlayAnimation</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">float</span> curveTime = <span class="number">0f</span>; </span><br><span class="line">    <span class="keyword">float</span> curveAmount = Curve.Evaluate (curveTime);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (curveAmount&lt;<span class="number">1.0f</span>) &#123;</span><br><span class="line">        </span><br><span class="line">        curveTime +=Time.deltaTime * Speed;</span><br><span class="line">        curveAmount = Curve.Evaluate (curveTime);</span><br><span class="line"></span><br><span class="line">        transform.localScale = <span class="keyword">new</span> Vector3(curveAmount,curveAmount,curveAmount); <span class="comment">//這裡我是把本身物件大小縮放</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">yield</span> <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>先定義一個curveTime 將他當作曲線的time值(就上面講過的X軸的值)傳入</p>
+<p>並且將curveTime隨時間增加，然後speed是我想比較方便控制他的速度才乘上去的</p>
+<p>curveAmount = Curve.Evaluate (curveTime);這句就是把curveTime去查出對應的value是多少</p>
+<p>之後就可以使用curveAmount來做動畫了，你可以改變物體大小…等很多事情</p>
+<p>最後當然要等待下一偵啦，不然太快會看不到阿~</p>
+<p>完整程式碼：</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">WaveControl</span> : <span class="title">MonoBehaviour</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> AnimationCurve Curve;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">float</span> Speed;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span> (<span class="params"></span>)</span> &#123;</span><br><span class="line">        StartCoroutine (<span class="string">"PlayAnimation"</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">IEnumerator <span class="title">PlayAnimation</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">float</span> curveTime = <span class="number">0f</span>;</span><br><span class="line">        <span class="keyword">float</span> curveAmount = Curve.Evaluate (curveTime);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (curveAmount&lt;<span class="number">1.0f</span>) &#123;</span><br><span class="line">        </span><br><span class="line">            curveTime +=Time.deltaTime * Speed;</span><br><span class="line">            curveAmount = Curve.Evaluate (curveTime);</span><br><span class="line"></span><br><span class="line">            transform.localScale = <span class="keyword">new</span> Vector3(curveAmount,curveAmount,curveAmount);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">yield</span> <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>16/10/5更:<br>忘記IEnumerator不能同時播放了XD<br>最後還是用回Update裡去了QQ</p>
+]]></content>
+      <categories>
+        <category>Unity</category>
+      </categories>
+      <tags>
+        <tag>Unity</tag>
+        <tag>AnimationCurve</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【C#】使用Mathf.Sin與Cos取得圓上點座標</title>
+    <url>/csharp-math-get-vector/</url>
+    <content><![CDATA[<p>最近要使用到算圓，因此想到以前常用的三角函數，sin、cos</p>
+<p>Mathf.sin 官方的api裡面註明了</p>
+<p>Returns the sine of angle f in radians.</p>
+<p>他輸入的是弧度，所以如果想求 圓上某個點的座標，要先把弧度轉換成角度</p>
+<a id="more"></a>
+
+
+
+<p>什麼是弧度呢?</p>
+<p>看下圖應該很明顯了XD</p>
+<p><a href="https://1.bp.blogspot.com/-y7vzlOUYF8I/V0RtHfcVNjI/AAAAAAAAAIM/7XuddVIsjVQ5sUQe8GnAh6zNfYfxMCiqACKgB/s1600/300px-Circle_radians.gif" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://1.bp.blogspot.com/-y7vzlOUYF8I/V0RtHfcVNjI/AAAAAAAAAIM/7XuddVIsjVQ5sUQe8GnAh6zNfYfxMCiqACKgB/s320/300px-Circle_radians.gif" alt="img"></a></p>
+<p>(取自維基百科)</p>
+<p>兩者關係就是</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span>弧度 ＝ <span class="number">360</span>°/<span class="number">2</span>π ≒ <span class="number">57.29</span>° </span><br><span class="line"></span><br><span class="line"><span class="number">1</span>° ＝ <span class="number">2</span>π/<span class="number">360</span>° ≒ <span class="number">0.0174533</span>(弧度)</span><br></pre></td></tr></table></figure>
+
+<p>這是比較公式化的，如果自己去算的話，就是照上面的圖，180°，分成180份</p>
+<p>然後除以長度，就會得出0.017453….</p>
+<p>這樣就知道1度等於0.0174533弧度，假如想求90度的話，就*90就好了</p>
+<p>Mathf裡面已經定義好常數給你使用了</p>
+<p>分別是</p>
+<p>Mathf.Deg2Rad跟Mathf.Rad2Deg</p>
+<p>以下簡單示範一下</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">float</span> angleY = Mathf.Sin(<span class="number">60</span>*Mathf.Deg2Rad);</span><br><span class="line"><span class="keyword">float</span> angleX = Mathf.Cos(<span class="number">60</span>*Mathf.Deg2Rad);</span><br><span class="line">Point1 = <span class="keyword">new</span> Vector2(angleX, angleY);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line">Debug.DrawLine(Vector2.zero, Point1,Color.green);</span><br></pre></td></tr></table></figure>
+
+<p>結果： (( 其他線是測試用，上述代碼出現的是綠色那條))</p>
+<p><a href="https://3.bp.blogspot.com/-BLrVCdTYGzk/V0R6qd6NhXI/AAAAAAAAAIY/f_OdQhMXKK8eHEC1HJpSW-77W8qydEuTQCLcB/s1600/Point.png" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://3.bp.blogspot.com/-BLrVCdTYGzk/V0R6qd6NhXI/AAAAAAAAAIY/f_OdQhMXKK8eHEC1HJpSW-77W8qydEuTQCLcB/s320/Point.png" alt="img"></a></p>
+<p>而使用Sin可以使用拿來移動物體</p>
+<p>使用上像是這樣</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> Vector3 _startPosition;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Start</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    _startPosition = transform.position;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Update</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    transform.position = _startPosition + <span class="keyword">new</span> Vector3(Mathf.Sin(Time.time), <span class="number">0.0f</span>, <span class="number">0.0f</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這樣就會有平滑平滑的感覺啦~</p>
+]]></content>
+      <categories>
+        <category>C#</category>
+      </categories>
+      <tags>
+        <tag>C#</tag>
+        <tag>Math</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Unity】UGUI不規則圖片觸發範圍修改</title>
+    <url>/unity-ugui-alphathreshold/</url>
+    <content><![CDATA[<p>NGUI有boxcollider可以自己調整觸發的範圍</p>
+<p>但UGUI由於不是用boxcollider來觸發的，所以要修改也要有另外個方法</p>
+<p>基本上用雨松的方法就行了–&gt;<a href="http://www.xuanyusong.com/archives/3492" rel="external nofollow noopener noreferrer" target="_blank">連結在此</a></p>
+<p>但找到另外一種方法，可以少寫比較多的代碼，但比較不靈活(?，沒辦法自己控制想要的範圍</p>
+<a id="more"></a>
+
+
+
+<p>首先有這麼一張圖，做成UGUI的按鈕的話，透明的地方也會被觸發到</p>
+<p>而今天我想消除透明的地方，只有有顏色的地方才能觸發</p>
+<p><a href="https://1.bp.blogspot.com/-fhVEd79bJfk/Vueo_rDyySI/AAAAAAAAAG4/KXMRlaeCIJI-ZDQd_Th2m-dhNeI7gy2lw/s1600/coll_ap.png" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://1.bp.blogspot.com/-fhVEd79bJfk/Vueo_rDyySI/AAAAAAAAAG4/KXMRlaeCIJI-ZDQd_Th2m-dhNeI7gy2lw/s200/coll_ap.png" alt="img"></a></p>
+<p>先把匯入的圖檔先調一下，調成可讀可寫的</p>
+<p><a href="https://1.bp.blogspot.com/-9w4iqr3OK_0/VuepHLFhm4I/AAAAAAAAAG8/6FxK8H_Qv0IoNzOh_MxebIcVQfGKemCdg/s1600/alpha.png" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://1.bp.blogspot.com/-9w4iqr3OK_0/VuepHLFhm4I/AAAAAAAAAG8/6FxK8H_Qv0IoNzOh_MxebIcVQfGKemCdg/s200/alpha.png" alt="img"></a></p>
+<p>然後+入一個腳本</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> UnityEngine.UI;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">UGUI_Button_alpha</span> : <span class="title">MonoBehaviour</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Image image;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">float</span> threshold = <span class="number">0.5f</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span> (<span class="params"></span>)</span> &#123;</span><br><span class="line">        image.eventAlphaThreshold = threshold;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>原理其實<a href="http://docs.unity3d.com/460/Documentation/ScriptReference/UI.Image-eventAlphaThreshold.html" rel="external nofollow noopener noreferrer" target="_blank">Unity API</a>裡面寫得很清楚了</p>
+<p>讀取Image的eventAlphaThreshold值，來判斷圖片的Alpha值(所以要把圖片設定為可讀可寫)</p>
+<p>1的話就是總是會通過，調低就會忽略透明度，所以到最後點擊圖片才會響應。</p>
+<p>Image就放你想套用的那張圖片，然後再調一下threshold 到你滿意的值就好</p>
+]]></content>
+      <categories>
+        <category>Unity</category>
+      </categories>
+      <tags>
+        <tag>Unity</tag>
+        <tag>UGUI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Unity】NGUI與UGUI分別如何攔截事件</title>
+    <url>/unity-ngui-ugui-pointer/</url>
+    <content><![CDATA[<p>由於常常會發生點擊了介面，遊戲內的物件也會被觸發的關係</p>
+<p>所以會用到攔截事件，而NGUI的方面比較簡單，只要添加</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (UICamera.isOverUI)</span><br><span class="line">    <span class="keyword">return</span>;</span><br></pre></td></tr></table></figure>
+
+<p>當我們在射線檢測的時候，如果點擊到UI就不會發生反應了</p>
+<a id="more"></a>
+
+
+
+<p>UGUI方面的話則是</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">if</span> IPHONE || ANDROID</span></span><br><span class="line">            <span class="keyword">if</span> (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(<span class="number">0</span>).fingerId))</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">            <span class="keyword">if</span> (EventSystem.current.IsPointerOverGameObject())</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<p>由於要判斷平台，所以比較長</p>
+<p>下面那句則是PC使用的</p>
+]]></content>
+      <categories>
+        <category>Unity</category>
+      </categories>
+      <tags>
+        <tag>Unity</tag>
+        <tag>UGUI</tag>
+        <tag>NGUI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Unity】Loading讀取畫面，百分比緩動</title>
+    <url>/unity-scene-loading/</url>
+    <content><![CDATA[<p><a href="http://www.xuanyusong.com/archives/1427" rel="external nofollow noopener noreferrer" target="_blank">momo的文章</a></p>
+<p>其實momo寫的就非常清楚了</p>
+<p>基本上大家都會異步加載的方式來實現loading畫面</p>
+<p>畢竟遊戲大了，只用loadlevel會lag 卡卡的</p>
+<p>要了解異步，要先了解<a href="http://docs.unity3d.com/ScriptReference/AsyncOperation.html" rel="external nofollow noopener noreferrer" target="_blank">AsyncOperation類別</a></p>
+<p>有四個Variables</p>
+<p>目前要用到的只有兩個</p>
+<p>allowSceneActivation和progress</p>
+<a id="more"></a>
+
+
+
+<p>progress的取值在0.1~1之間，不會等於1</p>
+<p>為了計算百分比，以下會x100來計算</p>
+<p>一般來說，我們都是 A場景到C場景，中間會有個B場景當LOADING畫面</p>
+<p>而通常我們載入一些資源較少的場景，loading會很快，這樣你可能連影都沒看到就跳到下個場景了</p>
+<p>所以allowSceneActivation 就是用來加載完成後，什麼時候你才要讓他跑下個場景</p>
+<p>設為false的話就是永遠不跳到下個場景，直到true才會</p>
+<p>======================</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span>.allowSceneActivation = <span class="literal">false</span>;</span><br><span class="line">       </span><br><span class="line"><span class="keyword">while</span> (<span class="keyword">async</span>.progress &lt; <span class="number">0.9f</span>)</span><br><span class="line">&#123;</span><br><span class="line">	toProgress = (<span class="keyword">int</span>)<span class="keyword">async</span>.progress * <span class="number">100</span>;</span><br><span class="line">	<span class="keyword">while</span> (displayProgress &lt; toProgress)</span><br><span class="line">	&#123;</span><br><span class="line"> 		++displayProgress;</span><br><span class="line">		SetLoadingSlider(displayProgress);</span><br><span class="line">		<span class="function"><span class="keyword">yield</span> return new <span class="title">WaitForEndOfFrame</span>(<span class="params"></span>)</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">yield</span> return new <span class="title">WaitForEndOfFrame</span>(<span class="params"></span>)</span>;</span><br><span class="line">&#125;</span><br><span class="line">toProgress = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">while</span> (displayProgress &lt; toProgress)</span><br><span class="line">&#123;</span><br><span class="line">	++displayProgress;</span><br><span class="line">	SetLoadingSlider(displayProgress);</span><br><span class="line">	<span class="function"><span class="keyword">yield</span> return new <span class="title">WaitForEndOfFrame</span>(<span class="params"></span>)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>基本上跟momo那篇一樣，不過IEnumerator loadScene()內在加入上面代碼</p>
+<p>async.allowSceneActivation = false; 就是加載完之後不允許直接跳下個畫面</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span>.progress</span><br></pre></td></tr></table></figure>
+
+<p>讀取進度通常會小於0.9的時候就跳畫面了，因此用兩個while迴圈</p>
+<p>一個是在0.9前，一個是在0.9後，也就是讀取完場景前跟讀取完場景後</p>
+<p>1.第一個while迴圈，還沒讀取完</p>
+<p>當displayProgress小於當前讀取進度的百分比</p>
+<p>就++，然後利用 SetLoadingSlider ，返回畫面的進度條讓他緩動 (( 就是1~90，每次跳躍都可以看到1.2.3.4這樣跳，才不會一開始10% 數字立馬跳到90%</p>
+<p>2.第二個while迴圈，讀取完後</p>
+<p>因為async.progress不會等於1，也就是 toProgress 不會讀取到100% ((詳細讀第一個迴圈</p>
+<p>手動的把toProgress設為100 後進入第二個迴圈</p>
+<p>接著跟上面一樣，就完成啦~</p>
+<p>完整代碼  ：</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> UnityEngine.UI;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Loading</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    AsyncOperation <span class="keyword">async</span>;</span><br><span class="line">    <span class="keyword">int</span> Progress</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123; <span class="keyword">return</span> _progress; &#125;</span><br><span class="line">        <span class="keyword">set</span> &#123;</span><br><span class="line">            _progress = <span class="keyword">value</span>;</span><br><span class="line">            <span class="keyword">if</span>(_progress&gt;=<span class="number">100</span>) &#123; <span class="keyword">async</span>.allowSceneActivation = <span class="literal">true</span>; &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> _progress = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">public</span> Slider LoadingSlider;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        StartCoroutine(loadScene());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">IEnumerator <span class="title">loadScene</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">int</span> Progress = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> toProgress = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">async</span> = Application.LoadLevelAsync(Globe.loadName);</span><br><span class="line">        <span class="keyword">async</span>.allowSceneActivation = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">async</span>.progress &lt; <span class="number">0.9f</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            toProgress = (<span class="keyword">int</span>)<span class="keyword">async</span>.progress * <span class="number">100</span>;</span><br><span class="line">            <span class="keyword">while</span> (Progress &lt; toProgress)</span><br><span class="line">            &#123;</span><br><span class="line">                ++Progress;</span><br><span class="line">                SetLoadingSlider(Progress);</span><br><span class="line">                <span class="function"><span class="keyword">yield</span> return new <span class="title">WaitForEndOfFrame</span>(<span class="params"></span>)</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="function"><span class="keyword">yield</span> return new <span class="title">WaitForEndOfFrame</span>(<span class="params"></span>)</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        toProgress = <span class="number">100</span>;</span><br><span class="line">        <span class="keyword">while</span> (Progress &lt; toProgress)</span><br><span class="line">        &#123;</span><br><span class="line">            ++Progress;</span><br><span class="line">            SetLoadingSlider(Progress);</span><br><span class="line">            <span class="function"><span class="keyword">yield</span> return new <span class="title">WaitForEndOfFrame</span>(<span class="params"></span>)</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">SetLoadingSlider</span>(<span class="params"><span class="keyword">int</span> p_progress</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">float</span> tmp = (<span class="keyword">float</span>)((<span class="keyword">float</span>)p_progress / <span class="number">100</span>);</span><br><span class="line">        LoadingSlider.<span class="keyword">value</span> = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Unity</category>
+      </categories>
+      <tags>
+        <tag>Unity</tag>
+        <tag>Loading</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Unity】創建對話系統</title>
+    <url>/unity-dialogue-system/</url>
+    <content><![CDATA[<p>對話系統 其實就是由一連串的字串組成的</p>
+<p>只是要怎麼讀取那些要自己慢慢寫</p>
+<p>最基礎的對話系統就是兩三個string然後用一個label去讀取 ，像這樣</p>
+<p>每次點擊都會讀取一個string 到達到最大長度-1為止</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Base_Dialog</span> : <span class="title">MonoBehaviour</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">string</span>[] All_text;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> UILabel Visible_label;</span><br><span class="line">    <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">   </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Update</span> (<span class="params"></span>)</span> &#123;</span><br><span class="line">       </span><br><span class="line">        <span class="keyword">if</span> (All_text != <span class="literal">null</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (Input.GetMouseButtonDown(<span class="number">0</span>)&amp;&amp;index&lt;All_text.Length<span class="number">-1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                index++;</span><br><span class="line">            &#125;</span><br><span class="line">            Visible_label.text = All_text[index];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+
+
+<p>而接下來就是延伸這個基礎的對話系統了</p>
+<p>我想要的功能有</p>
+<p>1.按鍵跳下一格</p>
+<p>2.顯示對話人物</p>
+<p>3.不必選擇Yes or No</p>
+<p>4.遇到npc 按下某一個按鍵可開始對話</p>
+<p>做完看似如下</p>
+<p><a href="https://www.youtube.com/watch?v=0yzY-5f09rs" rel="external nofollow noopener noreferrer" target="_blank">對話系統</a></p>
+<p>一、保存對話資料</p>
+<p>一般很多都是載入xml或txt資料來讀取對話，但我比較喜歡這種</p>
+<p><a href="http://www.manew.com/thread-41028-1-1.html" rel="external nofollow noopener noreferrer" target="_blank">遊戲蠻牛 RPG對話系統</a></p>
+<p>其實也可以直接看上下就做出一個比較好的對話系統，但我看不懂IEnumerator那個使用方式…</p>
+<p>如果有人願意解釋一下當然是最好的啦XD 但身邊沒什麼程式人… QQ</p>
+<p>所以我使用了他的保存對話資料的方式 ， 大概看一看就懂了</p>
+<p>他使用了兩層</p>
+<p>ConversationData - SpeakerData 然後就開始填對話者、講的話</p>
+<p>我的話是填了三層</p>
+<p>Dialog_Npc_Data - Dialog_Chapter - Dialog_eachPart_sentence</p>
+<p>我的想法是，每個NPC都有一個對話資料(Dialog_Npc_Data)，而NPC你很常看到他會有講話的分支，就像故事的章節一樣(Dialog_Chapter)，而每個章節保存了很多詳細的對話內容(Dialog_eachPart_sentence)</p>
+<p>像是 小紅帽故事書(對話資料)，分三個章節(Dialog_Chapter)，第一個章節小紅帽出去玩，然後</p>
+<p>奶奶: 走阿 永遠不要回來了</p>
+<p>小紅帽 : 是的船長</p>
+<p>像這樣，每個章節內都保存了哪個人物講什麼</p>
+<p>因此 Dialog_eachPart_sentence 這個Class內容就是</p>
+<h4 id="Dialog-eachPart-sentence"><a href="#Dialog-eachPart-sentence" class="headerlink" title="Dialog_eachPart_sentence"></a><strong>Dialog_eachPart_sentence</strong></h4><figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"></span><br><span class="line">[<span class="meta">System.Serializable</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Dialog_eachPart_sentence</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> UISprite spaker;</span><br><span class="line">    <span class="keyword">public</span> List&lt;<span class="keyword">string</span>&gt; sentence;</span><br><span class="line">    <span class="keyword">public</span> AnchorPosition pos ;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> AnchorPosition</span><br><span class="line">&#123;</span><br><span class="line">    Left,</span><br><span class="line">    Right</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>speakr就是誰講的，sentence就是這個人講了幾句話，pos是定義這個人的頭像位置在哪</p>
+<h4 id="Dialog-Chapter"><a href="#Dialog-Chapter" class="headerlink" title="Dialog_Chapter"></a><strong>Dialog_Chapter</strong></h4><p>是章節，定義了有幾個”人”去講話</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"></span><br><span class="line">[<span class="meta">System.Serializable</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Dialog_Chapter</span>  &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> List&lt;Dialog_eachPart_sentence&gt; eachpart_sentence;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最後是對話資料，定義了有幾個章節、這個對話資料的ID，indexpart可以不用理，當初是想用它來定義當前講到第幾章節</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[<span class="meta">System.Serializable</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Dialog_Npc_Data</span> : <span class="title">ScriptableObject</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> ID;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> IndexPart = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">public</span> List&lt;Dialog_Chapter&gt; eachChapter;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>看完遊戲蠻牛那個教學後，改一改 創建一個對話資料，對話資料的內容就會像這樣</p>
+<p>PS. 省略了創建對話資料那邊的過程，蠻牛上有</p>
+<p><a href="http://1.bp.blogspot.com/-E2kXtumAqok/Vk7ZT22YjbI/AAAAAAAAAEs/UNaHSJZDlGY/s1600/CS.png" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://1.bp.blogspot.com/-E2kXtumAqok/Vk7ZT22YjbI/AAAAAAAAAEs/UNaHSJZDlGY/s320/CS.png" alt="img"></a></p>
+<p>接下來就是創建一個對話系統來使用這些對話資料了</p>
+<p>part 1 宣告一個字典保存所有對話資料，以後用Key來尋找這個資料、一個List來把對話資料載入</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> Dictionary&lt;<span class="keyword">int</span>, Dialog_Npc_Data&gt; System_npc = <span class="keyword">new</span> Dictionary&lt;<span class="keyword">int</span>, Dialog_Npc_Data&gt;();</span><br><span class="line"><span class="keyword">public</span> List&lt;Dialog_Npc_Data&gt; all_Dialog;</span><br></pre></td></tr></table></figure>
+
+<p>在Awake方法中把資料加入字典裡</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Awake</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">foreach</span> (Dialog_Npc_Data dnd <span class="keyword">in</span> all_Dialog)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (!System_npc.ContainsKey(dnd.ID))</span><br><span class="line">           System_npc.Add(dnd.ID, dnd);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>part 2 宣告一些需要用到的資料</p>
+<p>Npc_ID是NPC的ID，index_Chapter是哪個章節，isDialog是判斷有沒有在對話</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">bool</span> isDialog = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">int</span> Npc_ID;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">int</span> index_Chapter=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//這兩個是一直變動的，一個是當前讀取句子，一個是讀取哪個speaker</span></span><br><span class="line"><span class="keyword">int</span> index_sentence=<span class="number">0</span>; <span class="comment">//最下層的句子</span></span><br><span class="line"><span class="keyword">int</span> index_Chapter_sentence=<span class="number">0</span>;</span><br><span class="line"><span class="comment">// 設定一個當前的資料選項</span></span><br><span class="line">Dialog_Npc_Data current_Npc_Data;</span><br></pre></td></tr></table></figure>
+
+<p>接下來定義兩個函數，一個是外部調用這個對話系統時傳入值的函數，一個是初始化的函數</p>
+<p>傳入值有兩個，一個是要讀取的NPC的ID，也就是哪個對話資料，一個是Chapter，要讀取的章節</p>
+<p>想像一下，當你接觸到某個npc範圍的時候，按下空白建，然後開始對話，然後就把某個npc的id還有定義好的章節傳入</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">SetDialogInfo</span>(<span class="params"><span class="keyword">int</span> Npc,<span class="keyword">int</span> Chapter</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Npc_ID           = Npc;</span><br><span class="line">    index_Chapter    = Chapter;</span><br><span class="line">    current_Npc_Data = System_npc[Npc];</span><br><span class="line">    Initialize();</span><br><span class="line">    isDialog = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Initialize</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    index_sentence = <span class="number">0</span>;</span><br><span class="line">    index_Chapter_sentence = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>當isDialog = true的時候 就開始對話了，開始對話每當按下滑鼠左鍵，最底層的index_sentence就開始跑，這跟最上面那個基礎對話機的原理一樣</p>
+<p>其中有呼叫一個函數StartDialog()，這個函數用來顯示、讀取對話的內容</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Update</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (isDialog)</span><br><span class="line">    &#123;</span><br><span class="line">        StartDialog();</span><br><span class="line">        <span class="keyword">if</span> (Input.GetMouseButtonDown(<span class="number">0</span>)) index_sentence++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下來再宣告一些會用到的東西</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="comment">//part4</span></span><br><span class="line"><span class="keyword">public</span> UILabel Visible_Message;</span><br><span class="line"><span class="keyword">public</span> UISprite Visible_Spaker;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">string</span> current_content;</span><br><span class="line"></span><br><span class="line"><span class="comment">//part5 </span></span><br><span class="line"><span class="keyword">public</span> Transform Left;</span><br><span class="line"><span class="keyword">public</span> Transform right;</span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">宣告一個Label用來顯示</span></span><br><span class="line"><span class="comment">一個Sprite用來當面板</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>Visible_Message用來在螢幕上顯示 對話的內容</p>
+<p>Visible_Spaker是對話的人</p>
+<p>current_content是用來回傳的</p>
+<p>Left、right是用來定義這個對話人物的位置在哪，傳統都是看到人物一個在左邊，一個在右邊</p>
+<p>然後就是實現上面的StartDialog方法了</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="comment">//傳入哪一段之後，就開始把這一段給看完</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">StartDialog</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Visible_Spaker.spriteName = System_npc[Npc_ID].eachChapter[index_Chapter].eachpart_sentence[index_Chapter_sentence].spaker.spriteName;</span><br><span class="line">    AnchorPosition ap = System_npc[Npc_ID].eachChapter[index_Chapter].eachpart_sentence[index_Chapter_sentence].pos;</span><br><span class="line">    <span class="keyword">if</span> (ap == AnchorPosition.Right) Visible_Spaker.transform.position = right.position;</span><br><span class="line">    <span class="keyword">if</span> (ap == AnchorPosition.Left) Visible_Spaker.transform.position = Left.position;</span><br><span class="line">    	Visible_Message.text = ChapterSentence();</span><br><span class="line">       </span><br><span class="line">       </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第一行是每個npc資料裡面都會有個speaker，，把顯示的UISprite換成當前npc的章節裡面的speaker的名子(好拗口</p>
+<p>第2.3.4行是定義了位置訊息</p>
+<p>第5行是 UIlabel顯示的內容，透過ChapterSentence()方法得到</p>
+<p>ChapterSentence()方法內容是</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">string</span> <span class="title">ChapterSentence</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">int</span> Max_sentence = System_npc[Npc_ID].eachChapter[index_Chapter].eachpart_sentence[index_Chapter_sentence].sentence.Count;</span><br><span class="line">        <span class="keyword">int</span> Max_Chapter_sentence = System_npc[Npc_ID].eachChapter[index_Chapter].eachpart_sentence.Count;</span><br><span class="line">       </span><br><span class="line">        <span class="keyword">if</span> (index_sentence &lt; Max_sentence)  </span><br><span class="line">        &#123;</span><br><span class="line"></span><br><span class="line">            current_content = System_npc[Npc_ID].eachChapter[index_Chapter].eachpart_sentence[index_Chapter_sentence].sentence[index_sentence];</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            index_sentence = <span class="number">0</span>;</span><br><span class="line">            index_Chapter_sentence++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (index_Chapter_sentence &gt;= Max_Chapter_sentence)</span><br><span class="line">        &#123;</span><br><span class="line">            </span><br><span class="line">            isDialog = <span class="literal">false</span>;</span><br><span class="line">           </span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> current_content;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>跟基礎對話系統差不多，獲得兩個最大可讀取的內容長度然後更新這兩個來讀取整個章節</p>
+<p>應該都不算太難，看看應該就懂了</p>
+<p>難的還是遊戲蠻牛那個方法來讀取，感覺好多了<del>“</del></p>
+<p><strong>完整版</strong></p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line">[<span class="meta">System.Serializable</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">System_Dialog</span> : <span class="title">MonoBehaviour</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    對話狀態</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="comment">//part 1 宣告一個字典保存所有對話資料，以後用Key來尋找這個資料、一個List來把對話資料載入</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Dictionary&lt;<span class="keyword">int</span>, Dialog_Npc_Data&gt; System_npc = <span class="keyword">new</span> Dictionary&lt;<span class="keyword">int</span>, Dialog_Npc_Data&gt;();</span><br><span class="line">    <span class="keyword">public</span> List&lt;Dialog_Npc_Data&gt; all_Dialog;</span><br><span class="line">    <span class="comment">//part4</span></span><br><span class="line">    <span class="keyword">public</span> UILabel Visible_Message;</span><br><span class="line">    <span class="keyword">public</span> UISprite Visible_Spaker;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">string</span> current_content;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//part5 </span></span><br><span class="line">    <span class="keyword">public</span> Transform Left;</span><br><span class="line">    <span class="keyword">public</span> Transform right;</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    宣告一個Label用來顯示</span></span><br><span class="line"><span class="comment">    一個Sprite用來當面板</span></span><br><span class="line"><span class="comment">    一個開關表示狀態</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">bool</span> isDialog = <span class="literal">false</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//兩個方法，一個用來在外部調用時可以傳入要用到的資料..等</span></span><br><span class="line">    <span class="comment">//一個用來初始化整個腳本</span></span><br><span class="line">    <span class="comment">//傳入的參數有 : 調用哪個對話資料(id)、章節(eachPart)</span></span><br><span class="line">    <span class="comment">//章節由於每次結束遊戲都要保存</span></span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> Npc_ID;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> index_Chapter=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//這兩個是一直變動的</span></span><br><span class="line">    <span class="keyword">int</span> index_sentence=<span class="number">0</span>; <span class="comment">//最下層的句子</span></span><br><span class="line">    <span class="keyword">int</span> index_Chapter_sentence=<span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 設定一個當前的資料選項</span></span><br><span class="line">    Dialog_Npc_Data current_Npc_Data;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">SetDialogInfo</span>(<span class="params"><span class="keyword">int</span> Npc,<span class="keyword">int</span> Chapter</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        Npc_ID           = Npc;</span><br><span class="line">        index_Chapter    = Chapter;</span><br><span class="line">        current_Npc_Data = System_npc[Npc];</span><br><span class="line"></span><br><span class="line">        Initialize();</span><br><span class="line">        isDialog = <span class="literal">true</span>;</span><br><span class="line">       </span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Initialize</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        index_sentence = <span class="number">0</span>;</span><br><span class="line">        index_Chapter_sentence = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//part 1 加入資料</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Awake</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">foreach</span> (Dialog_Npc_Data dnd <span class="keyword">in</span> all_Dialog)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (!System_npc.ContainsKey(dnd.ID))</span><br><span class="line">                System_npc.Add(dnd.ID, dnd);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Update</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">if</span> (isDialog)</span><br><span class="line">        &#123;</span><br><span class="line">            StartDialog();</span><br><span class="line">            <span class="keyword">if</span> (Input.GetMouseButtonDown(<span class="number">0</span>)) index_sentence++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//傳入哪一段之後，就開始把這一段給看完</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">StartDialog</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line"></span><br><span class="line">        Visible_Spaker.spriteName = System_npc[Npc_ID].eachChapter[index_Chapter].eachpart_sentence[index_Chapter_sentence].spaker.spriteName;</span><br><span class="line">        AnchorPosition ap = System_npc[Npc_ID].eachChapter[index_Chapter].eachpart_sentence[index_Chapter_sentence].pos;</span><br><span class="line">        <span class="keyword">if</span> (ap == AnchorPosition.Right) Visible_Spaker.transform.position = right.position;</span><br><span class="line">        <span class="keyword">if</span> (ap == AnchorPosition.Left) Visible_Spaker.transform.position = Left.position;</span><br><span class="line">        </span><br><span class="line">        Visible_Message.text = ChapterSentence();</span><br><span class="line">       </span><br><span class="line">       </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">string</span> <span class="title">ChapterSentence</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">int</span> Max_sentence = System_npc[Npc_ID].eachChapter[index_Chapter].eachpart_sentence[index_Chapter_sentence].sentence.Count;</span><br><span class="line">        <span class="keyword">int</span> Max_Chapter_sentence = System_npc[Npc_ID].eachChapter[index_Chapter].eachpart_sentence.Count;</span><br><span class="line">       </span><br><span class="line">        <span class="keyword">if</span> (index_sentence &lt; Max_sentence)  </span><br><span class="line">        &#123;</span><br><span class="line"></span><br><span class="line">            current_content = System_npc[Npc_ID].eachChapter[index_Chapter].eachpart_sentence[index_Chapter_sentence].sentence[index_sentence];</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            index_sentence = <span class="number">0</span>;</span><br><span class="line">            index_Chapter_sentence++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (index_Chapter_sentence &gt;= Max_Chapter_sentence)</span><br><span class="line">        &#123;</span><br><span class="line">            </span><br><span class="line">            isDialog = <span class="literal">false</span>;</span><br><span class="line">           </span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> current_content;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然後使用另外一個class來調用，我是放在npc上面</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">TestSystem</span> : <span class="title">MonoBehaviour</span> &#123;</span><br><span class="line"></span><br><span class="line">    NPCspeakerData npc;</span><br><span class="line">    <span class="keyword">public</span> UIPanel panels;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> nUM = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> CurrentChapther = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">bool</span> isCanTalk = <span class="literal">false</span>;</span><br><span class="line">    <span class="comment">// Use this for initialization</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span> (<span class="params"></span>)</span> &#123;</span><br><span class="line">        npc = gameObject.GetComponent&lt;NPCspeakerData&gt;();</span><br><span class="line">        panels.enabled = <span class="literal">false</span>;</span><br><span class="line">        isCanTalk = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Update is called once per frame</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Update</span> (<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="comment">//npc.Npc_ID = 1;</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (Input.GetMouseButtonDown(<span class="number">1</span>))</span><br><span class="line">        &#123;</span><br><span class="line">            panels.enabled = <span class="literal">true</span>;</span><br><span class="line">            npc.Npc_ID = nUM;</span><br><span class="line">            npc.currentNPC.IndexPart = CurrentChapther;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!npc.IsConversation)</span><br><span class="line">            panels.enabled = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">else</span> panels.enabled = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Unity</category>
+      </categories>
+      <tags>
+        <tag>Unity</tag>
+        <tag>Dialogue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Unity】創建自己的有限狀態機</title>
+    <url>/unity-finite-state%20machine/</url>
+    <content><![CDATA[<p>有限狀態機，大概大家都聽過吧，沒聽過的</p>
+<p><a href="https://zh.wikipedia.org/wiki/有限状态机" rel="external nofollow noopener noreferrer" target="_blank">這裡請</a></p>
+<p>不過基本上都是用到的時候學啦，以前有看了幾天，發現我的智力不足，先放棄</p>
+<p>但最近專題要開始使用，所以…火坑我來了</p>
+<p>看完中文，建議研究一下英文的，下面有實作</p>
+<p><a href="http://wiki.unity3d.com/index.php/Finite_State_Machine" rel="external nofollow noopener noreferrer" target="_blank">這裡</a></p>
+<p>本篇是根據英文的實作改了一下做出來的筆記，說是筆記，因為是雛形，然後又不知道哪邊觀念可能錯誤，請多多指教一下XD</p>
+<a id="more"></a>
+
+
+
+<p>研究了這麼久，我認為實作有限狀態機，最重要的概念是</p>
+<p>繼承，抽象</p>
+<p>整個看起來是這樣，完成之後才要在創建個AIController去使用它</p>
+<p><a href="http://3.bp.blogspot.com/-NNsBU01aKzk/VjDUnZiWf9I/AAAAAAAAACs/dLVelztQhgc/s1600/%E6%AD%A5%E6%AD%A5%E6%AD%A5.png" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://3.bp.blogspot.com/-NNsBU01aKzk/VjDUnZiWf9I/AAAAAAAAACs/dLVelztQhgc/s400/%25E6%25AD%25A5%25E6%25AD%25A5%25E6%25AD%25A5.png" alt="img"></a></p>
+<p>首先先創建個基類BaseState，此類別為抽象類別</p>
+<p>繼承他的實作他的DoSomething(Gameobject npc)方法，這個<strong>抽象方法</strong></p>
+<p>很重要，因為所有繼承他的類別都有這個方法，至於為何，等到用到會再說明</p>
+<p><a href="http://3.bp.blogspot.com/-T5NfG_Ot1Vw/VjDVnTUlBDI/AAAAAAAAAC0/UExzrMAch9w/s1600/1.png" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://3.bp.blogspot.com/-T5NfG_Ot1Vw/VjDVnTUlBDI/AAAAAAAAAC0/UExzrMAch9w/s640/1.png" alt="img"></a></p>
+<p>接下來，開始創建使用它的機器，((先不用創建它有哪些狀態))</p>
+<p><a href="http://2.bp.blogspot.com/-MngfnWulWVc/VjDWUORGJKI/AAAAAAAAAC8/1WyGZXfy918/s1600/2.png" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://2.bp.blogspot.com/-MngfnWulWVc/VjDWUORGJKI/AAAAAAAAAC8/1WyGZXfy918/s400/2.png" alt="img"></a></p>
+<p>這個類也是不用繼承MonoBehavior，因為真正要用狀態機的不是這個類</p>
+<p>首先，狀態”機”，的機，肯定是集合很多狀態而成的，因此宣告一個List把所有狀態都</p>
+<p>裝在一起，再宣告當前狀態 currentstate ，在建構子上為這個list創建空間，狀態機可能</p>
+<p>會有，新增、查詢、刪除…等 ，因為只是筆記最簡單的怎麼用，因此用一個普通的新增</p>
+<p>方法就好。</p>
+<p>好，接下來可以想一下你要什麼狀態了，這裡先用A狀態跟B狀態來表示，創建每個狀態</p>
+<p>然後繼承於BaseState類</p>
+<p><a href="http://4.bp.blogspot.com/-UYeJVN2uZX8/VjDYVUDpcxI/AAAAAAAAADI/MjyE57C2e_4/s1600/3.png" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://4.bp.blogspot.com/-UYeJVN2uZX8/VjDYVUDpcxI/AAAAAAAAADI/MjyE57C2e_4/s640/3.png" alt="img"></a></p>
+<p>B狀態也跟這上面一樣，我就不貼囉，然後選好狀態之後，差不多就完成了</p>
+<p>接下來要創建個控制器，也就是最終你會貼到Unity的編輯室窗上的component，也可以說成AI</p>
+<p>首先，在這個AI裡面，要先創建個狀態機，也就是剛剛集合所有State的 FSMMachine</p>
+<p>接著把所有會用到的State宣告一下</p>
+<p><a href="http://2.bp.blogspot.com/-lPlktEcPoak/VjDaFZHPYPI/AAAAAAAAADk/2_S0cdyRM20/s1600/10.png" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://2.bp.blogspot.com/-lPlktEcPoak/VjDaFZHPYPI/AAAAAAAAADk/2_S0cdyRM20/s400/10.png" alt="img"></a></p>
+<p>接著宣告完之後，在Start方法中把它(狀態) 加入到創建的fsm中</p>
+<p><a href="http://3.bp.blogspot.com/-5oEsXzwK2IQ/VjDaFeE6kVI/AAAAAAAAADs/0F5iii0ahQc/s1600/11.png" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://3.bp.blogspot.com/-5oEsXzwK2IQ/VjDaFeE6kVI/AAAAAAAAADs/0F5iii0ahQc/s320/11.png" alt="img"></a></p>
+<p>fsm中，加入了a、b狀態，currentstate是目前狀態，因為一開始沒指定，所以在start方法也順變指定為a</p>
+<p>接著再Update中，呼叫doSomthing方法，傳入gameobject</p>
+<p><a href="http://2.bp.blogspot.com/-CfzC83GdVTM/VjDaFfBUcPI/AAAAAAAAADo/zswa7BvPFrk/s1600/12.png" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://2.bp.blogspot.com/-CfzC83GdVTM/VjDaFfBUcPI/AAAAAAAAADo/zswa7BvPFrk/s400/12.png" alt="img"></a></p>
+<p>注意這邊 fsm.currentstate ，上面再Start方法中指定為a，因此目前做的是a的dosomthing方法</p>
+<p>如果把fsm.currentstate = b的話，就會執行b的dosomthing方法，這裡就是精華所在了</p>
+<p>換另外一個狀態，上一個狀態就不會再繼續執行，就像switch case做的狀態機一樣</p>
+<p>而目前的Controller中，沒辦法轉換狀態，因此加入一個ToState方法</p>
+<p><a href="http://2.bp.blogspot.com/-cizhP82052k/VjDaFwLHZ8I/AAAAAAAAAD4/Xm1m51QuvD8/s1600/13.png" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://2.bp.blogspot.com/-cizhP82052k/VjDaFwLHZ8I/AAAAAAAAAD4/Xm1m51QuvD8/s320/13.png" alt="img"></a></p>
+<p>傳入一State，然後改變fsm的currentstate(當前狀態)</p>
+<p>完整如下</p>
+<p><a href="http://2.bp.blogspot.com/-6anZ-gerfCw/VjDY9M58JXI/AAAAAAAAADU/fGacUWQz-Eo/s1600/dpo.png" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://2.bp.blogspot.com/-6anZ-gerfCw/VjDY9M58JXI/AAAAAAAAADU/fGacUWQz-Eo/s640/dpo.png" alt="img"></a></p>
+<p>這個類就完成了，接著去每個狀態中實現他們的方法</p>
+<p><a href="http://2.bp.blogspot.com/-ics1Sn0j-Jw/VjDdgKXRHbI/AAAAAAAAAEA/q5oY5r0esC8/s1600/1851515.png" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://2.bp.blogspot.com/-ics1Sn0j-Jw/VjDdgKXRHbI/AAAAAAAAAEA/q5oY5r0esC8/s640/1851515.png" alt="img"></a></p>
+<p>如果按下滑鼠左鍵，則轉換到狀態b，因該不用多解釋了吧XD</p>
+<p>接著把Controller掛到隨便一個物體上，運行就會像這樣</p>
+<p><a href="http://1.bp.blogspot.com/-NRaw5doAWLc/VjDeCozA6sI/AAAAAAAAAEI/iHg7pJNY6iE/s1600/dgvxdvef.png" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://1.bp.blogspot.com/-NRaw5doAWLc/VjDeCozA6sI/AAAAAAAAAEI/iHg7pJNY6iE/s640/dgvxdvef.png" alt="img"></a></p>
+<p>另外，Unity還有使用interface實現FSM的方法，個人比較喜歡那個，比較簡潔。</p>
+<p>參考資料 : <a href="http://wiki.unity3d.com/index.php/Finite_State_Machine" rel="external nofollow noopener noreferrer" target="_blank">http://wiki.unity3d.com/index.php/Finite_State_Machine</a></p>
+]]></content>
+      <categories>
+        <category>Unity</category>
+      </categories>
+      <tags>
+        <tag>Unity</tag>
+        <tag>Finite-State Machine</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Unity】使用PHP，更新MySql內Json資料</title>
+    <url>/unity-php-update-mysqldata/</url>
+    <content><![CDATA[<p>最近學了一下unity跟mysql結合，發現挺有用的</p>
+<p>配合上json更好儲存數據</p>
+<p>原本是把所有欄位轉成json數據傳送，但如果一堆要存的數據的話</p>
+<p>使用的欄位，未免過多，因此找了找些資料，發現可以用TEXT欄位寫所有json數據</p>
+<p>再傳到unity解析、更新，這樣就不必花費太多欄位了</p>
+<a id="more"></a>
+
+
+
+<p>unity跟mysql的關係，大概的關係是這樣</p>
+<p>中間兩個是php腳本</p>
+<p><a href="http://2.bp.blogspot.com/-A4OkVYoBoI0/VdHRbPmQ8XI/AAAAAAAAABA/1fV_NSFkrKY/s1600/%E6%B5%81%E7%A8%8B%E5%9C%96.png" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://2.bp.blogspot.com/-A4OkVYoBoI0/VdHRbPmQ8XI/AAAAAAAAABA/1fV_NSFkrKY/s640/%25E6%25B5%2581%25E7%25A8%258B%25E5%259C%2596.png" alt="img"></a></p>
+<p>一、創建資料庫</p>
+<p>PS.用的是xampp</p>
+<p><a href="http://2.bp.blogspot.com/-ObM4YoJ5P9s/VdGLUWkGuvI/AAAAAAAAAAk/U4cgWKO2k9w/s1600/1.%E5%89%B5%E5%BB%BA%E8%B3%87%E6%96%99%E5%BA%AB.jpg" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://2.bp.blogspot.com/-ObM4YoJ5P9s/VdGLUWkGuvI/AAAAAAAAAAk/U4cgWKO2k9w/s640/1.%25E5%2589%25B5%25E5%25BB%25BA%25E8%25B3%2587%25E6%2596%2599%25E5%25BA%25AB.jpg" alt="img"></a></p>
+<p><a href="http://3.bp.blogspot.com/-KOx8tMcPzbo/VdGLUf5M42I/AAAAAAAAAAg/YnwbQk6q6G8/s1600/2.%E5%85%88%E5%89%B5%E5%BB%BA%E5%80%8B%E8%B3%87%E6%96%99%E8%A1%A8.jpg" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://3.bp.blogspot.com/-KOx8tMcPzbo/VdGLUf5M42I/AAAAAAAAAAg/YnwbQk6q6G8/s320/2.%25E5%2585%2588%25E5%2589%25B5%25E5%25BB%25BA%25E5%2580%258B%25E8%25B3%2587%25E6%2596%2599%25E8%25A1%25A8.jpg" alt="img"></a></p>
+<p>資料庫名稱為unitydatabase </p>
+<p>資料表名稱為UserData</p>
+<p>兩個欄位 id , data</p>
+<p>然後先新增一欄資料，id為1</p>
+<p>data 裡面要打什麼都可以</p>
+<p>二、創建php</p>
+<p>其中UnityDatabase是你的數據庫名稱，root是你的帳戶名、root後面的是密碼</p>
+<p>我是沒設，所以中間留白</p>
+<p>第四行是連接數據庫</p>
+<p>第六行sql語句select * form (你的資料表)</p>
+<p>最後json_encode();是把剛剛選的資料表內的資料轉換成json格示輸出到網頁上</p>
+<p>儲存好後 網頁網址就會是</p>
+<p><a href="http://127.0.0.1/DownloadDB.php" rel="external nofollow noopener noreferrer" target="_blank">http://127.0.0.1/DownloadDB.php</a> //等等unity內會用到，要記好路徑</p>
+<p><a href="http://4.bp.blogspot.com/-5WZVA30ooik/VdGImSNczjI/AAAAAAAAAAM/ShwOV8Vz4VI/s1600/DownloadDB.png" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://4.bp.blogspot.com/-5WZVA30ooik/VdGImSNczjI/AAAAAAAAAAM/ShwOV8Vz4VI/s640/DownloadDB.png" alt="img"></a></p>
+<p>unitydata是自訂義的變數，後面那句 <strong>$_POST是跟unity連接的點</strong></p>
+<p>$_POST[“xxxxx”]  xxxxx 是Unity內，表單要傳送的變數名，要記住</p>
+<p>其他基本上都一樣，最後一句是更新目前資料庫內data欄位的數據，是用id=1去尋找的</p>
+<p><a href="http://4.bp.blogspot.com/-4c3wy3evfW4/VdGImdKX-_I/AAAAAAAAAAQ/MjuXzUllCZo/s1600/UpdateDB.png" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://4.bp.blogspot.com/-4c3wy3evfW4/VdGImdKX-_I/AAAAAAAAAAQ/MjuXzUllCZo/s640/UpdateDB.png" alt="img"></a></p>
+<p>三、創建unity腳本</p>
+<p> 定義兩個path，用來更新資料庫和下載資料庫</p>
+<p><a href="http://4.bp.blogspot.com/-H3fPGMh9E-s/VdHQ_c0rZ7I/AAAAAAAAAA4/Q1o2JZxQtjU/s1600/%E5%AE%9A%E7%BE%A9%E5%85%A9%E5%80%8B%E9%80%A3%E7%B5%90.png" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://4.bp.blogspot.com/-H3fPGMh9E-s/VdHQ_c0rZ7I/AAAAAAAAAA4/Q1o2JZxQtjU/s640/%25E5%25AE%259A%25E7%25BE%25A9%25E5%2585%25A9%25E5%2580%258B%25E9%2580%25A3%25E7%25B5%2590.png" alt="img"></a></p>
+<p>再來創建兩個按鈕，個別執行兩個函數，下載和上傳</p>
+<p><a href="http://3.bp.blogspot.com/-ydZq9SskXLA/VdHR9fZ2UiI/AAAAAAAAABI/YEl5Yy7z_uI/s1600/%E7%84%B6%E5%BE%8C%E8%A8%AD%E5%AE%9A%E5%85%A9%E5%80%8B%E6%8C%89%E9%88%951.png" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://3.bp.blogspot.com/-ydZq9SskXLA/VdHR9fZ2UiI/AAAAAAAAABI/YEl5Yy7z_uI/s400/%25E7%2584%25B6%25E5%25BE%258C%25E8%25A8%25AD%25E5%25AE%259A%25E5%2585%25A9%25E5%2580%258B%25E6%258C%2589%25E9%2588%25951.png" alt="img"></a></p>
+<p> 定義想要儲存的資料</p>
+<p><a href="http://2.bp.blogspot.com/-viAGFbdtLsQ/VdHSw0huM4I/AAAAAAAAABY/x4HmepEPycc/s1600/%E4%BD%A0%E6%83%B3%E8%A6%81%E5%84%B2%E5%AD%98%E4%BB%80%E9%BA%BC%E6%95%B8%E6%93%9A.png" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://2.bp.blogspot.com/-viAGFbdtLsQ/VdHSw0huM4I/AAAAAAAAABY/x4HmepEPycc/s1600/%25E4%25BD%25A0%25E6%2583%25B3%25E8%25A6%2581%25E5%2584%25B2%25E5%25AD%2598%25E4%25BB%2580%25E9%25BA%25BC%25E6%2595%25B8%25E6%2593%259A.png" alt="img"></a></p>
+<p><a href="http://4.bp.blogspot.com/-3_Y_KlW8R-c/VdHTCBfnChI/AAAAAAAAABg/Lc3Bt1SE1zs/s1600/%E8%B3%87%E6%96%99.png" rel="external nofollow noopener noreferrer" target="_blank">
+</a><a href="http://4.bp.blogspot.com/-3_Y_KlW8R-c/VdHTCBfnChI/AAAAAAAAABg/Lc3Bt1SE1zs/s1600/%E8%B3%87%E6%96%99.png" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://4.bp.blogspot.com/-3_Y_KlW8R-c/VdHTCBfnChI/AAAAAAAAABg/Lc3Bt1SE1zs/s640/%25E8%25B3%2587%25E6%2596%2599.png" alt="img"></a></p>
+<p>JsonSave方法是用來把所有儲存的資料轉換成json格式，日後用來上傳到資料庫</p>
+<p>定義之前兩個按鈕的方法</p>
+<p><a href="http://2.bp.blogspot.com/-Ouo5BVTtYdA/VdHUdeF35vI/AAAAAAAAABw/sFmzk8_NgcA/s1600/%E5%85%A9%E5%80%8B%E5%87%BD%E6%95%B8.png" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://2.bp.blogspot.com/-Ouo5BVTtYdA/VdHUdeF35vI/AAAAAAAAABw/sFmzk8_NgcA/s640/%25E5%2585%25A9%25E5%2580%258B%25E5%2587%25BD%25E6%2595%25B8.png" alt="img"></a></p>
+<p>downloadjson方法：</p>
+<p>使用內建的WWW方法，開啟之前宣告好的path</p>
+<p>拿到後，使用JsonMapper方法，將網頁內的json數據拿下來</p>
+<p>由於拿下來的數據會包含所有欄位的資料，因此下面的</p>
+<p>string jsc = json[“Data”].ToString();　是限定只獲取Data欄位內的資料</p>
+<p>為了改變數據，再次將jsc轉換，然後將想要改的資料騰上去</p>
+<p>這樣unity內的數據就轉換完成啦</p>
+<p>updatajson方法：</p>
+<p>宣告個WWWForm，第二行unitydata就是一開始updateDB.php那個post括弧內的String兩個一定要一樣，後面就是要傳入的資料，JsonSave上面有提及，就是所有資料打包成string</p>
+<p>OK後，用WWW將form傳入，然後undateDB.php就會更新mysql的資料庫了</p>
+<p>四、完成</p>
+<p>DownloadDB看起來會是這樣</p>
+<p><a href="http://3.bp.blogspot.com/-eatdqNkqEhk/VdHgLWWQZsI/AAAAAAAAACA/jblg0SiLoOM/s1600/dOWN.png" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://3.bp.blogspot.com/-eatdqNkqEhk/VdHgLWWQZsI/AAAAAAAAACA/jblg0SiLoOM/s320/dOWN.png" alt="img"></a></p>
+<p>資料庫內長的像這樣</p>
+<p><a href="http://1.bp.blogspot.com/-sKzuhawvADw/VdHgMIlCVhI/AAAAAAAAACQ/JEgish4AEIA/s1600/finish2.png" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://1.bp.blogspot.com/-sKzuhawvADw/VdHgMIlCVhI/AAAAAAAAACQ/JEgish4AEIA/s400/finish2.png" alt="img"></a></p>
+<p>在unity面板內可以更新，但第一次使用由於Data裡面會是空的</p>
+<p>所以下載下來的沒辦法使用，要先update一次才行。</p>
+<p><a href="http://3.bp.blogspot.com/--WRYSazlIzk/VdHgLbKG0mI/AAAAAAAAACI/dXB3usIFbUA/s1600/finish.png" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://3.bp.blogspot.com/--WRYSazlIzk/VdHgLbKG0mI/AAAAAAAAACI/dXB3usIFbUA/s640/finish.png" alt="img"></a></p>
+<p><a href="http://2.bp.blogspot.com/-3ijOV-e5y04/VdHgLnWld7I/AAAAAAAAACE/A3VkuGuB0U0/s1600/fin3.png" rel="external nofollow noopener noreferrer" target="_blank">
+</a><a href="http://2.bp.blogspot.com/-3ijOV-e5y04/VdHgLnWld7I/AAAAAAAAACE/A3VkuGuB0U0/s1600/fin3.png" rel="external nofollow noopener noreferrer" target="_blank">
+</a><a href="http://2.bp.blogspot.com/-3ijOV-e5y04/VdHgLnWld7I/AAAAAAAAACE/A3VkuGuB0U0/s1600/fin3.png" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://2.bp.blogspot.com/-3ijOV-e5y04/VdHgLnWld7I/AAAAAAAAACE/A3VkuGuB0U0/s640/fin3.png" alt="img"></a></p>
+<p>Script內容是這樣</p>
+]]></content>
+      <categories>
+        <category>Unity</category>
+      </categories>
+      <tags>
+        <tag>Unity</tag>
+        <tag>Php</tag>
+        <tag>Mysql</tag>
+        <tag>Json</tag>
       </tags>
   </entry>
 </search>

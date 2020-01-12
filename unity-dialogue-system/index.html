@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-TW">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+  <meta name="google-site-verification" content="u-avy-YW4cd2WfnN7dh1ahV5_K4Sx1ACruLOA5Nj3RI">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.2.0',
+    sidebar: {"position":"right","display":"post","offset":15,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="對話系統 其實就是由一連串的字串組成的 只是要怎麼讀取那些要自己慢慢寫 最基礎的對話系統就是兩三個string然後用一個label去讀取 ，像這樣 每次點擊都會讀取一個string 到達到最大長度-1為止 1234567891011121314151617181920212223using UnityEngine;using System.Collections;public class Base">
+<meta name="keywords" content="Unity,Dialogue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Unity】創建對話系統">
+<meta property="og:url" content="http://unoniceday.github.io/unity-dialogue-system/index.html">
+<meta property="og:site_name" content="Uno - Unity開發紀錄">
+<meta property="og:description" content="對話系統 其實就是由一連串的字串組成的 只是要怎麼讀取那些要自己慢慢寫 最基礎的對話系統就是兩三個string然後用一個label去讀取 ，像這樣 每次點擊都會讀取一個string 到達到最大長度-1為止 1234567891011121314151617181920212223using UnityEngine;using System.Collections;public class Base">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="https://1.bp.blogspot.com/-E2kXtumAqok/Vk7ZT22YjbI/AAAAAAAAAEs/UNaHSJZDlGY/s320/CS.png">
+<meta property="og:updated_time" content="2020-01-12T10:18:34.669Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【Unity】創建對話系統">
+<meta name="twitter:description" content="對話系統 其實就是由一連串的字串組成的 只是要怎麼讀取那些要自己慢慢寫 最基礎的對話系統就是兩三個string然後用一個label去讀取 ，像這樣 每次點擊都會讀取一個string 到達到最大長度-1為止 1234567891011121314151617181920212223using UnityEngine;using System.Collections;public class Base">
+<meta name="twitter:image" content="https://1.bp.blogspot.com/-E2kXtumAqok/Vk7ZT22YjbI/AAAAAAAAAEs/UNaHSJZDlGY/s320/CS.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Uno - Unity開發紀錄" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://unoniceday.github.io/unity-dialogue-system/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>【Unity】創建對話系統 | Uno - Unity開發紀錄</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-TW">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Uno - Unity開發紀錄</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切換導航欄">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首頁</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>標籤</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分類</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>時間軸</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜尋</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜尋..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://unoniceday.github.io/unity-dialogue-system/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Uno">
+      <meta itemprop="description" content="紀錄用Unity跑出的各種問題">
+      <meta itemprop="image" content="/images/WebAvator.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Uno - Unity開發紀錄">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">【Unity】創建對話系統
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+
+              
+                
+              
+
+              <time title="創建時間：2015-11-19 16:29:52" itemprop="dateCreated datePublished" datetime="2015-11-19T16:29:52+08:00">2015-11-19</time>
+            </span>
+          
+
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Unity/" itemprop="url" rel="index"><span itemprop="name">Unity</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">評論數：</span>
+                <a href="/unity-dialogue-system/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="unity-dialogue-system/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">文章字數：</span>
+              
+              <span title="文章字數">8.2k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              
+              <span title="所需閱讀時間">15 分鐘</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>對話系統 其實就是由一連串的字串組成的</p>
+<p>只是要怎麼讀取那些要自己慢慢寫</p>
+<p>最基礎的對話系統就是兩三個string然後用一個label去讀取 ，像這樣</p>
+<p>每次點擊都會讀取一個string 到達到最大長度-1為止</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Base_Dialog</span> : <span class="title">MonoBehaviour</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">string</span>[] All_text;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> UILabel Visible_label;</span><br><span class="line">    <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">   </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Update</span> (<span class="params"></span>)</span> &#123;</span><br><span class="line">       </span><br><span class="line">        <span class="keyword">if</span> (All_text != <span class="literal">null</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (Input.GetMouseButtonDown(<span class="number">0</span>)&amp;&amp;index&lt;All_text.Length<span class="number">-1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                index++;</span><br><span class="line">            &#125;</span><br><span class="line">            Visible_label.text = All_text[index];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+
+
+<p>而接下來就是延伸這個基礎的對話系統了</p>
+<p>我想要的功能有</p>
+<p>1.按鍵跳下一格</p>
+<p>2.顯示對話人物</p>
+<p>3.不必選擇Yes or No</p>
+<p>4.遇到npc 按下某一個按鍵可開始對話</p>
+<p>做完看似如下</p>
+<p><a href="https://www.youtube.com/watch?v=0yzY-5f09rs" rel="external nofollow noopener noreferrer" target="_blank">對話系統</a></p>
+<p>一、保存對話資料</p>
+<p>一般很多都是載入xml或txt資料來讀取對話，但我比較喜歡這種</p>
+<p><a href="http://www.manew.com/thread-41028-1-1.html" rel="external nofollow noopener noreferrer" target="_blank">遊戲蠻牛 RPG對話系統</a></p>
+<p>其實也可以直接看上下就做出一個比較好的對話系統，但我看不懂IEnumerator那個使用方式…</p>
+<p>如果有人願意解釋一下當然是最好的啦XD 但身邊沒什麼程式人… QQ</p>
+<p>所以我使用了他的保存對話資料的方式 ， 大概看一看就懂了</p>
+<p>他使用了兩層</p>
+<p>ConversationData - SpeakerData 然後就開始填對話者、講的話</p>
+<p>我的話是填了三層</p>
+<p>Dialog_Npc_Data - Dialog_Chapter - Dialog_eachPart_sentence</p>
+<p>我的想法是，每個NPC都有一個對話資料(Dialog_Npc_Data)，而NPC你很常看到他會有講話的分支，就像故事的章節一樣(Dialog_Chapter)，而每個章節保存了很多詳細的對話內容(Dialog_eachPart_sentence)</p>
+<p>像是 小紅帽故事書(對話資料)，分三個章節(Dialog_Chapter)，第一個章節小紅帽出去玩，然後</p>
+<p>奶奶: 走阿 永遠不要回來了</p>
+<p>小紅帽 : 是的船長</p>
+<p>像這樣，每個章節內都保存了哪個人物講什麼</p>
+<p>因此 Dialog_eachPart_sentence 這個Class內容就是</p>
+<h4 id="Dialog-eachPart-sentence"><a href="#Dialog-eachPart-sentence" class="headerlink" title="Dialog_eachPart_sentence"></a><strong>Dialog_eachPart_sentence</strong></h4><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"></span><br><span class="line">[<span class="meta">System.Serializable</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Dialog_eachPart_sentence</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> UISprite spaker;</span><br><span class="line">    <span class="keyword">public</span> List&lt;<span class="keyword">string</span>&gt; sentence;</span><br><span class="line">    <span class="keyword">public</span> AnchorPosition pos ;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> AnchorPosition</span><br><span class="line">&#123;</span><br><span class="line">    Left,</span><br><span class="line">    Right</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>speakr就是誰講的，sentence就是這個人講了幾句話，pos是定義這個人的頭像位置在哪</p>
+<h4 id="Dialog-Chapter"><a href="#Dialog-Chapter" class="headerlink" title="Dialog_Chapter"></a><strong>Dialog_Chapter</strong></h4><p>是章節，定義了有幾個”人”去講話</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"></span><br><span class="line">[<span class="meta">System.Serializable</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Dialog_Chapter</span>  &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> List&lt;Dialog_eachPart_sentence&gt; eachpart_sentence;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最後是對話資料，定義了有幾個章節、這個對話資料的ID，indexpart可以不用理，當初是想用它來定義當前講到第幾章節</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[<span class="meta">System.Serializable</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Dialog_Npc_Data</span> : <span class="title">ScriptableObject</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> ID;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> IndexPart = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">public</span> List&lt;Dialog_Chapter&gt; eachChapter;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>看完遊戲蠻牛那個教學後，改一改 創建一個對話資料，對話資料的內容就會像這樣</p>
+<p>PS. 省略了創建對話資料那邊的過程，蠻牛上有</p>
+<p><a href="http://1.bp.blogspot.com/-E2kXtumAqok/Vk7ZT22YjbI/AAAAAAAAAEs/UNaHSJZDlGY/s1600/CS.png" rel="external nofollow noopener noreferrer" target="_blank"><img src="https://1.bp.blogspot.com/-E2kXtumAqok/Vk7ZT22YjbI/AAAAAAAAAEs/UNaHSJZDlGY/s320/CS.png" alt="img"></a></p>
+<p>接下來就是創建一個對話系統來使用這些對話資料了</p>
+<p>part 1 宣告一個字典保存所有對話資料，以後用Key來尋找這個資料、一個List來把對話資料載入</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Dictionary&lt;<span class="keyword">int</span>, Dialog_Npc_Data&gt; System_npc = <span class="keyword">new</span> Dictionary&lt;<span class="keyword">int</span>, Dialog_Npc_Data&gt;();</span><br><span class="line"><span class="keyword">public</span> List&lt;Dialog_Npc_Data&gt; all_Dialog;</span><br></pre></td></tr></table></figure>
+
+<p>在Awake方法中把資料加入字典裡</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Awake</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">foreach</span> (Dialog_Npc_Data dnd <span class="keyword">in</span> all_Dialog)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (!System_npc.ContainsKey(dnd.ID))</span><br><span class="line">           System_npc.Add(dnd.ID, dnd);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>part 2 宣告一些需要用到的資料</p>
+<p>Npc_ID是NPC的ID，index_Chapter是哪個章節，isDialog是判斷有沒有在對話</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">bool</span> isDialog = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">int</span> Npc_ID;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">int</span> index_Chapter=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//這兩個是一直變動的，一個是當前讀取句子，一個是讀取哪個speaker</span></span><br><span class="line"><span class="keyword">int</span> index_sentence=<span class="number">0</span>; <span class="comment">//最下層的句子</span></span><br><span class="line"><span class="keyword">int</span> index_Chapter_sentence=<span class="number">0</span>;</span><br><span class="line"><span class="comment">// 設定一個當前的資料選項</span></span><br><span class="line">Dialog_Npc_Data current_Npc_Data;</span><br></pre></td></tr></table></figure>
+
+<p>接下來定義兩個函數，一個是外部調用這個對話系統時傳入值的函數，一個是初始化的函數</p>
+<p>傳入值有兩個，一個是要讀取的NPC的ID，也就是哪個對話資料，一個是Chapter，要讀取的章節</p>
+<p>想像一下，當你接觸到某個npc範圍的時候，按下空白建，然後開始對話，然後就把某個npc的id還有定義好的章節傳入</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">SetDialogInfo</span>(<span class="params"><span class="keyword">int</span> Npc,<span class="keyword">int</span> Chapter</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Npc_ID           = Npc;</span><br><span class="line">    index_Chapter    = Chapter;</span><br><span class="line">    current_Npc_Data = System_npc[Npc];</span><br><span class="line">    Initialize();</span><br><span class="line">    isDialog = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Initialize</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    index_sentence = <span class="number">0</span>;</span><br><span class="line">    index_Chapter_sentence = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>當isDialog = true的時候 就開始對話了，開始對話每當按下滑鼠左鍵，最底層的index_sentence就開始跑，這跟最上面那個基礎對話機的原理一樣</p>
+<p>其中有呼叫一個函數StartDialog()，這個函數用來顯示、讀取對話的內容</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Update</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (isDialog)</span><br><span class="line">    &#123;</span><br><span class="line">        StartDialog();</span><br><span class="line">        <span class="keyword">if</span> (Input.GetMouseButtonDown(<span class="number">0</span>)) index_sentence++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下來再宣告一些會用到的東西</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//part4</span></span><br><span class="line"><span class="keyword">public</span> UILabel Visible_Message;</span><br><span class="line"><span class="keyword">public</span> UISprite Visible_Spaker;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">string</span> current_content;</span><br><span class="line"></span><br><span class="line"><span class="comment">//part5 </span></span><br><span class="line"><span class="keyword">public</span> Transform Left;</span><br><span class="line"><span class="keyword">public</span> Transform right;</span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">宣告一個Label用來顯示</span></span><br><span class="line"><span class="comment">一個Sprite用來當面板</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>Visible_Message用來在螢幕上顯示 對話的內容</p>
+<p>Visible_Spaker是對話的人</p>
+<p>current_content是用來回傳的</p>
+<p>Left、right是用來定義這個對話人物的位置在哪，傳統都是看到人物一個在左邊，一個在右邊</p>
+<p>然後就是實現上面的StartDialog方法了</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//傳入哪一段之後，就開始把這一段給看完</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">StartDialog</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Visible_Spaker.spriteName = System_npc[Npc_ID].eachChapter[index_Chapter].eachpart_sentence[index_Chapter_sentence].spaker.spriteName;</span><br><span class="line">    AnchorPosition ap = System_npc[Npc_ID].eachChapter[index_Chapter].eachpart_sentence[index_Chapter_sentence].pos;</span><br><span class="line">    <span class="keyword">if</span> (ap == AnchorPosition.Right) Visible_Spaker.transform.position = right.position;</span><br><span class="line">    <span class="keyword">if</span> (ap == AnchorPosition.Left) Visible_Spaker.transform.position = Left.position;</span><br><span class="line">    	Visible_Message.text = ChapterSentence();</span><br><span class="line">       </span><br><span class="line">       </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第一行是每個npc資料裡面都會有個speaker，，把顯示的UISprite換成當前npc的章節裡面的speaker的名子(好拗口</p>
+<p>第2.3.4行是定義了位置訊息</p>
+<p>第5行是 UIlabel顯示的內容，透過ChapterSentence()方法得到</p>
+<p>ChapterSentence()方法內容是</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">string</span> <span class="title">ChapterSentence</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">int</span> Max_sentence = System_npc[Npc_ID].eachChapter[index_Chapter].eachpart_sentence[index_Chapter_sentence].sentence.Count;</span><br><span class="line">        <span class="keyword">int</span> Max_Chapter_sentence = System_npc[Npc_ID].eachChapter[index_Chapter].eachpart_sentence.Count;</span><br><span class="line">       </span><br><span class="line">        <span class="keyword">if</span> (index_sentence &lt; Max_sentence)  </span><br><span class="line">        &#123;</span><br><span class="line"></span><br><span class="line">            current_content = System_npc[Npc_ID].eachChapter[index_Chapter].eachpart_sentence[index_Chapter_sentence].sentence[index_sentence];</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            index_sentence = <span class="number">0</span>;</span><br><span class="line">            index_Chapter_sentence++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (index_Chapter_sentence &gt;= Max_Chapter_sentence)</span><br><span class="line">        &#123;</span><br><span class="line">            </span><br><span class="line">            isDialog = <span class="literal">false</span>;</span><br><span class="line">           </span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> current_content;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>跟基礎對話系統差不多，獲得兩個最大可讀取的內容長度然後更新這兩個來讀取整個章節</p>
+<p>應該都不算太難，看看應該就懂了</p>
+<p>難的還是遊戲蠻牛那個方法來讀取，感覺好多了<del>“</del></p>
+<p><strong>完整版</strong></p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line">[<span class="meta">System.Serializable</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">System_Dialog</span> : <span class="title">MonoBehaviour</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    對話狀態</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="comment">//part 1 宣告一個字典保存所有對話資料，以後用Key來尋找這個資料、一個List來把對話資料載入</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Dictionary&lt;<span class="keyword">int</span>, Dialog_Npc_Data&gt; System_npc = <span class="keyword">new</span> Dictionary&lt;<span class="keyword">int</span>, Dialog_Npc_Data&gt;();</span><br><span class="line">    <span class="keyword">public</span> List&lt;Dialog_Npc_Data&gt; all_Dialog;</span><br><span class="line">    <span class="comment">//part4</span></span><br><span class="line">    <span class="keyword">public</span> UILabel Visible_Message;</span><br><span class="line">    <span class="keyword">public</span> UISprite Visible_Spaker;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">string</span> current_content;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//part5 </span></span><br><span class="line">    <span class="keyword">public</span> Transform Left;</span><br><span class="line">    <span class="keyword">public</span> Transform right;</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    宣告一個Label用來顯示</span></span><br><span class="line"><span class="comment">    一個Sprite用來當面板</span></span><br><span class="line"><span class="comment">    一個開關表示狀態</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">bool</span> isDialog = <span class="literal">false</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//兩個方法，一個用來在外部調用時可以傳入要用到的資料..等</span></span><br><span class="line">    <span class="comment">//一個用來初始化整個腳本</span></span><br><span class="line">    <span class="comment">//傳入的參數有 : 調用哪個對話資料(id)、章節(eachPart)</span></span><br><span class="line">    <span class="comment">//章節由於每次結束遊戲都要保存</span></span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> Npc_ID;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> index_Chapter=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//這兩個是一直變動的</span></span><br><span class="line">    <span class="keyword">int</span> index_sentence=<span class="number">0</span>; <span class="comment">//最下層的句子</span></span><br><span class="line">    <span class="keyword">int</span> index_Chapter_sentence=<span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 設定一個當前的資料選項</span></span><br><span class="line">    Dialog_Npc_Data current_Npc_Data;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">SetDialogInfo</span>(<span class="params"><span class="keyword">int</span> Npc,<span class="keyword">int</span> Chapter</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        Npc_ID           = Npc;</span><br><span class="line">        index_Chapter    = Chapter;</span><br><span class="line">        current_Npc_Data = System_npc[Npc];</span><br><span class="line"></span><br><span class="line">        Initialize();</span><br><span class="line">        isDialog = <span class="literal">true</span>;</span><br><span class="line">       </span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Initialize</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        index_sentence = <span class="number">0</span>;</span><br><span class="line">        index_Chapter_sentence = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//part 1 加入資料</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Awake</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">foreach</span> (Dialog_Npc_Data dnd <span class="keyword">in</span> all_Dialog)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (!System_npc.ContainsKey(dnd.ID))</span><br><span class="line">                System_npc.Add(dnd.ID, dnd);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Update</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">if</span> (isDialog)</span><br><span class="line">        &#123;</span><br><span class="line">            StartDialog();</span><br><span class="line">            <span class="keyword">if</span> (Input.GetMouseButtonDown(<span class="number">0</span>)) index_sentence++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//傳入哪一段之後，就開始把這一段給看完</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">StartDialog</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line"></span><br><span class="line">        Visible_Spaker.spriteName = System_npc[Npc_ID].eachChapter[index_Chapter].eachpart_sentence[index_Chapter_sentence].spaker.spriteName;</span><br><span class="line">        AnchorPosition ap = System_npc[Npc_ID].eachChapter[index_Chapter].eachpart_sentence[index_Chapter_sentence].pos;</span><br><span class="line">        <span class="keyword">if</span> (ap == AnchorPosition.Right) Visible_Spaker.transform.position = right.position;</span><br><span class="line">        <span class="keyword">if</span> (ap == AnchorPosition.Left) Visible_Spaker.transform.position = Left.position;</span><br><span class="line">        </span><br><span class="line">        Visible_Message.text = ChapterSentence();</span><br><span class="line">       </span><br><span class="line">       </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">string</span> <span class="title">ChapterSentence</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">int</span> Max_sentence = System_npc[Npc_ID].eachChapter[index_Chapter].eachpart_sentence[index_Chapter_sentence].sentence.Count;</span><br><span class="line">        <span class="keyword">int</span> Max_Chapter_sentence = System_npc[Npc_ID].eachChapter[index_Chapter].eachpart_sentence.Count;</span><br><span class="line">       </span><br><span class="line">        <span class="keyword">if</span> (index_sentence &lt; Max_sentence)  </span><br><span class="line">        &#123;</span><br><span class="line"></span><br><span class="line">            current_content = System_npc[Npc_ID].eachChapter[index_Chapter].eachpart_sentence[index_Chapter_sentence].sentence[index_sentence];</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            index_sentence = <span class="number">0</span>;</span><br><span class="line">            index_Chapter_sentence++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (index_Chapter_sentence &gt;= Max_Chapter_sentence)</span><br><span class="line">        &#123;</span><br><span class="line">            </span><br><span class="line">            isDialog = <span class="literal">false</span>;</span><br><span class="line">           </span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> current_content;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然後使用另外一個class來調用，我是放在npc上面</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">TestSystem</span> : <span class="title">MonoBehaviour</span> &#123;</span><br><span class="line"></span><br><span class="line">    NPCspeakerData npc;</span><br><span class="line">    <span class="keyword">public</span> UIPanel panels;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> nUM = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> CurrentChapther = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">bool</span> isCanTalk = <span class="literal">false</span>;</span><br><span class="line">    <span class="comment">// Use this for initialization</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span> (<span class="params"></span>)</span> &#123;</span><br><span class="line">        npc = gameObject.GetComponent&lt;NPCspeakerData&gt;();</span><br><span class="line">        panels.enabled = <span class="literal">false</span>;</span><br><span class="line">        isCanTalk = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Update is called once per frame</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Update</span> (<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="comment">//npc.Npc_ID = 1;</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (Input.GetMouseButtonDown(<span class="number">1</span>))</span><br><span class="line">        &#123;</span><br><span class="line">            panels.enabled = <span class="literal">true</span>;</span><br><span class="line">            npc.Npc_ID = nUM;</span><br><span class="line">            npc.currentNPC.IndexPart = CurrentChapther;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!npc.IsConversation)</span><br><span class="line">            panels.enabled = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">else</span> panels.enabled = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Unity/" rel="tag"><i class="fa fa-tag"></i> Unity</a>
+          
+            <a href="/tags/Dialogue/" rel="tag"><i class="fa fa-tag"></i> Dialogue</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/unity-finite-state machine/" rel="next" title="【Unity】創建自己的有限狀態機">
+                <i class="fa fa-chevron-left"></i> 【Unity】創建自己的有限狀態機
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/unity-scene-loading/" rel="prev" title="【Unity】Loading讀取畫面，百分比緩動">
+                【Unity】Loading讀取畫面，百分比緩動 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            本站概要
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/WebAvator.png" alt="Uno">
+            
+              <p class="site-author-name" itemprop="name">Uno</p>
+              <div class="site-description motion-element" itemprop="description">紀錄用Unity跑出的各種問題</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">29</span>
+                    <span class="site-state-item-name">文章</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分類</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">26</span>
+                    <span class="site-state-item-name">標籤</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/unoniceday" title="GitHub &rarr; https://github.com/unoniceday" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:uno.niceday@gmail.com" title="E-Mail &rarr; mailto:uno.niceday@gmail.com" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Dialog-eachPart-sentence"><span class="nav-number">1.</span> <span class="nav-text">Dialog_eachPart_sentence</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dialog-Chapter"><span class="nav-number">2.</span> <span class="nav-text">Dialog_Chapter</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Uno</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="總字數">57k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="所需總閱讀時間">1:43</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://r-uno.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://unoniceday.github.io/unity-dialogue-system/";
+    this.page.identifier = "unity-dialogue-system/";
+    this.page.title = '【Unity】創建對話系統';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://r-uno.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    window.addEventListener('load', loadComments, false);
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
+  
+  <script>
+    (function () {
+
+      firebase.initializeApp({
+        apiKey: 'AIzaSyBo3mlO53-PVLxdUZ6-XsICPJewLu6su7Q',
+        projectId: 'unowebpage'
+      })
+
+      function getCount(doc, increaseCount) {
+        //increaseCount will be false when not in article page
+
+        return doc.get().then(function (d) {
+          var count
+          if (!d.exists) { //has no data, initialize count
+            if (increaseCount) {
+              doc.set({
+                count: 1
+              })
+              count = 1
+            }
+            else {
+              count = 0
+            }
+          }
+          else { //has data
+            count = d.data().count
+            if (increaseCount) {
+              if (!(window.localStorage && window.localStorage.getItem(title))) { //if first view this article
+                doc.set({ //increase count
+                  count: count + 1
+                })
+                count++
+              }
+            }
+          }
+          if (window.localStorage && increaseCount) { //mark as visited
+            localStorage.setItem(title, true)
+          }
+
+          return count
+        })
+      }
+
+      function appendCountTo(el) {
+        return function (count) {
+          $(el).append(
+            $('<span>').addClass('post-visitors-count').append(
+              $('<span>').addClass('post-meta-divider').text('|')
+            ).append(
+              $('<span>').addClass('post-meta-item-icon').append(
+                $('<i>').addClass('fa fa-users')
+              )
+              ).append($('<span>').text('閱讀次數 ' + count))
+          )
+        }
+      }
+
+      var db = firebase.firestore()
+      var articles = db.collection('articles')
+
+      //https://hexo.io/docs/variables.html
+      var isPost = '【Unity】創建對話系統'.length > 0
+      var isArchive = '' === 'true'
+      var isCategory = ''.length > 0
+      var isTag = ''.length > 0
+
+      if (isPost) { //is article page
+        var title = '【Unity】創建對話系統'
+        var doc = articles.doc(title)
+
+        getCount(doc, true).then(appendCountTo($('.post-meta')))
+      }
+      else if (!isArchive && !isCategory && !isTag) { //is index page
+        var titles = [] //array to titles
+
+        var postsstr = '' //if you have a better way to get titles of posts, please change it
+        eval(postsstr)
+
+        var promises = titles.map(function (title) {
+          return articles.doc(title)
+        }).map(function (doc) {
+          return getCount(doc)
+        })
+        Promise.all(promises).then(function (counts) {
+          var metas = $('.post-meta')
+          counts.forEach(function (val, idx) {
+            appendCountTo(metas[idx])(val)
+          })
+        })
+      }
+    })()
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<script>
+  $('.highlight').not('.gist .highlight').each(function(i, e) {
+    var $wrap = $('<div>').addClass('highlight-wrap');
+    $(e).after($wrap);
+    $wrap.append($('<button>').addClass('copy-btn').append('複製').on('click', function(e) {
+      var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+        return $(e).text();
+      }).toArray().join('\n');
+      var ta = document.createElement('textarea');
+      var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+      ta.style.top = yPosition + 'px'; // Prevent page scroll
+      ta.style.position = 'absolute';
+      ta.style.opacity = '0';
+      ta.readOnly = true;
+      ta.value = code;
+      document.body.appendChild(ta);
+      const selection = document.getSelection();
+      const selected = selection.rangeCount > 0 ? selection.getRangeAt(0) : false;
+      ta.select();
+      ta.setSelectionRange(0, code.length);
+      ta.readOnly = false;
+      var result = document.execCommand('copy');
+      
+        if (result) $(this).text('複製成功');
+        else $(this).text('複製失敗');
+      
+      ta.blur(); // For iOS
+      $(this).blur();
+      if (selected) {
+        selection.removeAllRanges();
+        selection.addRange(selected);
+      }
+    })).on('mouseleave', function(e) {
+      var $b = $(this).find('.copy-btn');
+      setTimeout(function() {
+        $b.text('複製');
+      }, 300);
+    }).append(e);
+  })
+</script>
+
+
+  
+
+  
+
+</body>
+</html>
