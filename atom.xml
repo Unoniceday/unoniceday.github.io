@@ -167,9 +167,9 @@
     
       <category term="Unity" scheme="http://unoniceday.github.io/tags/Unity/"/>
     
-      <category term="JobSystem" scheme="http://unoniceday.github.io/tags/JobSystem/"/>
-    
       <category term="測試" scheme="http://unoniceday.github.io/tags/%E6%B8%AC%E8%A9%A6/"/>
+    
+      <category term="JobSystem" scheme="http://unoniceday.github.io/tags/JobSystem/"/>
     
   </entry>
   
